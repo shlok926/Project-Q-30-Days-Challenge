@@ -51,7 +51,7 @@ Displays a matplotlib bar chart (Histogram) showing the frequency distribution o
 ```bash
 python histogram.py
 ```
-> ![Histogram Output](assets/histogram.png)
+> ![Histogram Output](assets/Histogram.png)
 
 #### 3. Statistical Analysis
 Applies mathematical analysis to calculate the **Mean** and **Standard Deviation** of the generated quantum sequence.
