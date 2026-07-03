@@ -1,6 +1,16 @@
-# Project Q: 30 Days Challenge - Zero to Quantum Hero ⚛️
+<div align="center">
+  <img src="https://img.shields.io/badge/IBM-Quantum-blue?style=for-the-badge&logo=IBM&logoColor=white" alt="IBM Quantum" />
+  <img src="https://img.shields.io/badge/Python-3.x-yellow?style=for-the-badge&logo=python&logoColor=white" alt="Python 3.x" />
+  <img src="https://img.shields.io/badge/Qiskit-SDK-purple?style=for-the-badge" alt="Qiskit SDK" />
+  
+  <h1>⚛️ Project Q: 30 Days Challenge ⚛️</h1>
+  <h3><i>From Zero to Quantum Hero</i></h3>
+  <p>An intensive 30-day journey mastering Quantum Computing, Qiskit, and Quantum Cryptography.</p>
+</div>
 
-A 30-day intensive journey into Quantum Computing and Qiskit. This repository contains my daily workbooks, learning notes, and practical implementations, including a **Quantum-Secured Password Generator** built as a mini-project.
+<br/>
+
+This repository contains my daily workbooks, learning notes, and practical implementations, including a **Quantum-Secured Password Generator** built as a mini-project.
 
 ## 📁 Repository Structure
 
