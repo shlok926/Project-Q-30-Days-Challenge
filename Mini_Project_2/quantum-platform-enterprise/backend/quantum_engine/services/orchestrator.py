@@ -28,4 +28,4 @@ class ExecutionOrchestrator:
         execution_time = (time.time() - start_time) * 1000
         response.execution_time_ms = execution_time
         
-        return response\n
+        return response

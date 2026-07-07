@@ -23,4 +23,4 @@ class QiskitAdapter:
             elif op["type"] == "measure":
                 qc.measure(op["qubit"], op["clbit"])
                 
-        return qc\n
+        return qc

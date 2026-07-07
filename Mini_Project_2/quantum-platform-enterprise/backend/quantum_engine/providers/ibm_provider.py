@@ -77,4 +77,4 @@ class IBMProvider(QuantumProvider):
             supports_noise=True,
             supports_real_hardware=True,
             supports_simulator=True
-        )\n
+        )

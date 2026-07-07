@@ -33,4 +33,4 @@ def require_role(required_role: str):
         if current_user.role.value != required_role and current_user.role.value != "admin":
             raise AuthorizationError("Not enough permissions")
         return current_user
-    return role_checker\n
+    return role_checker

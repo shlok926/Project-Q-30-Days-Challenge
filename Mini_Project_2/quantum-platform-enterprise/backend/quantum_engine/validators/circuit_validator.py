@@ -6,4 +6,4 @@ class CircuitValidator:
     def validate(definition: QuantumCircuitDefinition) -> bool:
         if definition.num_qubits <= 0:
             raise InvalidCircuit("Number of qubits must be greater than 0.")
-        return True\n
+        return True

@@ -1,0 +1,13 @@
+fastapi>=0.100.0
+uvicorn>=0.23.0
+sqlalchemy>=2.0.0
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+alembic>=1.11.0
+asyncpg>=0.28.0
+passlib[bcrypt]>=1.7.4
+python-jose[cryptography]>=3.3.0
+prometheus-client>=0.17.0
+qiskit>=1.0.0
+qiskit-aer>=0.14.0
+qiskit-ibm-runtime>=0.23.0

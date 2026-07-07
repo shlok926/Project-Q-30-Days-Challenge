@@ -17,4 +17,4 @@ class ExecutionReport(BaseModel):
     ibm_job_id: Optional[str] = None
     warnings: list[str] = []
     errors: list[str] = []
-    statistics: Dict[str, Any] = {}\n
+    statistics: Dict[str, Any] = {}

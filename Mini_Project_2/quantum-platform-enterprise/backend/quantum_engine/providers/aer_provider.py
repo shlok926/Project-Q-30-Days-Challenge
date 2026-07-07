@@ -43,4 +43,4 @@ class AerProvider(QuantumProvider):
         return AerSimulatorBackend(name)
         
     def available_backends(self) -> list:
-        return [AerSimulatorBackend("qasm_simulator"), AerSimulatorBackend("statevector_simulator")]\n
+        return [AerSimulatorBackend("qasm_simulator"), AerSimulatorBackend("statevector_simulator")]

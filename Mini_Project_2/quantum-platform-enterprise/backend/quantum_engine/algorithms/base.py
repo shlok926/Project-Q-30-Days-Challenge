@@ -9,4 +9,4 @@ class QuantumAlgorithmPlugin(ABC):
 
     @abstractmethod
     def build_circuit(self, **kwargs) -> QuantumCircuitDefinition:
-        pass\n
+        pass

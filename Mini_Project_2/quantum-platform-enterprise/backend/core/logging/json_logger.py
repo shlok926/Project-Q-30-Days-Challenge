@@ -19,4 +19,4 @@ def setup_logging():
     logger.setLevel(logging.INFO)
     handler = logging.StreamHandler(sys.stdout)
     handler.setFormatter(JSONFormatter())
-    logger.addHandler(handler)\n
+    logger.addHandler(handler)

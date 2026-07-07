@@ -39,4 +39,4 @@ class BaseRepository(Generic[ModelType]):
         if obj:
             await db.delete(obj)
             await db.commit()
-        return obj\n
+        return obj

@@ -41,4 +41,4 @@ class CircuitBuilder:
             num_qubits=self.num_qubits,
             num_clbits=self.num_clbits,
             operations=self.operations
-        )\n
+        )

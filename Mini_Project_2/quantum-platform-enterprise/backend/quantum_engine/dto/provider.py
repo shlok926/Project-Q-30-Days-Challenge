@@ -8,4 +8,4 @@ class ProviderCapabilities(BaseModel):
     supports_pulse: bool
     supports_noise: bool
     supports_real_hardware: bool
-    supports_simulator: bool\n
+    supports_simulator: bool

@@ -17,4 +17,4 @@ def map_ibm_exception(e: Exception) -> QuantumEngineError:
         return HardwareQueueError("Hardware queue overflow or capacity reached.")
     if "timeout" in err_str:
         return ExecutionTimeout("IBM Runtime job timed out.")
-    return QuantumEngineError(f"IBM Execution Error: {str(e)}")\n
+    return QuantumEngineError(f"IBM Execution Error: {str(e)}")

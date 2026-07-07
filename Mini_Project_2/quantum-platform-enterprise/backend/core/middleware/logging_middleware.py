@@ -26,4 +26,4 @@ class EnterpriseLoggingMiddleware(BaseHTTPMiddleware):
                 "process_time_ms": round(process_time * 1000, 2),
             }
         )
-        return response\n
+        return response

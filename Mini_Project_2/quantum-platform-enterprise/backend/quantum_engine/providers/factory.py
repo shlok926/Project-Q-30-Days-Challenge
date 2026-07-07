@@ -13,4 +13,4 @@ class QuantumProviderFactory:
                 raise ProviderUnavailable("IBM Provider requires an 'api_token' in credentials.")
             return IBMProvider(api_token=credentials["api_token"])
         else:
-            raise ProviderUnavailable(f"Provider {provider_type} is not implemented.")\n
+            raise ProviderUnavailable(f"Provider {provider_type} is not implemented.")

@@ -25,4 +25,4 @@ async def login(db: AsyncSession = Depends(get_db), form_data: OAuth2PasswordReq
     
     from core.security.jwt import create_access_token
     access_token = create_access_token(subject=user.id)
-    return {"access_token": access_token, "token_type": "bearer"}\n
+    return {"access_token": access_token, "token_type": "bearer"}

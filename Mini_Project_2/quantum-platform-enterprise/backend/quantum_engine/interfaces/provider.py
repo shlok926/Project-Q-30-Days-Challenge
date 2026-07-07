@@ -13,4 +13,4 @@ class QuantumProvider(ABC):
 class QuantumBackend(ABC):
     @abstractmethod
     def execute(self, circuit: "CircuitExecutionRequest") -> "CircuitExecutionResponse":
-        pass\n
+        pass

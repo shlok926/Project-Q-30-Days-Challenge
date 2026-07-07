@@ -19,4 +19,8 @@ class ResourceNotFound(BaseAPIException):
 
 class ConflictError(BaseAPIException):
     def __init__(self, detail: str = "Resource conflict"):
-        super().__init__(status.HTTP_409_CONFLICT, detail, "CONFLICT")\n
+        super().__init__(status.HTTP_409_CONFLICT, detail, "CONFLICT")
+
+class BusinessRuleError(BaseAPIException):
+    def __init__(self, detail: str = "Business rule violation"):
+        super().__init__(status.HTTP_422_UNPROCESSABLE_ENTITY, detail, "BUSINESS_RULE_ERROR")

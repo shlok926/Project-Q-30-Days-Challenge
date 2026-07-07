@@ -16,4 +16,4 @@ class UserRepository(BaseRepository[User]):
         result = await db.execute(select(User).filter(User.username == username))
         return result.scalars().first()
 
-user_repo = UserRepository()\n
+user_repo = UserRepository()

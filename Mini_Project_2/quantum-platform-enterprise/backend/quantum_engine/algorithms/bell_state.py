@@ -21,4 +21,4 @@ class BellStateAlgorithm(QuantumAlgorithmPlugin):
         builder.add_measurement(0, 0)
         builder.add_measurement(1, 1)
         
-        return builder.build()\n
+        return builder.build()

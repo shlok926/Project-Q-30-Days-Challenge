@@ -23,4 +23,4 @@ class HardwareQueueError(QuantumEngineError):
     pass
 
 class ProviderAuthError(QuantumEngineError):
-    pass\n
+    pass

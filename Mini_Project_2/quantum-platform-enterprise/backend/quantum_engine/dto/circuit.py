@@ -20,4 +20,4 @@ class CircuitExecutionResponse(BaseModel):
     job_id: str
     status: str
     counts: Optional[Dict[str, int]]
-    execution_time_ms: float\n
+    execution_time_ms: float
