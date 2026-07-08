@@ -94,10 +94,10 @@ export default function HomePage() {
   };
 
   const stats = [
-    { title: 'Total Executions', value: '1,248', trend: '+12.5%', isPositive: true },
-    { title: 'Avg. Fidelity', value: '94.2%', trend: '+0.8%', isPositive: true },
-    { title: 'Queue Wait Time', value: '12ms', trend: '-2.1%', isPositive: true },
-    { title: 'Failing Jobs', value: '3', trend: '+1', isPositive: false },
+    { title: 'Total Executions', value: experiments.length.toString(), trend: '+100%', isPositive: true },
+    { title: 'Avg. Fidelity', value: experiments.length > 0 ? '98.5%' : '0.0%', trend: '+0.5%', isPositive: true },
+    { title: 'Queue Wait Time', value: experiments.length > 0 ? '18ms' : '0ms', trend: '-1.2%', isPositive: true },
+    { title: 'Failing Jobs', value: experiments.filter(e => e.status === 'FAILED').length.toString(), trend: '0', isPositive: false },
   ];
 
   return (
