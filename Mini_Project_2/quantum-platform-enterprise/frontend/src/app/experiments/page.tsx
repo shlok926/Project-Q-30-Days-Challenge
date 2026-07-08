@@ -28,7 +28,7 @@ export default function WorkspacePage() {
     
     // Simulate API delay for dramatic effect
     setTimeout(() => {
-      let mockCounts = { "00": 512, "11": 512 };
+      let mockCounts: Record<string, number> = { "00": 512, "11": 512 };
       let mockSvg = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMTIwIiB2aWV3Qm94PSIwIDAgNDAwIDEyMCI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0id2hpdGUiLz48bGluZSB4MT0iNDAiIHkxPSI0MCIgeDI9IjM2MCIgeTI9IjQwIiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiLz48bGluZSB4MT0iNDAiIHkxPSI4MCIgeDI9IjM2MCIgeTI9IjgwIiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiLz48cmVjdCB4PSI4MCIgeT0iMjAiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgZmlsbD0iI2ZiNzE4NSIgc3Ryb2tlPSJibGFjayIvPjx0ZXh0IHg9IjEwMCIgeT0iNDYiIGZvbnQtZmFtaWx5PSJhcmlhbCIgZm9udC1zaXplPSIyMCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iYmxhY2siPkg8L3RleHQ+PGNpcmNsZSBjeD0iMTYwIiBjeT0iNDAiIHI9IjUiIGZpbGw9ImJsYWNrIi8+PGxpbmUgeDE9IjE2MCIgeTE9IjQwIiB4Mj0iMTYwIiB5Mj0iODAiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMiIvPjxjaXJjbGUgY3g9IjE2MCIgY3k9IjgwIiByPSIxNCIgZmlsbD0id2hpdGUiIHN0cm9rZT0iYmxhY2siIHN0cm9rZS13aWR0aD0iMiIvPjxsaW5lIHgxPSIxNjAiIHkxPSI2NiIgeDI9IjE2MCIgeTI9Ijk0IiBzdHJva2U9ImJsYWNrIiBzdHJva2Utd2lkdGg9IjIiLz48bGluZSB4MT0iMTQ2IiB5MT0iODAiIHgyPSIxNzQiIHkyPSI4MCIgc3Ryb2tlPSJibGFjayIgc3Ryb2tlLXdpZHRoPSIyIi8+PC9zdmc+";
       
       if (algorithm === 'grover_search') {
