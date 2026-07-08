@@ -18,6 +18,8 @@ The repository is organized day-by-day. Each folder contains the daily workbook/
 
 * **Day_01 to Day_10**: Core quantum concepts (Qubits, Superposition, Entanglement, Measurement) and Qiskit basics.
 * **Mini_Project_1**: The Quantum Randomness Laboratory.
+* **Day_11 to Day_15**: Advanced algorithms, Quantum Error Correction, and Quantum Optimization (QAOA).
+* **Mini_Project_2**: Quantum Platform Enterprise Dashboard.
 
 ## 🛡️ Mini-Project: Quantum-Randomness-Lab
 
