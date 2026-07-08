@@ -7,6 +7,8 @@ export default function HardwarePage() {
   const [providers, setProviders] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [ibmTemp, setIbmTemp] = useState<number[]>(Array.from({length: 30}, () => 15));
+  const [aerTemp, setAerTemp] = useState<number[]>(Array.from({length: 30}, () => 40));
 
   useEffect(() => {
     const fetchProviders = async () => {
@@ -23,9 +25,26 @@ export default function HardwarePage() {
     };
     
     fetchProviders();
-    // Refresh every 10 seconds to show "live" data
     const interval = setInterval(fetchProviders, 10000);
-    return () => clearInterval(interval);
+    
+    // Live Telemetry Mock
+    const telemetryInterval = setInterval(() => {
+      setIbmTemp(prev => {
+        const next = [...prev.slice(1)];
+        next.push(15 + (Math.random() * 2 - 1));
+        return next;
+      });
+      setAerTemp(prev => {
+        const next = [...prev.slice(1)];
+        next.push(40 + (Math.random() * 5 - 2.5));
+        return next;
+      });
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+      clearInterval(telemetryInterval);
+    };
   }, []);
 
   if (loading && !providers) return <div className="text-gray-400 p-8">Loading Quantum Nodes...</div>;
@@ -69,6 +88,14 @@ export default function HardwarePage() {
               <span className="text-sm text-gray-200 font-mono">ibmq_qasm_simulator</span>
             </div>
             <div className="flex justify-between items-center border-b border-[#222] pb-2">
+              <span className="text-sm text-gray-400">Architecture</span>
+              <span className="text-sm text-gray-200">Eagle (127 Qubits)</span>
+            </div>
+            <div className="flex justify-between items-center border-b border-[#222] pb-2">
+              <span className="text-sm text-gray-400">Topology</span>
+              <span className="text-sm text-gray-200">Heavy-hex lattice</span>
+            </div>
+            <div className="flex justify-between items-center border-b border-[#222] pb-2">
               <span className="text-sm text-gray-400">Usage Load</span>
               <div className="flex items-center gap-3">
                 <div className="w-24 h-1.5 bg-[#222] rounded-full overflow-hidden">
@@ -80,6 +107,19 @@ export default function HardwarePage() {
             <div className="flex justify-between items-center pb-2">
               <span className="text-sm text-gray-400">Average Queue Time</span>
               <span className="text-sm text-gray-200">{providers?.ibm_quantum?.average_queue_time || 'N/A'}</span>
+            </div>
+          </div>
+          
+          {/* Live Telemetry Graph */}
+          <div className="mt-6 pt-4 border-t border-[#222]">
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-xs text-gray-500 flex items-center gap-1"><Activity className="w-3 h-3 text-emerald-500"/> Live QPU Temperature</span>
+              <span className="text-xs font-mono text-emerald-400">{ibmTemp[ibmTemp.length-1].toFixed(2)} mK</span>
+            </div>
+            <div className="h-12 w-full flex items-end gap-[1px] opacity-80">
+              {ibmTemp.map((temp, i) => (
+                <div key={i} className="w-full bg-blue-500/30 rounded-t-sm transition-all duration-300" style={{ height: `${(temp/20)*100}%` }}></div>
+              ))}
             </div>
           </div>
         </div>
@@ -113,6 +153,14 @@ export default function HardwarePage() {
               <span className="text-sm text-gray-200 font-mono">aer_simulator</span>
             </div>
             <div className="flex justify-between items-center border-b border-[#222] pb-2">
+              <span className="text-sm text-gray-400">Architecture</span>
+              <span className="text-sm text-gray-200">CPU-Accelerated (Infinite RAM)</span>
+            </div>
+            <div className="flex justify-between items-center border-b border-[#222] pb-2">
+              <span className="text-sm text-gray-400">Topology</span>
+              <span className="text-sm text-gray-200">Fully Connected (Virtual)</span>
+            </div>
+            <div className="flex justify-between items-center border-b border-[#222] pb-2">
               <span className="text-sm text-gray-400">Usage Load</span>
               <div className="flex items-center gap-3">
                 <div className="w-24 h-1.5 bg-[#222] rounded-full overflow-hidden">
@@ -124,6 +172,19 @@ export default function HardwarePage() {
             <div className="flex justify-between items-center pb-2">
               <span className="text-sm text-gray-400">Average Queue Time</span>
               <span className="text-sm text-gray-200">{providers?.aer_simulator?.average_queue_time || '0s'}</span>
+            </div>
+          </div>
+
+          {/* Live Telemetry Graph */}
+          <div className="mt-6 pt-4 border-t border-[#222]">
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-xs text-gray-500 flex items-center gap-1"><Activity className="w-3 h-3 text-amber-500"/> CPU Core Temp (Host)</span>
+              <span className="text-xs font-mono text-amber-400">{aerTemp[aerTemp.length-1].toFixed(1)} °C</span>
+            </div>
+            <div className="h-12 w-full flex items-end gap-[1px] opacity-80">
+              {aerTemp.map((temp, i) => (
+                <div key={i} className="w-full bg-purple-500/30 rounded-t-sm transition-all duration-300" style={{ height: `${(temp/60)*100}%` }}></div>
+              ))}
             </div>
           </div>
         </div>
