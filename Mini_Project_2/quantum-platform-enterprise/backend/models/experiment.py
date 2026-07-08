@@ -20,7 +20,7 @@ class Experiment(Base):
     provider: Mapped[str] = mapped_column(String(255), nullable=True)
     backend_name: Mapped[str] = mapped_column(String(255), nullable=True)
     
-    tags: Mapped[list[str]] = mapped_column(ARRAY(String), default=[])
+    tags: Mapped[list[str]] = mapped_column(JSONB, default=[])
     version: Mapped[int] = mapped_column(default=1)
     is_favorite: Mapped[bool] = mapped_column(Boolean, default=False)
     is_template: Mapped[bool] = mapped_column(Boolean, default=False)

@@ -5,7 +5,7 @@ from database.base import Base
 # Import all models to ensure they are registered with Base
 from models.user import User, RoleEnum
 from models.experiment import Experiment
-from models.analytics import AnalyticsMetric
+from models.analytics import DailyAggregation
 from models.execution_history import ExecutionHistory
 from models.audit import AuditLog
 from core.security.password import get_password_hash

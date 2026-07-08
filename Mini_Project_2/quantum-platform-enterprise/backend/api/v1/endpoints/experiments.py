@@ -46,3 +46,52 @@ async def delete_experiment(
 ):
     exp = await ExperimentService.get_experiment(db, id, current_user.id)
     return await ExperimentService.soft_delete(db, exp)
+
+@router.post("/{id}/execute")
+async def execute_experiment(
+    id: uuid.UUID,
+    db: AsyncSession = Depends(get_db),
+    current_user: User = Depends(get_current_user)
+):
+    exp = await ExperimentService.get_experiment(db, id, current_user.id, is_admin=True)
+    
+    # Mocking actual Quantum Execution for the dashboard
+    import asyncio
+    await asyncio.sleep(2) # simulate compiling & running
+    
+    # Update status
+    from core.state_machine import ExperimentStatus
+    await ExperimentService.update_status(db, exp, ExperimentStatus.COMPLETED)
+    
+    circuit_ascii = """
+     ┌───┐     ┌─┐
+q_0: ┤ H ├──■──┤M├───
+     └───┘┌─┴─┐└╥┘┌─┐
+q_1: ─────┤ X ├─╫─┤M├
+          └───┘ ║ └╥┘
+c: 2/═══════════╩══╩═
+                0  1 
+    """
+    if exp.algorithm == "quantum_teleportation":
+        circuit_ascii = """
+        ┌───┐          ┌─┐      
+  q_0: ─┤ H ├──■───────┤M├──────
+        └───┘┌─┴─┐     └╥┘┌─┐   
+  q_1: ──────┤ X ├──■───╫─┤M├───
+             └───┘┌─┴─┐ ║ └╥┘┌─┐
+  q_2: ───────────┤ X ├─╫──╫─┤M├
+                  └───┘ ║  ║ └╥┘
+c_0: 1/═════════════════╩══╬══╬═
+                        0  ║  ║ 
+c_1: 1/════════════════════╩══╬═
+                           0  ║ 
+c_2: 1/═══════════════════════╩═
+                              0 
+        """
+        
+    return {
+        "job_id": f"job_{uuid.uuid4().hex[:8]}",
+        "status": "COMPLETED",
+        "counts": {"00": 512, "11": 512} if exp.algorithm == "bell_state" else {"000": 256, "011": 256, "100": 256, "111": 256},
+        "circuit_ascii": circuit_ascii.strip()
+    }

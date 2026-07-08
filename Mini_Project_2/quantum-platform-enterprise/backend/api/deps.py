@@ -19,7 +19,7 @@ async def get_current_user(
 ) -> User:
     if not token:
         # Development bypass for frontend integration
-        return User(id=uuid.uuid4(), email="admin@quantum.com", username="admin", password_hash="dummy", role=RoleEnum.ADMIN, is_active=True)
+        return User(id=uuid.UUID("a9bd318f-1438-457d-b060-6e8b82c442a0"), email="admin@quantum.com", username="admin", password_hash="dummy", role=RoleEnum.ADMIN, is_active=True)
 
     try:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[ALGORITHM])
