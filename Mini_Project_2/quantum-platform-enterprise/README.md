@@ -20,7 +20,7 @@ Quantum Platform Enterprise is a modern, full-stack quantum computing management
 
 ### 1. System Overview Dashboard
 Live KPI tracking, fidelity telemetry graphs, and real-time backend-connected execution history.
-![System Overview Dashboard](./docs/assets/dashboard.png)
+![System Overview Dashboard](./docs/assets/Dashboard.png)
 
 ### 2. Quantum Workspace
 Design, compile, and execute real quantum algorithms (Bell State, Grover, QFT, VQE) with direct high-quality Qiskit circuit rendering.
@@ -28,7 +28,7 @@ Design, compile, and execute real quantum algorithms (Bell State, Grover, QFT, V
 
 ### 3. Hardware & Nodes Telemetry
 Live tracking of QPU core temperatures, architecture specs (Eagle 127-Qubit), and heavy-hex lattice topology data.
-![Hardware & Nodes](./docs/assets/hardware.png)
+![Hardware & Nodes](./docs/assets/Hardware.png)
 
 *(Note: To display the images above, please place the screenshot files in the `docs/assets/` folder and name them `dashboard.png`, `workspace.png`, and `hardware.png` respectively.)*
 
