@@ -7,8 +7,10 @@ import { Activity, Cpu, Network, Zap, CheckCircle2, XCircle, Clock, MoreHorizont
 export default function HomePage() {
   const [data, setData] = useState<number[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [experiments, setExperiments] = useState<any[]>([]);
 
   useEffect(() => {
+    // Fetch live telemetry (simulated)
     setData(Array.from({ length: 20 }, () => Math.random() * 20 + 80));
     const interval = setInterval(() => {
       setData(prev => {
@@ -17,6 +19,13 @@ export default function HomePage() {
         return newData;
       });
     }, 2000);
+
+    // Fetch real experiments from DB
+    fetch('http://localhost:8000/api/v1/experiments')
+      .then(res => res.json())
+      .then(data => setExperiments(data))
+      .catch(err => console.error("Failed to fetch experiments", err));
+
     return () => clearInterval(interval);
   }, []);
 
@@ -212,37 +221,37 @@ export default function HomePage() {
                 <th className="px-5 py-3 font-medium">Algorithm</th>
                 <th className="px-5 py-3 font-medium">Provider</th>
                 <th className="px-5 py-3 font-medium">Status</th>
-                <th className="px-5 py-3 font-medium">Duration</th>
+                <th className="px-5 py-3 font-medium">Executed At</th>
                 <th className="px-5 py-3 font-medium text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-[#222]">
-              {[
-                { id: 'q-7f8a9b2', algo: 'Quantum Fourier Transform', provider: 'IBM Quantum', status: 'COMPLETED', time: '1.2s' },
-                { id: 'q-1a2b3c4', algo: 'Grover Search (3 Qubit)', provider: 'Aer Simulator', status: 'RUNNING', time: '0.4s' },
-                { id: 'q-9x8y7z6', algo: 'Bell State Entanglement', provider: 'IBM Quantum', status: 'FAILED', time: '4.1s' },
-                { id: 'q-4m5n6o7', algo: 'VQE Molecule', provider: 'Aer Simulator', status: 'COMPLETED', time: '8.5s' },
-              ].map((job) => (
-                <tr key={job.id} className="hover:bg-[#1A1A1A]/50 transition-colors">
-                  <td className="px-5 py-3 text-xs font-mono text-gray-300">{job.id}</td>
-                  <td className="px-5 py-3 text-xs text-gray-200">{job.algo}</td>
-                  <td className="px-5 py-3 text-xs text-gray-400 flex items-center gap-2">
-                    <Cpu className="w-3 h-3" />
-                    {job.provider}
-                  </td>
-                  <td className="px-5 py-3 text-xs">
-                    {job.status === 'COMPLETED' && <span className="inline-flex items-center gap-1.5 text-emerald-400"><CheckCircle2 className="w-3.5 h-3.5" /> Completed</span>}
-                    {job.status === 'RUNNING' && <span className="inline-flex items-center gap-1.5 text-blue-400"><Clock className="w-3.5 h-3.5 animate-pulse" /> Running</span>}
-                    {job.status === 'FAILED' && <span className="inline-flex items-center gap-1.5 text-rose-400"><XCircle className="w-3.5 h-3.5" /> Failed</span>}
-                  </td>
-                  <td className="px-5 py-3 text-xs text-gray-400">{job.time}</td>
-                  <td className="px-5 py-3 text-right">
-                    <button className="text-gray-500 hover:text-white transition-colors">
-                      <MoreHorizontal className="w-4 h-4" />
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {experiments.length === 0 ? (
+                <tr><td colSpan={6} className="text-center py-6 text-gray-500 text-xs">No recent executions found. Run an experiment in Workspace.</td></tr>
+              ) : (
+                experiments.slice(0, 5).map((job) => (
+                  <tr key={job.id} className="hover:bg-[#1A1A1A]/50 transition-colors">
+                    <td className="px-5 py-3 text-xs font-mono text-gray-300" title={job.id}>{job.id.substring(0,8)}...</td>
+                    <td className="px-5 py-3 text-xs text-gray-200 capitalize">{job.algorithm.replace('_', ' ')}</td>
+                    <td className="px-5 py-3 text-xs text-gray-400 flex items-center gap-2">
+                      <Cpu className="w-3 h-3" />
+                      {job.provider || 'Aer Simulator'}
+                    </td>
+                    <td className="px-5 py-3 text-xs">
+                      {job.status === 'COMPLETED' && <span className="inline-flex items-center gap-1.5 text-emerald-400"><CheckCircle2 className="w-3.5 h-3.5" /> Completed</span>}
+                      {job.status === 'RUNNING' && <span className="inline-flex items-center gap-1.5 text-blue-400"><Clock className="w-3.5 h-3.5 animate-pulse" /> Running</span>}
+                      {(job.status === 'DRAFT' || job.status === 'VALIDATED' || job.status === 'QUEUED') && <span className="inline-flex items-center gap-1.5 text-yellow-400"><Clock className="w-3.5 h-3.5" /> Pending</span>}
+                      {job.status === 'FAILED' && <span className="inline-flex items-center gap-1.5 text-rose-400"><XCircle className="w-3.5 h-3.5" /> Failed</span>}
+                    </td>
+                    <td className="px-5 py-3 text-xs text-gray-400">{new Date(job.created_at).toLocaleString()}</td>
+                    <td className="px-5 py-3 text-right">
+                      <Link href="/experiments" className="text-gray-500 hover:text-white transition-colors">
+                        <MoreHorizontal className="w-4 h-4" />
+                      </Link>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>
