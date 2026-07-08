@@ -51,7 +51,7 @@ Displays a matplotlib bar chart (Histogram) showing the frequency distribution o
 ```bash
 python histogram.py
 ```
-> ![Histogram Output](assets/Histogram.png)
+> 🔗 [View Histogram Output Image](assets/Histogram.png)
 
 #### 3. Statistical Analysis
 Applies mathematical analysis to calculate the **Mean** and **Standard Deviation** of the generated quantum sequence.
@@ -76,12 +76,50 @@ python quantum_password.py
 ### 📸 Project Screenshots
 *(Below is the terminal output running all the lab scripts successfully)*
 
-![Terminal Output](assets/terminal.png)
+🔗 [View Terminal Output Image](assets/terminal.png)
+
+---
+
+## 🌐 Mini-Project 2: Quantum Platform Enterprise
+
+For the second milestone, I built a production-grade full-stack **Quantum Computing Management Dashboard**. This platform allows researchers to design circuits, execute them on simulated or IBM backends, and monitor real-time quantum hardware telemetry.
+
+### 🌟 Key Features
+* **Real-time Quantum Telemetry**: Live tracking of QPU temperatures and queue loads using animated sparklines.
+* **High-Fidelity Circuit Rendering**: Native integration with IBM Qiskit `matplotlib` drawer for professional, color-coded quantum circuit export (PNG).
+* **State Machine Execution Engine**: Reliable quantum job tracking (Draft ➔ Queued ➔ Running ➔ Completed) managed via FastAPI.
+* **Enterprise Dashboard**: Live data-driven KPIs, execution history, and analytical telemetry.
+
+### 📸 Platform Previews (Click to View)
+* 🔗 [View System Overview Dashboard](Mini_Project_2/quantum-platform-enterprise/docs/assets/Dashboard.png)
+* 🔗 [View Quantum Workspace & Circuit Rendering](Mini_Project_2/quantum-platform-enterprise/docs/assets/workspace.png)
+* 🔗 [View Hardware & Nodes Telemetry](Mini_Project_2/quantum-platform-enterprise/docs/assets/Hardware.png)
+
+### 🚀 How to Run Mini-Project 2
+
+**1. Start the Backend (FastAPI)**
+```bash
+cd "Mini_Project_2/quantum-platform-enterprise/backend"
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+python -m uvicorn main:app --reload --port 8000
+```
+
+**2. Start the Frontend (Next.js)**
+```bash
+cd "Mini_Project_2/quantum-platform-enterprise/frontend"
+npm install
+npm run dev
+```
+Visit `http://localhost:3000` to access the Enterprise Dashboard.
+
+---
 
 ## 🛠️ Technologies Used
-* **Python 3**
-* **Qiskit & Qiskit Aer** (IBM's Quantum Computing SDK)
-* **Matplotlib & NumPy** (For data visualization and statistics)
+* **Frontend:** Next.js 14, Tailwind CSS, Framer Motion
+* **Backend:** FastAPI (Python), SQLite (Async SQLAlchemy)
+* **Quantum:** Qiskit, Qiskit Aer, Matplotlib
 
 ---
 *This repository is maintained as part of the Project-Q 30-Day Quantum Challenge.*
