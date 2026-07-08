@@ -9,6 +9,9 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata = {
   title: 'Quantum Platform Enterprise',
   description: 'Enterprise Quantum Communication Dashboard',
+  icons: {
+    icon: '/icon.svg',
+  },
 };
 
 export default function RootLayout({
