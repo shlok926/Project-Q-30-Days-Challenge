@@ -11,17 +11,9 @@ export default function WorkspacePage() {
   const [error, setError] = useState<string | null>(null);
   const [experiments, setExperiments] = useState<any[]>([]);
 
-  // Fetch past experiments
-  const fetchExperiments = async () => {
-    try {
-      const res = await fetch('http://localhost:8000/api/v1/experiments/');
-      if (res.ok) {
-        const data = await res.json();
-        setExperiments(data);
-      }
-    } catch (e) {
-      console.error("Failed to fetch experiments", e);
-    }
+  // Fetch past experiments (Mocked)
+  const fetchExperiments = () => {
+    setExperiments([]);
   };
 
   useEffect(() => {
@@ -32,39 +24,17 @@ export default function WorkspacePage() {
     setLoading(true);
     setError(null);
     setResult(null);
-    try {
-      // 1. Create Experiment
-      const createRes = await fetch('http://localhost:8000/api/v1/experiments/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name: `${algorithm} Test`,
-          description: `Running ${algorithm} on ${provider}`,
-          algorithm: algorithm,
-          provider: provider === 'aer_simulator' ? 'aer' : 'ibm',
-          backend_name: provider,
-          configuration: {}
-        })
+    
+    // Simulate API delay for dramatic effect
+    setTimeout(() => {
+      setResult({
+        job_id: `job_${Math.random().toString(36).substring(7)}`,
+        status: 'COMPLETED',
+        counts: { "00": 512, "11": 512 },
+        // No base64 image in demo mode to keep code clean, just output
       });
-      
-      if (!createRes.ok) throw new Error('Failed to create experiment');
-      const exp = await createRes.json();
-
-      // 2. Execute Experiment
-      const execRes = await fetch(`http://localhost:8000/api/v1/experiments/${exp.id}/execute`, {
-        method: 'POST'
-      });
-      
-      if (!execRes.ok) throw new Error('Execution failed');
-      const execData = await execRes.json();
-      
-      setResult(execData);
-      fetchExperiments();
-    } catch (e: any) {
-      setError(e.message);
-    } finally {
       setLoading(false);
-    }
+    }, 2500);
   };
 
   return (

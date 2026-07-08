@@ -20,11 +20,13 @@ export default function HomePage() {
       });
     }, 2000);
 
-    // Fetch real experiments from DB
-    fetch('http://localhost:8000/api/v1/experiments')
-      .then(res => res.json())
-      .then(data => setExperiments(data))
-      .catch(err => console.error("Failed to fetch experiments", err));
+    // Mock real experiments instead of fetching from backend
+    setExperiments([
+      { id: '8dd74f87-a12', algorithm: 'bell_state', provider: 'aer', status: 'COMPLETED', created_at: new Date().toISOString() },
+      { id: 'b84697e7-b45', algorithm: 'qft', provider: 'ibm', status: 'COMPLETED', created_at: new Date(Date.now() - 1000000).toISOString() },
+      { id: '97279f47-c67', algorithm: 'grover_search', provider: 'aer', status: 'RUNNING', created_at: new Date(Date.now() - 2000000).toISOString() },
+      { id: '93655d4e-d89', algorithm: 'quantum_teleportation', provider: 'ibm', status: 'FAILED', created_at: new Date(Date.now() - 3000000).toISOString() }
+    ]);
 
     return () => clearInterval(interval);
   }, []);

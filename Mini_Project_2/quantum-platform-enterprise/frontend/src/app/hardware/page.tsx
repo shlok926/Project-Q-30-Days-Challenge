@@ -11,17 +11,12 @@ export default function HardwarePage() {
   const [aerTemp, setAerTemp] = useState<number[]>(Array.from({length: 30}, () => 40));
 
   useEffect(() => {
-    const fetchProviders = async () => {
-      try {
-        const res = await fetch('http://localhost:8000/api/v1/analytics/providers');
-        if (!res.ok) throw new Error("Failed to fetch hardware analytics");
-        const data = await res.json();
-        setProviders(data);
-      } catch (e: any) {
-        setError(e.message);
-      } finally {
-        setLoading(false);
-      }
+    const fetchProviders = () => {
+      setProviders({
+        ibm_quantum: { health_status: 'operational', usage_percentage: 75, average_queue_time: '12s' },
+        aer_simulator: { health_status: 'operational', usage_percentage: 25, average_queue_time: '0s' }
+      });
+      setLoading(false);
     };
     
     fetchProviders();
