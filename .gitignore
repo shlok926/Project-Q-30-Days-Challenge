@@ -23,3 +23,6 @@ out/
 .idea/
 .DS_Store
 Thumbs.db
+
+# AI Memory
+.ai/
