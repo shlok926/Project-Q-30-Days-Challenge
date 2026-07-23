@@ -30,6 +30,10 @@ def test_simulation_config_invalid() -> None:
     with pytest.raises(ValidationError):
         SimulationConfig(n_qubits=100, eve_intercept_probability=1.5)
 
+    with pytest.raises(ValidationError) as exc:
+        SimulationConfig(n_qubits=100, repetitions=0)
+    assert "QST-VAL-303" in str(exc.value)
+
 
 @pytest.mark.unit
 def test_simulation_result_valid() -> None:

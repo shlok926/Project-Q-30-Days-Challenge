@@ -4,7 +4,7 @@ References:
     Docs/10_API_SPECIFICATION.md §5
 """
 
-from qst.models.config import SimulationConfig, SecurityThresholds
+from qst.models.config import SimulationConfig, SecurityThresholds, ProtocolType
 from qst.models.metadata import SimulationMetadata
 from qst.models.results import (
     BatchResult,
@@ -17,12 +17,19 @@ from qst.models.results import (
     EveSimulationResult,
     QBERResult,
     SecurityMetrics,
+    ExperimentMetadata,
+    ExecutionMetrics,
+    ExperimentResult,
+    SweepDimensions,
+    ParameterSweepResult,
+    StatisticsResult,
 )
 from qst.models.visualization import VisualizationResult
 
 __all__ = [
     "SimulationConfig",
     "SecurityThresholds",
+    "ProtocolType",
     "SimulationMetadata",
     "SimulationResult",
     "BatchResult",
@@ -35,4 +42,10 @@ __all__ = [
     "EveSimulationResult",
     "QBERResult",
     "SecurityMetrics",
+    "ExperimentMetadata",
+    "ExecutionMetrics",
+    "ExperimentResult",
+    "SweepDimensions",
+    "ParameterSweepResult",
+    "StatisticsResult",
 ]

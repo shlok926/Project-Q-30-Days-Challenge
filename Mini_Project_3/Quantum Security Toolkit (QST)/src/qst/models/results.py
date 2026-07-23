@@ -328,3 +328,115 @@ class ValidationResult:
 
     is_valid: bool
     error_message: Optional[str] = None
+
+
+@dataclass(frozen=True)
+class ExperimentMetadata:
+    """Immutable metadata tracking experiment execution details.
+
+    Attributes:
+        protocol: Name/identifier of the protocol (e.g. 'BB84').
+        timestamp: ISO-8601 formatted execution timestamp.
+        qiskit_version: Loaded Qiskit package version.
+        repetitions: Configured execution iterations.
+        seed_strategy: Description of seed distribution (e.g. 'seeded-generator').
+    """
+
+    protocol: str
+    timestamp: str
+    qiskit_version: str
+    repetitions: int
+    seed_strategy: str
+
+
+@dataclass(frozen=True)
+class ExecutionMetrics:
+    """Immutable performance metrics for simulation executions.
+
+    Attributes:
+        execution_time: Total elapsed runtime in seconds.
+        average_simulation_time: Mean simulation step duration.
+        throughput: Qubits simulated per second.
+        simulations_per_second: Executed trial loops per second.
+    """
+
+    execution_time: float
+    average_simulation_time: float
+    throughput: float
+    simulations_per_second: float
+
+
+@dataclass(frozen=True)
+class ExperimentResult:
+    """Immutable domain model containing aggregated outcomes of a simulation run repetitions.
+
+    Attributes:
+        simulations: Sequence of individual simulation results.
+        average_qber: Average QBER rate computed across the sweep.
+        average_key_rate: Average key rate achieved.
+        secure_runs: Number of runs classified as SECURE.
+        warning_runs: Number of runs classified as WARNING.
+        compromised_runs: Number of runs classified as COMPROMISED.
+        metrics: Performance profiling execution details.
+        metadata: Audit metadata tracking environment context.
+    """
+
+    simulations: tuple[SimulationResult, ...]
+    average_qber: float
+    average_key_rate: float
+    secure_runs: int
+    warning_runs: int
+    compromised_runs: int
+    metrics: ExecutionMetrics
+    metadata: ExperimentMetadata
+
+
+@dataclass(frozen=True)
+class SweepDimensions:
+    """Immutable sweep coordinates specifying varied parameter grids.
+
+    Attributes:
+        qubit_counts: Sequence of varied qubit sizes.
+        interception_probabilities: Sequence of eavesdropping rates tested.
+        seeds: Sequence of random generator seeds.
+    """
+
+    qubit_counts: tuple[int, ...]
+    interception_probabilities: tuple[float, ...]
+    seeds: tuple[Optional[int], ...]
+
+
+@dataclass(frozen=True)
+class ParameterSweepResult:
+    """Immutable domain model holding parameter sweep execution outcomes.
+
+    Attributes:
+        experiments: Sequence of completed ExperimentResult sets.
+        total_experiments: Count of distinct sweeps completed.
+        sweep_dimensions: Varied bounds defining configuration loops.
+        metadata: Global sweep execution context attributes.
+    """
+
+    experiments: tuple[ExperimentResult, ...]
+    total_experiments: int
+    sweep_dimensions: SweepDimensions
+    metadata: ExperimentMetadata
+
+
+@dataclass(frozen=True)
+class StatisticsResult:
+    """Immutable statistical metrics summary wrapper.
+
+    Attributes:
+        mean: Standard average calculated across the sample.
+        median: Midpoint value in sorted sequence.
+        variance: Sample variance representing spread.
+        standard_deviation: Sample standard deviation.
+        confidence_interval: 95% confidence interval boundaries.
+    """
+
+    mean: float
+    median: float
+    variance: float
+    standard_deviation: float
+    confidence_interval: tuple[float, float]

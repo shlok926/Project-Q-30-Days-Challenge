@@ -5,5 +5,11 @@ References:
 """
 
 from qst.orchestration.orchestrator import SimulationOrchestrator
+from qst.orchestration.statistics import ExperimentStatisticsService
+from qst.orchestration.sweep_generator import ParameterSweepGenerator
 
-__all__ = ["SimulationOrchestrator"]
+__all__ = [
+    "SimulationOrchestrator",
+    "ExperimentStatisticsService",
+    "ParameterSweepGenerator",
+]

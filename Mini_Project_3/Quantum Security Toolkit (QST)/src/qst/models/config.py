@@ -5,7 +5,8 @@ References:
     Docs/05_PRODUCT_REQUIREMENTS.md §1
 """
 
-from dataclasses import dataclass
+from enum import Enum
+from dataclasses import dataclass, field
 from typing import Optional
 
 from qst.exceptions.validation import ValidationError
@@ -14,6 +15,14 @@ from qst.utils.validation import (
     validate_qubit_count,
     validate_seed,
 )
+
+
+class ProtocolType(Enum):
+    """Enumeration representing supported QKD protocols."""
+
+    BB84 = "BB84"
+    B92 = "B92"
+    E91 = "E91"
 
 
 @dataclass(frozen=True)
@@ -41,22 +50,42 @@ class SecurityThresholds:
 
 @dataclass(frozen=True)
 class SimulationConfig:
-    """Read-only parameter settings configuration for a single simulation run.
+    """Read-only parameter settings configuration for a simulation run.
 
     Attributes:
         n_qubits: Number of qubits to simulate.
         seed: Random seed for reproducibility.
-        eve_intercept_probability: Probability of eavesdropper interception.
+        eve_intercept_probability: Backward-compatible probability of interception.
+        interception_probability: Active probability of interception.
+        repetitions: Number of simulation run repetitions.
+        security_thresholds: Security classification thresholds.
+        protocol: Protocol variant identifier.
     """
 
     n_qubits: int
     seed: Optional[int] = None
     eve_intercept_probability: float = 0.0
+    interception_probability: float = 0.0
+    repetitions: int = 1
+    security_thresholds: SecurityThresholds = field(default_factory=SecurityThresholds)
+    protocol: ProtocolType = ProtocolType.BB84
 
     def __post_init__(self) -> None:
         """Perform validation on configured parameters after initialization."""
         validate_qubit_count(self.n_qubits)
         validate_seed(self.seed)
+
+        # Synchronize interception probabilities to keep backward compatibility
+        prob = self.interception_probability or self.eve_intercept_probability
+        object.__setattr__(self, "interception_probability", prob)
+        object.__setattr__(self, "eve_intercept_probability", prob)
+
         validate_probability(
-            self.eve_intercept_probability, name="eve_intercept_probability"
+            self.interception_probability, name="interception_probability"
         )
+
+        if self.repetitions <= 0:
+            raise ValidationError(
+                f"Repetitions must be greater than zero, got {self.repetitions}.",
+                code="QST-VAL-303",
+            )
