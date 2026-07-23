@@ -27,7 +27,9 @@ class Visualizer:
             A formatted string containing the basis reconciliation table.
         """
         # TODO: Construct formatted text table mapping bases and bits. Ref: VISUALIZATION_SPEC.md §3
-        raise NotImplementedError("Visualizer.render_basis_table is not yet implemented.")
+        raise NotImplementedError(
+            "Visualizer.render_basis_table is not yet implemented."
+        )
 
     @staticmethod
     def plot_qber_vs_interception(results: list[SimulationResult]) -> Any:
@@ -40,4 +42,6 @@ class Visualizer:
             A matplotlib.figure.Figure object representing the chart.
         """
         # TODO: Plot line graph using matplotlib. Ref: VISUALIZATION_SPEC.md §3
-        raise NotImplementedError("Visualizer.plot_qber_vs_interception is not yet implemented.")
+        raise NotImplementedError(
+            "Visualizer.plot_qber_vs_interception is not yet implemented."
+        )

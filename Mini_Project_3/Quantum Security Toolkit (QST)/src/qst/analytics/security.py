@@ -30,7 +30,9 @@ class SecurityAnalytics:
             The error rate as a float, or None if the sample index set is empty.
         """
         # TODO: Implement QBER sample division. Ref: QBER_SPEC.md §1, §6
-        raise NotImplementedError("SecurityAnalytics.compute_qber is not yet implemented.")
+        raise NotImplementedError(
+            "SecurityAnalytics.compute_qber is not yet implemented."
+        )
 
     @staticmethod
     def compute_key_rate(final_key_length: int, n_qubits: int) -> float:
@@ -44,7 +46,9 @@ class SecurityAnalytics:
             The key rate as a float.
         """
         # TODO: Compute ratio. Ref: QBER_SPEC.md §3
-        raise NotImplementedError("SecurityAnalytics.compute_key_rate is not yet implemented.")
+        raise NotImplementedError(
+            "SecurityAnalytics.compute_key_rate is not yet implemented."
+        )
 
     @staticmethod
     def detection_probability(

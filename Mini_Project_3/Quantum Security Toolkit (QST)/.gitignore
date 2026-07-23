@@ -1,2 +1,10 @@
 # Ignore documentation folder
 Docs/
+
+# Python coverage and test caches
+.coverage
+coverage.xml
+htmlcov/
+.pytest_cache/
+__pycache__/
+*.pyc

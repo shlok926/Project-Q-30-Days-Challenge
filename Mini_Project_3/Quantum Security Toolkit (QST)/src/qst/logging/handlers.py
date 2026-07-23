@@ -24,9 +24,11 @@ def get_console_handler(structured: bool = False) -> logging.Handler:
     handler = logging.StreamHandler(sys.stdout)
     if structured:
         from qst.logging.formatters import StructuredJSONFormatter
+
         handler.setFormatter(StructuredJSONFormatter())
     else:
         from qst.logging.formatters import StandardFormatter
+
         handler.setFormatter(StandardFormatter())
     return handler
 
@@ -48,9 +50,11 @@ def get_file_handler(
         handler = logging.FileHandler(file_path, encoding="utf-8")
         if structured:
             from qst.logging.formatters import StructuredJSONFormatter
+
             handler.setFormatter(StructuredJSONFormatter())
         else:
             from qst.logging.formatters import StandardFormatter
+
             handler.setFormatter(StandardFormatter())
         return handler
     except OSError:

@@ -4,6 +4,7 @@ References:
     Docs/10_API_SPECIFICATION.md §6
 """
 
+
 class QSTError(Exception):
     """Base exception for all QST-specific errors.
 

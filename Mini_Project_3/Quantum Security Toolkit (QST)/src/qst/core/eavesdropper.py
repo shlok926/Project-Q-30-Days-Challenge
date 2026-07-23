@@ -15,7 +15,9 @@ class Eavesdropper:
     configured probability metrics.
     """
 
-    def __init__(self, intercept_probability: float = 0.0, seed: Optional[int] = None) -> None:
+    def __init__(
+        self, intercept_probability: float = 0.0, seed: Optional[int] = None
+    ) -> None:
         """Initialize the Eavesdropper model.
 
         Args:
@@ -37,4 +39,6 @@ class Eavesdropper:
             The modified Qiskit circuit representing the resubmitted qubit.
         """
         # TODO: Apply random measurement and reconstruct state vector. Ref: BB84_SPEC.md §5
-        raise NotImplementedError("Eavesdropper.intercept_and_resend is not yet implemented.")
+        raise NotImplementedError(
+            "Eavesdropper.intercept_and_resend is not yet implemented."
+        )
