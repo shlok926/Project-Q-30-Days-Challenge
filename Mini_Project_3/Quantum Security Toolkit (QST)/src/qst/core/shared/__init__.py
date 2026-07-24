@@ -5,6 +5,7 @@ References:
 """
 
 from qst.core.shared.execution.executor import AerExecutor, ExecutorInterface
+from qst.core.shared.execution.ibm_runtime_executor import IBMRuntimeExecutor
 from qst.core.shared.random.random_provider import NumpyRandomProvider, RandomProvider
 from qst.core.shared.validation.validators import (
     validate_basis_values,
@@ -19,6 +20,7 @@ __all__ = [
     "NumpyRandomProvider",
     "ExecutorInterface",
     "AerExecutor",
+    "IBMRuntimeExecutor",
     "validate_qubit_count",
     "validate_bit_values",
     "validate_basis_values",

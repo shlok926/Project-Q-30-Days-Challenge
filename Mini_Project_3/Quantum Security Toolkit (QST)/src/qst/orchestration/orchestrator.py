@@ -41,7 +41,9 @@ class SimulationOrchestrator:
         if protocol_factory is None:
             from qst.core.bb84.protocol import BB84Protocol
 
-            self._protocol_factory = lambda p_type: BB84Protocol()
+            self._protocol_factory = lambda p_type, exec_val=None: BB84Protocol(
+                executor=exec_val
+            )
         else:
             self._protocol_factory = protocol_factory
 
@@ -61,6 +63,11 @@ class SimulationOrchestrator:
             repetitions=1,
             security_thresholds=config.security_thresholds,
             protocol=config.protocol,
+            use_ibm_runtime=config.use_ibm_runtime,
+            backend_name=config.backend_name,
+            ibm_token=config.ibm_token,
+            noise_aware_local=config.noise_aware_local,
+            fallback_to_aer=config.fallback_to_aer,
         )
         return self.run_many(single_config)
 
@@ -76,6 +83,28 @@ class SimulationOrchestrator:
         repetitions = config.repetitions
         n_qubits = config.n_qubits
 
+        # Initialize executor based on config
+        executor = None
+        if getattr(config, "use_ibm_runtime", False):
+            try:
+                from qst.core.shared.execution.ibm_runtime_executor import (
+                    IBMRuntimeExecutor,
+                )
+
+                executor = IBMRuntimeExecutor(
+                    backend_name=getattr(config, "backend_name", None),
+                    token=getattr(config, "ibm_token", None),
+                    noise_aware_local=getattr(config, "noise_aware_local", False),
+                )
+            except Exception as e:
+                if getattr(config, "fallback_to_aer", True):
+                    print(
+                        f"[Warning] Fallback to AerExecutor triggered due to IBM Quantum Runtime error: {e}"
+                    )
+                    # executor remains None, falling back to AerExecutor
+                else:
+                    raise e
+
         # Generate seed sub-sequence to preserve determinism
         if config.seed is not None:
             rng = np.random.default_rng(config.seed)
@@ -89,7 +118,13 @@ class SimulationOrchestrator:
         t_start_batch = time.perf_counter()
 
         for j in range(repetitions):
-            protocol = self._protocol_factory(config.protocol)
+            # Instantiate protocol, supporting custom lambdas or legacy factories
+            try:
+                protocol = self._protocol_factory(config.protocol, exec_val=executor)
+            except TypeError:
+                protocol = self._protocol_factory(config.protocol)
+                if executor is not None and hasattr(protocol, "_executor"):
+                    object.__setattr__(protocol, "_executor", executor)
 
             t_start_run = time.perf_counter()
 
@@ -105,8 +140,34 @@ class SimulationOrchestrator:
                 )
 
             protocol.initialize(**init_kwargs)
-            protocol.execute()
-            protocol.measure()
+
+            try:
+                protocol.execute()
+                protocol.measure()
+            except Exception as e:
+                # If execution fails and we are configured to fallback to Aer
+                if getattr(config, "use_ibm_runtime", False) and getattr(
+                    config, "fallback_to_aer", True
+                ):
+                    print(
+                        f"[Warning] Fallback to AerExecutor triggered during execution due to error: {e}"
+                    )
+                    from qst.core.shared.execution.executor import AerExecutor
+
+                    fallback_exec = AerExecutor()
+                    try:
+                        protocol = self._protocol_factory(
+                            config.protocol, exec_val=fallback_exec
+                        )
+                    except TypeError:
+                        protocol = self._protocol_factory(config.protocol)
+                        if hasattr(protocol, "_executor"):
+                            object.__setattr__(protocol, "_executor", fallback_exec)
+                    protocol.initialize(**init_kwargs)
+                    protocol.execute()
+                    protocol.measure()
+                else:
+                    raise e
 
             res = protocol.export()
             simulations.append(res)

@@ -5,5 +5,6 @@ References:
 """
 
 from qst.core.shared.execution.executor import AerExecutor, ExecutorInterface
+from qst.core.shared.execution.ibm_runtime_executor import IBMRuntimeExecutor
 
-__all__ = ["ExecutorInterface", "AerExecutor"]
+__all__ = ["ExecutorInterface", "AerExecutor", "IBMRuntimeExecutor"]

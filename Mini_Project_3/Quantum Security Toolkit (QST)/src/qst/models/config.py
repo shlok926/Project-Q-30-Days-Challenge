@@ -69,6 +69,11 @@ class SimulationConfig:
     repetitions: int = 1
     security_thresholds: SecurityThresholds = field(default_factory=SecurityThresholds)
     protocol: ProtocolType = ProtocolType.BB84
+    use_ibm_runtime: bool = False
+    backend_name: Optional[str] = None
+    ibm_token: Optional[str] = None
+    noise_aware_local: bool = False
+    fallback_to_aer: bool = True
 
     def __post_init__(self) -> None:
         """Perform validation on configured parameters after initialization."""

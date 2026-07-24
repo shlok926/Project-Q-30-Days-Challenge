@@ -57,7 +57,7 @@ QST includes a set of documented example scripts located in the `examples/` dire
 | [`04_export_results.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/04_export_results.py) | Intermediate | 3 mins | Serializers, JSONExporter, CSVExporter, schema load verification |
 | [`05_visualization.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/05_visualization.py) | Intermediate | 4 mins | Visualizer, MatplotlibBackend, themes (Light, Dark, Scientific), multi-format plots (PNG, SVG, PDF) |
 | [`06_complete_pipeline.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/06_complete_pipeline.py) | Advanced | 5 mins | E2E sweeps, trend analysis, scientific plotting, serialization, JSON/CSV exports |
-| [`07_real_hardware_placeholder.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/07_real_hardware_placeholder.py) | Intermediate | 2 mins | IBM Quantum Runtime API design preview, dependency check, roadmap details |
+| [`07_real_hardware_execution.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/07_real_hardware_execution.py) | Intermediate | 3 mins | IBM Quantum Runtime execution, backend discovery/selection, and Aer fallback |
 
 ---
 
@@ -98,7 +98,38 @@ To master the QST framework, we recommend developers follow this step-by-step pa
 2. **Security & Eavesdropping (5 mins):** Go through the `Security_Analysis.ipynb` notebook and run `02_eavesdropper_demo.py` to see the effect of measurement collapse on QBER.
 3. **Aggregations & Sweps (5 mins):** Run `03_parameter_sweep.py` and review `Parameter_Sweeps.ipynb` to understand multi-trial simulation aggregations.
 4. **Production Pipelines & Outputs (5 mins):** Study `04_export_results.py`, `05_visualization.py`, and run the comprehensive script `06_complete_pipeline.py`.
-5. **Looking Ahead:** Run `07_real_hardware_placeholder.py` to preview QPU hardware execution integration.
+5. **Looking Ahead:** Run `07_real_hardware_execution.py` to test physical QPU execution and see graceful fallbacks in action.
+
+---
+
+## 🌐 IBM Quantum Runtime Integration
+
+QST includes Phase 12 integration allowing seamless execution on physical IBM Quantum QPUs or remote simulators using Qiskit Runtime Service.
+
+### Authentication Guide
+Authenticate by passing your token via configuration parameters or setting up system environment variables:
+```bash
+# Save to environment variables
+export QISKIT_IBM_TOKEN="your_ibm_api_token"
+```
+QST automatically scans for `QISKIT_IBM_TOKEN` or `IBM_QUANTUM_TOKEN`, falling back to previously saved accounts on the local system if no environment token is supplied.
+
+### Backend Selection
+Select the execution target using `SimulationConfig` backend attributes:
+* `"best"`: Automatically discovers and routes execution to the least busy operational physical QPU backend on your account.
+* `"simulator"`: Routes execution to IBM's remote qasm simulator.
+* Explicit Backend Name: Pass a specific backend string (e.g., `backend_name="ibm_brisbane"`).
+
+### Supported Execution Modes
+Configured via `SimulationConfig`:
+1. **Ideal Simulation (Local):** `use_ibm_runtime=False` (default, executes locally on AerSimulator).
+2. **Real Hardware Execution (QPU):** `use_ibm_runtime=True`, `noise_aware_local=False` (transpiles and sends job queues to remote QPU).
+3. **Noise-Aware Local Simulation:** `use_ibm_runtime=True`, `noise_aware_local=True` (fetches the physical QPU noise properties and runs a local noise-aware Aer simulation).
+
+### Troubleshooting Common Runtime Errors
+* **QST-SIM-301 (Authentication Denied):** Your credentials token is invalid, or the channel cannot be resolved. Check your environment setup.
+* **QST-SIM-303 (Backend Selection Error):** The requested device backend is inactive or unauthorized.
+* **QST-SIM-304 (QPU execution timeout/cancelled):** Job timed out or was cancelled by the remote queue scheduler. Configure `fallback_to_aer=True` to recover gracefully.
 
 ---
 
@@ -130,9 +161,9 @@ Below is a summary of the completed development milestones and the target roadma
 * **[x] Visualization:** Custom styling themes (Light, Dark, Scientific) and MatplotlibBackend.
 * **[x] Integration & E2E Testing:** Deterministic golden schema checks, math invariants property tests, regression performance benchmarks.
 * **[x] Examples & Tutorials:** 7 python example scripts, 3 Jupyter notebooks, output auto-routing.
+* **[x] IBM Quantum Runtime Integration (Phase 12):** Real physical QPU execution support, least-busy selection, noise-aware simulation, and automatic Aer fallbacks.
 
 ### Future Roadmap (Coming Soon)
-* **[ ] IBM Quantum Runtime Integration (Phase 12):** Real physical QPU execution support and quantum job queue estimators.
 * **[ ] Privacy Amplification (Phase 13):** Toeplitz matrix hashing and hashing extraction algorithms for secure key distillation.
 * **[ ] Error Correction (Phase 13):** Cascade and LDPC reconciliation coding to correct channel noise.
 * **[ ] Secure Key Generation (Phase 13):** Production-ready symmetric key exports.
