@@ -7,7 +7,10 @@ References:
 
 from enum import Enum
 from dataclasses import dataclass, field
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from qst.correction.models import CascadeConfiguration
 
 from qst.exceptions.validation import ValidationError
 from qst.utils.validation import (
@@ -74,6 +77,8 @@ class SimulationConfig:
     ibm_token: Optional[str] = None
     noise_aware_local: bool = False
     fallback_to_aer: bool = True
+    run_error_correction: bool = False
+    cascade_configuration: Optional["CascadeConfiguration"] = None
 
     def __post_init__(self) -> None:
         """Perform validation on configured parameters after initialization."""

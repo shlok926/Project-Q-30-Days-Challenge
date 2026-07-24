@@ -58,6 +58,7 @@ QST includes a set of documented example scripts located in the `examples/` dire
 | [`05_visualization.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/05_visualization.py) | Intermediate | 4 mins | Visualizer, MatplotlibBackend, themes (Light, Dark, Scientific), multi-format plots (PNG, SVG, PDF) |
 | [`06_complete_pipeline.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/06_complete_pipeline.py) | Advanced | 5 mins | E2E sweeps, trend analysis, scientific plotting, serialization, JSON/CSV exports |
 | [`07_real_hardware_execution.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/07_real_hardware_execution.py) | Intermediate | 3 mins | IBM Quantum Runtime execution, backend discovery/selection, and Aer fallback |
+| [`08_error_correction.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/08_error_correction.py) | Intermediate | 3 mins | Cascade Error Correction integration, key reconciliation metrics, telemetry |
 
 ---
 
@@ -98,7 +99,65 @@ To master the QST framework, we recommend developers follow this step-by-step pa
 2. **Security & Eavesdropping (5 mins):** Go through the `Security_Analysis.ipynb` notebook and run `02_eavesdropper_demo.py` to see the effect of measurement collapse on QBER.
 3. **Aggregations & Sweps (5 mins):** Run `03_parameter_sweep.py` and review `Parameter_Sweeps.ipynb` to understand multi-trial simulation aggregations.
 4. **Production Pipelines & Outputs (5 mins):** Study `04_export_results.py`, `05_visualization.py`, and run the comprehensive script `06_complete_pipeline.py`.
-5. **Looking Ahead:** Run `07_real_hardware_execution.py` to test physical QPU execution and see graceful fallbacks in action.
+5. **Error Correction (3 mins):** Run `08_error_correction.py` to reconcile keys via Cascade error correction and observe telemetry.
+6. **Physical Execution:** Run `07_real_hardware_execution.py` to test physical QPU execution and see graceful fallbacks in action.
+
+
+## 🛡️ Cascade Error Correction (Phase 13A)
+
+QST includes Phase 13A Cascade Error Correction support. It reconciles transmission noise and eavesdropping errors between Alice's and Bob's sifted keys without compromising raw key data structures.
+
+### Protocol Flow Diagram
+
+```
+      Alice
+        │
+        ▼
+  Quantum Transmission
+        │
+        ▼
+       Bob
+        │
+        ▼
+Basis Reconciliation
+        │
+        ▼
+   Key Sifting
+        │
+        ▼
+ QBER Estimation
+        │
+        ▼
+Cascade Error Correction (Phase 13A)
+        │
+        ▼
+Privacy Amplification (Phase 13B)
+        │
+        ▼
+ Final Secret Key (Phase 13C)
+```
+
+### Configuration & Settings
+Configure via `SimulationConfig`:
+* `run_error_correction` (bool): Activates the reconciler stages when set to `True`.
+* `cascade_configuration` (CascadeConfiguration): Overrides default options (block sizes, passes, and seeds):
+  ```python
+  from qst.correction.models import CascadeConfiguration
+  config.cascade_configuration = CascadeConfiguration(
+      block_sizes=(4, 8, 16),
+      num_passes=4,
+      seed=42
+  )
+  ```
+
+### Reconciled Metrics
+The `SimulationResult` exposes metrics in the `error_correction` field:
+* `corrected_key`: The finalized, matching binary key.
+* `initial_qber`: The raw QBER before error correction.
+* `estimated_qber_after_correction`: The remaining error rate (usually `0.0` after Cascade).
+* `correction_efficiency`: The ratio of bits disclosed relative to the theoretical Shannon entropy limit.
+* `parity_messages_exchanged`: Total messages sent during parity exchanges.
+* `communication_rounds`: Communication rounds performed.
 
 ---
 
@@ -160,11 +219,11 @@ Below is a summary of the completed development milestones and the target roadma
 * **[x] CLI Engine:** simulate, sweep, export, and visualize subcommands execution.
 * **[x] Visualization:** Custom styling themes (Light, Dark, Scientific) and MatplotlibBackend.
 * **[x] Integration & E2E Testing:** Deterministic golden schema checks, math invariants property tests, regression performance benchmarks.
-* **[x] Examples & Tutorials:** 7 python example scripts, 3 Jupyter notebooks, output auto-routing.
+* **[x] Examples & Tutorials:** 8 python example scripts, 3 Jupyter notebooks, output auto-routing.
 * **[x] IBM Quantum Runtime Integration (Phase 12):** Real physical QPU execution support, least-busy selection, noise-aware simulation, and automatic Aer fallbacks.
+* **[x] Cascade Error Correction (Phase 13A):** Recursive Cascade parity reconciliation algorithm.
 
 ### Future Roadmap (Coming Soon)
-* **[ ] Privacy Amplification (Phase 13):** Toeplitz matrix hashing and hashing extraction algorithms for secure key distillation.
-* **[ ] Error Correction (Phase 13):** Cascade and LDPC reconciliation coding to correct channel noise.
-* **[ ] Secure Key Generation (Phase 13):** Production-ready symmetric key exports.
+* **[ ] Privacy Amplification (Phase 13B):** Toeplitz matrix hashing and hashing extraction algorithms for secure key distillation.
+* **[ ] Final Secret Key & Rate Calculation (Phase 13C):** Secure key extraction rate formulas.
 * **[ ] Release & Packaging (Phase 14):** PyPI package deployment, public GitHub releases, and production v1.0.0 tag.

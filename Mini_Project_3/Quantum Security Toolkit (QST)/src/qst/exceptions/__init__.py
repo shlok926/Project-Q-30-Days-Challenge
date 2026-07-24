@@ -10,6 +10,7 @@ from qst.exceptions.export import ExportError
 from qst.exceptions.simulation import SimulationError
 from qst.exceptions.validation import ValidationError
 from qst.exceptions.visualization import VisualizationError
+from qst.correction.exceptions import CorrectionError
 
 __all__ = [
     "QSTError",
@@ -18,4 +19,5 @@ __all__ = [
     "SimulationError",
     "ExportError",
     "VisualizationError",
+    "CorrectionError",
 ]

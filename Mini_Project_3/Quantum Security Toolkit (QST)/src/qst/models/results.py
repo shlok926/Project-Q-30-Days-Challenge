@@ -12,6 +12,10 @@ from typing import Any, Optional
 
 from qst.exceptions.validation import ValidationError
 from qst.models.metadata import SimulationMetadata
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from qst.correction.models import CorrectionResult
 
 
 class SecurityStatus(Enum):
@@ -256,8 +260,12 @@ class SimulationResult:
     qber_result: Optional[QBERResult] = None
     security_metrics: Optional[SecurityMetrics] = None
     privacy_amplification: Optional[Any] = None
-    error_correction: Optional[Any] = None
+    error_correction: Optional["CorrectionResult"] = None
     entropy_analysis: Optional[Any] = None
+    raw_key: Optional[list[int]] = None
+    corrected_key: Optional[list[int]] = None
+    privacy_result: Optional["PrivacyAmplificationResult"] = None
+    final_secret_key: Optional["FinalSecretKey"] = None
 
     def __post_init__(self) -> None:
         """Validate output properties post initialization."""

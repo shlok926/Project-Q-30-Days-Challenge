@@ -68,6 +68,8 @@ class SimulationOrchestrator:
             ibm_token=config.ibm_token,
             noise_aware_local=config.noise_aware_local,
             fallback_to_aer=config.fallback_to_aer,
+            run_error_correction=config.run_error_correction,
+            cascade_configuration=config.cascade_configuration,
         )
         return self.run_many(single_config)
 
@@ -170,6 +172,28 @@ class SimulationOrchestrator:
                     raise e
 
             res = protocol.export()
+
+            if getattr(config, "run_error_correction", False):
+                from qst.correction.cascade import CascadeReconciler
+                from qst.correction.models import CascadeConfiguration
+                from dataclasses import replace
+
+                cascade_config = getattr(config, "cascade_configuration", None)
+                if cascade_config is None:
+                    cascade_config = CascadeConfiguration()
+
+                reconciler = CascadeReconciler(cascade_config)
+                alice_sifted = res.sifted_keys.alice_key if res.sifted_keys else ()
+                bob_sifted = res.sifted_keys.bob_key if res.sifted_keys else ()
+
+                if alice_sifted and bob_sifted:
+                    corr_result = reconciler.reconcile(alice_sifted, bob_sifted)
+                    res = replace(
+                        res,
+                        corrected_key=list(corr_result.corrected_key.key_bits),
+                        error_correction=corr_result,
+                    )
+
             simulations.append(res)
 
             simulation_times.append(time.perf_counter() - t_start_run)

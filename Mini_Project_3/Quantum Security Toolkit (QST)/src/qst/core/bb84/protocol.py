@@ -256,6 +256,7 @@ class BB84Protocol(ProtocolInterface):
             privacy_amplification=None,
             error_correction=None,
             entropy_analysis=None,
+            raw_key=list(self._alice_bits) if self._alice_bits else None,
         )
 
     # Public getters for test assertions
