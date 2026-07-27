@@ -12,6 +12,7 @@ from typing import Optional, TYPE_CHECKING
 if TYPE_CHECKING:
     from qst.correction.models import CascadeConfiguration
     from qst.privacy.models import PrivacyAmplificationConfiguration
+    from qst.secret.models import SecurityClassificationConfig
 
 from qst.exceptions.validation import ValidationError
 from qst.utils.validation import (
@@ -82,6 +83,7 @@ class SimulationConfig:
     cascade_configuration: Optional["CascadeConfiguration"] = None
     run_privacy_amplification: bool = False
     privacy_configuration: Optional["PrivacyAmplificationConfiguration"] = None
+    security_classification_thresholds: Optional["SecurityClassificationConfig"] = None
 
     def __post_init__(self) -> None:
         """Perform validation on configured parameters after initialization."""

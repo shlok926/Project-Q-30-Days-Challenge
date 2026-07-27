@@ -17,6 +17,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from qst.correction.models import CorrectionResult
     from qst.privacy.models import PrivacyAmplificationResult, FinalSecretKey
+    from qst.secret.models import ProtocolSummary, SecretKeyMetrics, SecurityLevel
 
 
 class SecurityStatus(Enum):
@@ -267,6 +268,9 @@ class SimulationResult:
     corrected_key: Optional[list[int]] = None
     privacy_result: Optional["PrivacyAmplificationResult"] = None
     final_secret_key: Optional["FinalSecretKey"] = None
+    protocol_summary: Optional["ProtocolSummary"] = None
+    secret_key_metrics: Optional["SecretKeyMetrics"] = None
+    security_level: Optional["SecurityLevel"] = None
 
     def __post_init__(self) -> None:
         """Validate output properties post initialization."""

@@ -72,6 +72,7 @@ class SimulationOrchestrator:
             cascade_configuration=config.cascade_configuration,
             run_privacy_amplification=config.run_privacy_amplification,
             privacy_configuration=config.privacy_configuration,
+            security_classification_thresholds=config.security_classification_thresholds,
         )
         return self.run_many(single_config)
 
@@ -145,6 +146,7 @@ class SimulationOrchestrator:
 
             protocol.initialize(**init_kwargs)
 
+            fell_back = False
             try:
                 protocol.execute()
                 protocol.measure()
@@ -153,6 +155,7 @@ class SimulationOrchestrator:
                 if getattr(config, "use_ibm_runtime", False) and getattr(
                     config, "fallback_to_aer", True
                 ):
+                    fell_back = True
                     print(
                         f"[Warning] Fallback to AerExecutor triggered during execution due to error: {e}"
                     )
@@ -228,6 +231,73 @@ class SimulationOrchestrator:
                             else 0.0
                         ),
                     )
+
+            if getattr(config, "use_ibm_runtime", False):
+                if fell_back:
+                    execution_mode = "Local Aer"
+                elif getattr(config, "noise_aware_local", False):
+                    execution_mode = "Noise-aware Aer"
+                else:
+                    execution_mode = "IBM Runtime"
+            else:
+                execution_mode = "Local Aer"
+
+            from qst.secret.metrics import SecretMetricsCalculator
+            from qst.secret.summary import ProtocolSummaryBuilder
+            from qst.secret.models import SecurityClassificationConfig
+            from dataclasses import replace
+
+            classification_config = getattr(
+                config, "security_classification_thresholds", None
+            )
+            metrics_calc = SecretMetricsCalculator(classification_config)
+            summary_builder = ProtocolSummaryBuilder()
+
+            raw_len = len(res.raw_key) if res.raw_key is not None else 0
+            sifted_len = len(res.sifted_key) if res.sifted_key is not None else 0
+            corrected_len = (
+                len(res.corrected_key) if res.corrected_key is not None else None
+            )
+
+            if res.final_secret_key is not None:
+                final_len = len(res.final_secret_key.key_bits)
+            elif corrected_len is not None:
+                final_len = corrected_len
+            else:
+                final_len = sifted_len
+
+            sec_param = 0.0
+            if res.privacy_result is not None:
+                sec_param = res.privacy_result.statistics.estimated_security_parameter
+
+            metrics = metrics_calc.calculate_metrics(
+                raw_len=raw_len,
+                sifted_len=sifted_len,
+                corrected_len=corrected_len,
+                final_len=final_len,
+                security_parameter=sec_param,
+            )
+
+            sec_level = metrics_calc.classify_security_level(sec_param)
+
+            summary = summary_builder.build_summary(
+                raw_len=raw_len,
+                sifted_len=sifted_len,
+                corrected_len=corrected_len,
+                final_len=final_len,
+                qber=res.qber if res.qber is not None else 0.0,
+                correction_enabled=getattr(config, "run_error_correction", False),
+                privacy_enabled=getattr(config, "run_privacy_amplification", False),
+                overall_success=True,
+                execution_mode=execution_mode,
+            )
+
+            res = replace(
+                res,
+                protocol_summary=summary,
+                secret_key_metrics=metrics,
+                security_level=sec_level,
+            )
 
             simulations.append(res)
 

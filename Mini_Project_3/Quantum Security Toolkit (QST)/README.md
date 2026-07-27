@@ -60,6 +60,7 @@ QST includes a set of documented example scripts located in the `examples/` dire
 | [`07_real_hardware_execution.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/07_real_hardware_execution.py) | Intermediate | 3 mins | IBM Quantum Runtime execution, backend discovery/selection, and Aer fallback |
 | [`08_error_correction.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/08_error_correction.py) | Intermediate | 3 mins | Cascade Error Correction integration, key reconciliation metrics, telemetry |
 | [`09_privacy_amplification.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/09_privacy_amplification.py) | Intermediate | 3 mins | Privacy Amplification, key compression ratio metrics, Min/Shannon Entropy |
+| [`10_protocol_summary.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/10_protocol_summary.py) | Intermediate | 3 mins | Protocol Finalization, E2E key rates summary, classification levels, and losses |
 
 ---
 
@@ -102,7 +103,8 @@ To master the QST framework, we recommend developers follow this step-by-step pa
 4. **Production Pipelines & Outputs (5 mins):** Study `04_export_results.py`, `05_visualization.py`, and run the comprehensive script `06_complete_pipeline.py`.
 5. **Error Correction (3 mins):** Run `08_error_correction.py` to reconcile keys via Cascade error correction and observe telemetry.
 6. **Privacy Amplification (3 mins):** Run `09_privacy_amplification.py` to compress keys and estimate security parameters/entropy.
-7. **Physical Execution:** Run `07_real_hardware_execution.py` to test physical QPU execution and see graceful fallbacks in action.
+7. **Protocol Finalization (3 mins):** Run `10_protocol_summary.py` to generate complete protocol summaries and benchmarking losses.
+8. **Physical Execution:** Run `07_real_hardware_execution.py` to test physical QPU execution and see graceful fallbacks in action.
 
 
 ## 🛡️ Cascade Error Correction (Phase 13A)
@@ -136,7 +138,10 @@ Cascade Error Correction (Phase 13A)
 Privacy Amplification (Phase 13B)
         │
         ▼
- Final Secret Key (Phase 13C)
+Secret Key Metrics & Summary (Phase 13C)
+        │
+        ▼
+  Final Shared Secret Key
 ```
 
 ### Configuration & Settings
@@ -199,6 +204,67 @@ The final execution metrics are populated on `SimulationResult` under `privacy_r
 * `statistics.effective_key_rate`: The final compression efficiency.
 * `statistics.estimated_security_parameter`: Quantifies trace distance upper bound bounds ($s = \text{discard} - \text{leak}$).
 
+
+## 📊 Secret Key Metrics & Protocol Finalization (Phase 13C)
+
+QST includes Phase 13C Secret Key Metrics & Protocol Finalization. This stage aggregates metrics from previous protocol stages using dedicated calculators and builders without modifying intermediate key arrays, providing complete execution transparency and benchmark-ready telemetry.
+
+### Metrics & Builders Abstraction
+* **`SecretMetricsCalculator`:** A service class that computes key rates and protocol loss parameters relative to raw key size, and classifies the final security level.
+* **`ProtocolSummaryBuilder`:** A service class that constructs a summary containing key lengths, execution modes, and success flags.
+
+### Configurable Security Levels
+Security levels (`LOW`, `MEDIUM`, `HIGH`) are classified based on the computed trace distance security parameter and configurable thresholds:
+* **`SecurityClassificationConfig`:** Configure custom classification boundaries via `SimulationConfig`:
+  ```python
+  from qst.secret.models import SecurityClassificationConfig
+  config.security_classification_thresholds = SecurityClassificationConfig(
+      high_threshold=12.0,
+      medium_threshold=6.0
+  )
+  ```
+
+### Metric Calculations
+The `SimulationResult` exposes metrics under `protocol_summary`, `secret_key_metrics`, and `security_level`:
+* **Rates & Efficiency:**
+  - `raw_key_rate`: $1.0$ (or $0.0$ if no raw key populated).
+  - `sifted_key_rate`: $\frac{N_{\text{sifted}}}{N_{\text{raw}}}$.
+  - `corrected_key_rate`: $\frac{N_{\text{corrected}}}{N_{\text{raw}}}$.
+  - `final_secret_key_rate`: $\frac{N_{\text{final}}}{N_{\text{raw}}}$.
+  - `overall_efficiency`: Equivalent to the final secret key rate.
+* **Loss Benchmarks:**
+  - `error_correction_loss`: Disclosed parity bits fraction $\frac{N_{\text{sifted}} - N_{\text{corrected}}}{N_{\text{raw}}}$.
+  - `privacy_amplification_loss`: Hashing compression fraction $\frac{N_{\text{corrected}} - N_{\text{final}}}{N_{\text{raw}}}$.
+  - `total_protocol_loss`: Total key reduction fraction $\frac{N_{\text{raw}} - N_{\text{final}}}{N_{\text{raw}}}$.
+
+### Sample Console Output
+```text
+Protocol Summary
+------------------------
+Raw Key Length:          20
+  v
+Sifted Key Length:       8
+  v
+Corrected Key Length:    8
+  v
+Final Secret Key Length: 4
+------------------------
+Raw Key Rate:            1.0000
+  v
+Sifted Key Rate:         0.4000
+  v
+Corrected Key Rate:      0.4000
+  v
+Final Key Rate:          0.2000
+------------------------
+QBER:                    0.0000
+Security Parameter:      4.0000
+Security Level:          MEDIUM
+Execution Backend:       Local Aer
+Overall Success:         True
+------------------------
+```
+
 ---
 
 ## 🌐 IBM Quantum Runtime Integration
@@ -259,11 +325,11 @@ Below is a summary of the completed development milestones and the target roadma
 * **[x] CLI Engine:** simulate, sweep, export, and visualize subcommands execution.
 * **[x] Visualization:** Custom styling themes (Light, Dark, Scientific) and MatplotlibBackend.
 * **[x] Integration & E2E Testing:** Deterministic golden schema checks, math invariants property tests, regression performance benchmarks.
-* **[x] Examples & Tutorials:** 9 python example scripts, 3 Jupyter notebooks, output auto-routing.
+* **[x] Examples & Tutorials:** 10 python example scripts, 3 Jupyter notebooks, output auto-routing.
 * **[x] IBM Quantum Runtime Integration (Phase 12):** Real physical QPU execution support, least-busy selection, noise-aware simulation, and automatic Aer fallbacks.
 * **[x] Cascade Error Correction (Phase 13A):** Recursive Cascade parity reconciliation algorithm.
 * **[x] Privacy Amplification (Phase 13B):** Extensible 2-universal hashing with Toeplitz algorithm and entropy bounds calculations.
+* **[x] Secret Key Metrics & Protocol Finalization (Phase 13C):** Multi-stage calculators and summary builders, configurable classification levels, and benchmarking losses.
 
 ### Future Roadmap (Coming Soon)
-* **[ ] Final Secret Key & Rate Calculation (Phase 13C):** Secure key extraction rate formulas.
 * **[ ] Release & Packaging (Phase 14):** PyPI package deployment, public GitHub releases, and production v1.0.0 tag.

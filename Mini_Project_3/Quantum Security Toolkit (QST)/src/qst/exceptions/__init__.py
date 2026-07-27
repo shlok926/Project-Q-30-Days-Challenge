@@ -12,6 +12,7 @@ from qst.exceptions.validation import ValidationError
 from qst.exceptions.visualization import VisualizationError
 from qst.correction.exceptions import CorrectionError
 from qst.privacy.exceptions import PrivacyAmplificationError
+from qst.secret.exceptions import SecretKeyError
 
 __all__ = [
     "QSTError",
@@ -22,4 +23,5 @@ __all__ = [
     "VisualizationError",
     "CorrectionError",
     "PrivacyAmplificationError",
+    "SecretKeyError",
 ]
