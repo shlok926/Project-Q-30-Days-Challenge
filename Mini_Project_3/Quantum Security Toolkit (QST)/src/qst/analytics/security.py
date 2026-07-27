@@ -1,11 +1,11 @@
-"""SecurityAnalytics implementation class stub.
+"""SecurityAnalytics implementation for key rate and QBER checks.
 
 References:
     Docs/QBER_SPEC.md §1-§5
     Docs/07_SYSTEM_ARCHITECTURE.md §5
 """
 
-from typing import List, Optional
+from typing import Optional
 
 
 class SecurityAnalytics:
@@ -29,10 +29,15 @@ class SecurityAnalytics:
         Returns:
             The error rate as a float, or None if the sample index set is empty.
         """
-        # TODO: Implement QBER sample division. Ref: QBER_SPEC.md §1, §6
-        raise NotImplementedError(
-            "SecurityAnalytics.compute_qber is not yet implemented."
-        )
+        if not sample_indices:
+            return None
+
+        errors = 0
+        for idx in sample_indices:
+            if idx < len(alice_bits) and idx < len(bob_bits):
+                if alice_bits[idx] != bob_bits[idx]:
+                    errors += 1
+        return errors / len(sample_indices)
 
     @staticmethod
     def compute_key_rate(final_key_length: int, n_qubits: int) -> float:
@@ -45,10 +50,7 @@ class SecurityAnalytics:
         Returns:
             The key rate as a float.
         """
-        # TODO: Compute ratio. Ref: QBER_SPEC.md §3
-        raise NotImplementedError(
-            "SecurityAnalytics.compute_key_rate is not yet implemented."
-        )
+        return final_key_length / n_qubits if n_qubits > 0 else 0.0
 
     @staticmethod
     def detection_probability(
@@ -64,7 +66,7 @@ class SecurityAnalytics:
         Returns:
             Statistical confidence (0.0 to 1.0) of eavesdropper presence.
         """
-        # TODO: Implement Wilson score interval or binomial hypothesis test. Ref: QBER_SPEC.md §5
-        raise NotImplementedError(
-            "SecurityAnalytics.detection_probability is not yet implemented."
-        )
+        if qber <= noise_floor or sample_size <= 0:
+            return 0.0
+        p_no_detect = (1.0 - (qber - noise_floor)) ** sample_size
+        return max(0.0, min(1.0, 1.0 - p_no_detect))

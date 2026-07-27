@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - name: "QST Authors"
+title: "Quantum Security Toolkit (QST)"
+version: 1.0.0
+date-released: 2026-07-28
+url: "https://github.com/shlok926/Project-Q-30-Days-Challenge"
+repository-code: "https://github.com/shlok926/Project-Q-30-Days-Challenge"
+license: "MIT"
+abstract: "A production-grade Python framework for simulating post-quantum cryptography, BB84 Quantum Key Distribution, Eve eavesdropping collapse, Cascade parity error correction, and 2-universal Toeplitz privacy amplification."
+keywords:
+  - quantum-key-distribution
+  - bb84-protocol
+  - cascade-error-correction
+  - privacy-amplification
+  - quantum-security

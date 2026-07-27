@@ -1,5 +1,9 @@
-# Ignore documentation folder
-Docs/
+# Python build and distribution artifacts
+build/
+dist/
+*.egg-info/
+.venv/
+release_venv/
 
 # Python coverage and test caches
 .coverage

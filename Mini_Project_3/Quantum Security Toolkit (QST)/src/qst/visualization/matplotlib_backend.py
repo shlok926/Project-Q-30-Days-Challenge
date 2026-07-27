@@ -8,12 +8,19 @@ References:
 import os
 from typing import Any, Optional
 
-# Matplotlib imports strictly isolated in this file
-from matplotlib.figure import Figure
+try:
+    from matplotlib.figure import Figure
+
+    HAS_MATPLOTLIB = True
+except ImportError:
+    Figure = Any  # type: ignore
+    HAS_MATPLOTLIB = False
+
 import numpy as np
 
 from qst.exceptions.export import ExportError
 from qst.exceptions.validation import ValidationError
+from qst.exceptions.visualization import VisualizationError
 from qst.visualization.backend import (
     ChartType,
     VisualizationBackend,
@@ -58,6 +65,12 @@ class MatplotlibBackend(VisualizationBackend):
         Returns:
             A VisualizationResult payload wrapper.
         """
+        if not HAS_MATPLOTLIB:
+            raise VisualizationError(
+                "Matplotlib is not installed. Install with optional dependencies 'pip install \"qst[viz]\"' to enable plotting.",
+                code="QST-VIS-701",
+            )
+
         # Validate format beforehand if filepath is supplied
         fmt = None
         if filepath is not None:

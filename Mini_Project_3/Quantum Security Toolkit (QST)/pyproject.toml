@@ -4,26 +4,41 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "qst"
-version = "0.1.0"
-description = "Quantum Security Toolkit (QST)"
+version = "1.0.0"
+description = "A production-grade toolkit for simulating BB84 Quantum Key Distribution, Eve eavesdropping collapse, Cascade parity error correction, and Toeplitz privacy amplification."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 license = { text = "MIT" }
 authors = [
-    { name = "ParaDise" }
+    { name = "QST Authors" }
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Operating System :: OS Independent",
     "Topic :: Security :: Cryptography",
+    "Topic :: Scientific/Engineering :: Physics",
+]
+keywords = [
+    "quantum-cryptography",
+    "qkd",
+    "bb84",
+    "cascade-protocol",
+    "privacy-amplification",
+    "qiskit",
 ]
 dependencies = [
     "qiskit>=1.0.0",
     "qiskit-aer>=0.14.0",
     "numpy>=1.24.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/shlok926/Project-Q-30-Days-Challenge"
+Repository = "https://github.com/shlok926/Project-Q-30-Days-Challenge"
+Documentation = "https://github.com/shlok926/Project-Q-30-Days-Challenge/tree/main/Mini_Project_3/Quantum%20Security%20Toolkit%20(QST)/Docs"
 
 [project.optional-dependencies]
 viz = [

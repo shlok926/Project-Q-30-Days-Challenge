@@ -1,60 +1,28 @@
 ---
 name: Bug Report
-about: Report unexpected or incorrect behavior
-title: "[Bug] "
+about: Create a report to help us improve.
+title: "[BUG] "
 labels: bug
 assignees: ''
 ---
 
-## Description
+**Describe the bug**
+A clear and concise description of what the bug is.
 
-A clear, concise description of what went wrong.
+**To Reproduce**
+Steps to reproduce the behavior:
+1. Initialize configuration with `...`
+2. Execute SimulationOrchestrator run
+3. See error
 
-## Reproduction
+**Expected behavior**
+A clear and concise description of what you expected to happen.
 
-**Please include the exact parameters used, per `docs/../specs/SIMULATION_SPEC.md` §6's Determinism Contract — a bug report without a seed is much harder to reproduce.**
+**Environment**
+- OS: [e.g. Windows, Ubuntu]
+- Python Version: [e.g. 3.11.4]
+- Qiskit Version: [e.g. 1.0.2]
+- Qiskit Aer Version: [e.g. 0.14.1]
 
-```python
-# Example:
-from qst.orchestration import SimulationOrchestrator
-
-orchestrator = SimulationOrchestrator(
-    n_qubits=...,
-    seed=...,
-    eve_intercept_probability=...,
-)
-result = orchestrator.run()
-```
-
-Or, if using the CLI:
-
-```bash
-qst simulate --qubits ... --seed ... --eve-prob ...
-```
-
-## Expected Behavior
-
-What you expected to happen.
-
-## Actual Behavior
-
-What actually happened. Include the full error message/traceback if applicable.
-
-## Diagnostic Info
-
-If possible, run with `--diagnose` (see `docs/30_OBSERVABILITY.md` §8) and paste the output here:
-
-```
-(paste --diagnose output)
-```
-
-Otherwise, please provide manually:
-
-- QST version:
-- Qiskit version:
-- Python version:
-- OS:
-
-## Additional Context
-
-Anything else relevant — e.g., does this affect `core/` (BB84Protocol/Eavesdropper)? If so, please flag this explicitly, since core-logic bugs are treated as highest priority (see `docs/29_THREAT_MODEL.md` §11).
+**Additional context**
+Add any other context, stack traces, or logs about the problem here.
