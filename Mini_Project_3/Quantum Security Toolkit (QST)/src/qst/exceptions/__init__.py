@@ -11,6 +11,7 @@ from qst.exceptions.simulation import SimulationError
 from qst.exceptions.validation import ValidationError
 from qst.exceptions.visualization import VisualizationError
 from qst.correction.exceptions import CorrectionError
+from qst.privacy.exceptions import PrivacyAmplificationError
 
 __all__ = [
     "QSTError",
@@ -20,4 +21,5 @@ __all__ = [
     "ExportError",
     "VisualizationError",
     "CorrectionError",
+    "PrivacyAmplificationError",
 ]

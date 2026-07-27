@@ -16,6 +16,7 @@ from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from qst.correction.models import CorrectionResult
+    from qst.privacy.models import PrivacyAmplificationResult, FinalSecretKey
 
 
 class SecurityStatus(Enum):

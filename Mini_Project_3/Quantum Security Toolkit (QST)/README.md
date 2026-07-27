@@ -59,6 +59,7 @@ QST includes a set of documented example scripts located in the `examples/` dire
 | [`06_complete_pipeline.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/06_complete_pipeline.py) | Advanced | 5 mins | E2E sweeps, trend analysis, scientific plotting, serialization, JSON/CSV exports |
 | [`07_real_hardware_execution.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/07_real_hardware_execution.py) | Intermediate | 3 mins | IBM Quantum Runtime execution, backend discovery/selection, and Aer fallback |
 | [`08_error_correction.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/08_error_correction.py) | Intermediate | 3 mins | Cascade Error Correction integration, key reconciliation metrics, telemetry |
+| [`09_privacy_amplification.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/09_privacy_amplification.py) | Intermediate | 3 mins | Privacy Amplification, key compression ratio metrics, Min/Shannon Entropy |
 
 ---
 
@@ -100,7 +101,8 @@ To master the QST framework, we recommend developers follow this step-by-step pa
 3. **Aggregations & Sweps (5 mins):** Run `03_parameter_sweep.py` and review `Parameter_Sweeps.ipynb` to understand multi-trial simulation aggregations.
 4. **Production Pipelines & Outputs (5 mins):** Study `04_export_results.py`, `05_visualization.py`, and run the comprehensive script `06_complete_pipeline.py`.
 5. **Error Correction (3 mins):** Run `08_error_correction.py` to reconcile keys via Cascade error correction and observe telemetry.
-6. **Physical Execution:** Run `07_real_hardware_execution.py` to test physical QPU execution and see graceful fallbacks in action.
+6. **Privacy Amplification (3 mins):** Run `09_privacy_amplification.py` to compress keys and estimate security parameters/entropy.
+7. **Physical Execution:** Run `07_real_hardware_execution.py` to test physical QPU execution and see graceful fallbacks in action.
 
 
 ## 🛡️ Cascade Error Correction (Phase 13A)
@@ -158,6 +160,44 @@ The `SimulationResult` exposes metrics in the `error_correction` field:
 * `correction_efficiency`: The ratio of bits disclosed relative to the theoretical Shannon entropy limit.
 * `parity_messages_exchanged`: Total messages sent during parity exchanges.
 * `communication_rounds`: Communication rounds performed.
+
+
+## 🔒 Privacy Amplification (Phase 13B)
+
+QST includes Phase 13B Privacy Amplification support. It distills the corrected or sifted key into a cryptographically stronger, shorter final secret key, eliminating any potential information leaked to Eve.
+
+### Extensible Hashing Architecture
+Privacy Amplification uses an extensible design:
+* **`HashAlgorithm` Interface:** A generic interface defining the contract for hash families.
+* **`ToeplitzHasher`:** The default 2-universal hash family implementation. It generates a deterministic $(N \times M)$ Toeplitz matrix from a configured seed to perform modulo-2 matrix multiplication.
+
+### Input Key Routing
+Privacy Amplification automatically routes the input key:
+1. **Corrected Key (Recommended):** If Cascade Error Correction is enabled (`run_error_correction=True`), the reconciler's corrected output key is processed.
+2. **Sifted Key (Fallback):** If Cascade is disabled, it operates directly on the sifted key.
+
+### Configuration & Settings
+Configure via `SimulationConfig`:
+* `run_privacy_amplification` (bool): Activates the privacy stage when set to `True`.
+* `privacy_configuration` (PrivacyAmplificationConfiguration): Configures compression and seed options:
+  ```python
+  from qst.privacy.models import PrivacyAmplificationConfiguration
+  config.privacy_configuration = PrivacyAmplificationConfiguration(
+      compression_ratio=0.5,
+      hash_algorithm="toeplitz",
+      seed=42
+  )
+  ```
+
+### Cryptographic Telemetry
+The final execution metrics are populated on `SimulationResult` under `privacy_result` and `final_secret_key`:
+* `final_secret_key.key_bits`: The compressed shared secret key.
+* `final_secret_key.min_entropy_estimate` ($H_{\infty}$): Standard metric in QKD security analysis representing the adversary's maximum information capability.
+* `final_secret_key.shannon_entropy_estimate`: Standard sample Shannon entropy.
+* `statistics.discarded_bits`: Count of bits removed during compression.
+* `statistics.compression_percentage`: Key length reduction ratio.
+* `statistics.effective_key_rate`: The final compression efficiency.
+* `statistics.estimated_security_parameter`: Quantifies trace distance upper bound bounds ($s = \text{discard} - \text{leak}$).
 
 ---
 
@@ -219,11 +259,11 @@ Below is a summary of the completed development milestones and the target roadma
 * **[x] CLI Engine:** simulate, sweep, export, and visualize subcommands execution.
 * **[x] Visualization:** Custom styling themes (Light, Dark, Scientific) and MatplotlibBackend.
 * **[x] Integration & E2E Testing:** Deterministic golden schema checks, math invariants property tests, regression performance benchmarks.
-* **[x] Examples & Tutorials:** 8 python example scripts, 3 Jupyter notebooks, output auto-routing.
+* **[x] Examples & Tutorials:** 9 python example scripts, 3 Jupyter notebooks, output auto-routing.
 * **[x] IBM Quantum Runtime Integration (Phase 12):** Real physical QPU execution support, least-busy selection, noise-aware simulation, and automatic Aer fallbacks.
 * **[x] Cascade Error Correction (Phase 13A):** Recursive Cascade parity reconciliation algorithm.
+* **[x] Privacy Amplification (Phase 13B):** Extensible 2-universal hashing with Toeplitz algorithm and entropy bounds calculations.
 
 ### Future Roadmap (Coming Soon)
-* **[ ] Privacy Amplification (Phase 13B):** Toeplitz matrix hashing and hashing extraction algorithms for secure key distillation.
 * **[ ] Final Secret Key & Rate Calculation (Phase 13C):** Secure key extraction rate formulas.
 * **[ ] Release & Packaging (Phase 14):** PyPI package deployment, public GitHub releases, and production v1.0.0 tag.

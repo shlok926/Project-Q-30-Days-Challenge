@@ -70,6 +70,8 @@ class SimulationOrchestrator:
             fallback_to_aer=config.fallback_to_aer,
             run_error_correction=config.run_error_correction,
             cascade_configuration=config.cascade_configuration,
+            run_privacy_amplification=config.run_privacy_amplification,
+            privacy_configuration=config.privacy_configuration,
         )
         return self.run_many(single_config)
 
@@ -192,6 +194,39 @@ class SimulationOrchestrator:
                         res,
                         corrected_key=list(corr_result.corrected_key.key_bits),
                         error_correction=corr_result,
+                    )
+
+            if getattr(config, "run_privacy_amplification", False):
+                from qst.privacy.amplifier import PrivacyAmplifier
+                from qst.privacy.models import PrivacyAmplificationConfiguration
+                from dataclasses import replace
+
+                privacy_config = getattr(config, "privacy_configuration", None)
+                if privacy_config is None:
+                    privacy_config = PrivacyAmplificationConfiguration()
+
+                input_key = (
+                    res.corrected_key
+                    if res.corrected_key is not None
+                    else res.sifted_key
+                )
+
+                if input_key:
+                    amplifier = PrivacyAmplifier(privacy_config)
+                    initial_qber = res.qber if res.qber is not None else 0.0
+                    priv_result = amplifier.amplify(
+                        input_key, initial_qber=initial_qber
+                    )
+                    res = replace(
+                        res,
+                        privacy_result=priv_result,
+                        final_secret_key=priv_result.final_secret_key,
+                        final_key_length=priv_result.output_key_length,
+                        key_rate=(
+                            float(priv_result.output_key_length / res.n_qubits)
+                            if res.n_qubits > 0
+                            else 0.0
+                        ),
                     )
 
             simulations.append(res)
