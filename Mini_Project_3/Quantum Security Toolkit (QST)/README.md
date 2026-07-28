@@ -25,6 +25,7 @@
 
 <p align="center">
   <a href="#-quick-start"><strong>Quick Start</strong></a> |
+  <a href="#-example-outputs"><strong>Example Outputs</strong></a> |
   <a href="#-installation"><strong>Installation</strong></a> |
   <a href="#-architecture-diagram"><strong>Architecture</strong></a> |
   <a href="#-examples"><strong>Examples</strong></a> |
@@ -42,29 +43,30 @@
 ## 🗺️ Table of Contents
 1. [📖 Introduction](#-introduction)
 2. [🚀 Quick Start](#-quick-start)
-3. [📂 Documentation Hub](#-documentation-hub)
-4. [🌟 Feature Highlights](#-feature-highlights)
-5. [📷 Screenshots & Visual Showcase](#-screenshots--visual-showcase)
-6. [📐 Architecture Diagram](#-architecture-diagram)
-7. [🔄 Project Workflow](#-project-workflow)
-8. [📂 Project Structure](#-project-structure)
-9. [📦 Installation](#-installation)
-10. [💻 CLI Showcase](#-cli-showcase)
-11. [🐍 Python API Usage](#-python-api-usage)
-12. [📚 Examples](#-examples)
-13. [⚙️ Configuration](#-configuration)
-14. [🏛️ Architecture Overview](#%EF%B8%8F-architecture-overview)
-15. [🛠️ Technology Stack](#%EF%B8%8F-technology-stack)
-16. [📊 Benchmarks](#-benchmarks)
-17. [📅 Project Roadmap](#-project-roadmap)
-18. [🤝 Contributing](#-contributing)
-19. [🛡️ Security](#%EF%B8%8F-security)
-20. [🧪 Testing](#-testing)
-21. [📅 Release Information](#-release-information)
-22. [🏷️ Citation](#%EF%B8%8F-citation)
-23. [📜 License](#-license)
-24. [💖 Acknowledgements](#-acknowledgements)
-25. [✉️ Footer](#%EF%B8%8F-footer)
+3. [📸 Example Outputs](#-example-outputs)
+4. [📂 Documentation Hub](#-documentation-hub)
+5. [🌟 Feature Highlights](#-feature-highlights)
+6. [📷 Screenshots & Visual Showcase](#-screenshots--visual-showcase)
+7. [📐 Architecture Diagram](#-architecture-diagram)
+8. [🔄 Project Workflow](#-project-workflow)
+9. [📂 Project Structure](#-project-structure)
+10. [📦 Installation](#-installation)
+11. [💻 CLI Showcase](#-cli-showcase)
+12. [🐍 Python API Usage](#-python-api-usage)
+13. [📚 Examples](#-examples)
+14. [⚙️ Configuration](#-configuration)
+15. [🏛️ Architecture Overview](#%EF%B8%8F-architecture-overview)
+16. [🛠️ Technology Stack](#%EF%B8%8F-technology-stack)
+17. [📊 Benchmarks](#-benchmarks)
+18. [📅 Project Roadmap](#-project-roadmap)
+19. [🤝 Contributing](#-contributing)
+20. [🛡️ Security](#%EF%B8%8F-security)
+21. [🧪 Testing](#-testing)
+22. [📅 Release Information](#-release-information)
+23. [🏷️ Citation](#%EF%B8%8F-citation)
+24. [📜 License](#-license)
+25. [💖 Acknowledgements](#-acknowledgements)
+26. [✉️ Footer](#%EF%B8%8F-footer)
 
 ---
 
@@ -116,6 +118,55 @@ python quickstart.py
 ```bash
 qst simulate --qubits 20 --seed 42 --output trial.json
 ```
+
+---
+
+## 📸 Example Outputs
+
+This section showcases the real visual outputs produced by the toolkit's simulation and visualizer pipelines, illustrating the scientific plots generated during execution.
+
+### Example 05 — QBER Trend Analysis
+
+This plot illustrates the relationship between the observed Quantum Bit Error Rate (QBER) and the interception probability of the eavesdropper (Eve). It demonstrates the linear growth in transition errors caused by state collapses under measurement intercepts, helping researchers benchmark detection limits.
+
+![QBER Trend Analysis](./examples/outputs/figures/qber_trend.png)
+
+#### What this demonstrates
+* Alice/Bob polarization basis sifting reconciliation yields.
+* Statistical tracking of the Quantum Bit Error Rate (QBER) in transit.
+* Eavesdropper measurement collapse simulation with custom probabilities.
+* Visual verification of detection thresholds in the quantum channel.
+* Generation of publication-ready scientific vector graphics (PNG/SVG/PDF).
+
+---
+
+### Example 05 (Continued) — Heatmap Matrix Visualization
+
+This chart visualizes QBER occurrences across different key segments and blocks. It provides spatial profiling of error distributions, helping to evaluate block size selections for post-processing error correction algorithms.
+
+![QBER Heatmap Matrix](./examples/outputs/figures/qber_heatmap.png)
+
+#### What this demonstrates
+* Spatial distribution of error density across key blocks.
+* Profiling of error locations to detect correlation in intercepts.
+* Telemetry mapping for Cascade block size optimization parameters.
+* Graphical validation of parity check matrices distributions.
+
+---
+
+### Example 06 — Complete Pipeline Sweep
+
+This plot represents the end-to-end parameter sweep tracking overall secret key rate and QBER trends. It details key rate attenuation and error margins as interception levels increase.
+
+![Complete Pipeline Sweep](./examples/outputs/figures/qber_vs_intercept_trend.png)
+
+#### What this demonstrates
+* End-to-end QKD pipeline simulation (Raw → Sifted → Corrected → Final Secret Key).
+* Key rate attenuation trends under active eavesdropper interference.
+* Cascade Error Correction efficiency threshold benchmarks.
+* Privacy Amplification key compression ratio limits.
+* Protocol loss analysis tracking (raw, sifted, corrected, final).
+* Execution backend profiling across simulated parameters.
 
 ---
 
