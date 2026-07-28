@@ -1,91 +1,186 @@
 # 🌌 Quantum Security Toolkit (QST)
 
-```text
-      ___           ___           ___     
-     /\  \         /\  \         /\  \    
-    /::\  \       /::\  \        \::\  \   
-   /:/\:\  \     /:/\ \  \        \::\  \  
-  /:/  \:\  \   _\:\~\ \  \       /::/  /  
- /:/__/ \:\__\ /\ \:\ \ \__\     /:/  /    
- \:\  \  \/__/ \:\ \:\ \/__/    /:/  /     
-  \:\  \        \:\ \:\__\     /:/  /      
-   \:\  \        \:\/:/  /     \/__/       
-    \:\__\        \::/  /                  
-     \/__/         \/__/                   
-```
+<p align="center">
+  <img src="https://raw.githubusercontent.com/shlok926/Project-Q-30-Days-Challenge/main/Mini_Project_3/Quantum%20Security%20Toolkit%20(QST)/Docs/images/logo_placeholder.png" alt="QST Logo Placeholder" width="200" height="200" />
+</p>
 
-The **Quantum Security Toolkit (QST)** is a modular, enterprise-grade simulation, analysis, and validation framework for Quantum Key Distribution (QKD) protocols. Built on top of IBM's Qiskit, QST allows security researchers, network engineers, and students to model quantum networks, evaluate the impact of eavesdroppers, and run statistical parameter sweeps in clean, reproducible environments.
+<p align="center">
+  <strong>A modular, enterprise-grade simulation, analysis, and validation framework for Quantum Key Distribution (QKD) protocols.</strong>
+</p>
 
-[![Python Version](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue.svg)](https://www.python.org/)
-[![License](https://img.shields.io/badge/license-MIT-green.svg)](./LICENSE)
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](#)
-[![Tests](https://img.shields.io/badge/tests-209%20passed-success.svg)](#)
-[![Coverage](https://img.shields.io/badge/coverage-95%25-success.svg)](#)
-[![Release Version](https://img.shields.io/badge/release-v1.0.0-blue.svg)](#)
-[![Code Style](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
-[![Documentation](https://img.shields.io/badge/docs-complete-brightgreen.svg)](#-documentation)
-[![Downloads](https://img.shields.io/badge/downloads-12k%2Fmonth-brightgreen.svg)](#)
+<p align="center">
+  QST allows security researchers, network engineers, and students to model quantum networks, evaluate the impact of eavesdroppers, and run statistical parameter sweeps in clean, reproducible environments.
+</p>
+
+<p align="center">
+  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue.svg" alt="Python Version" /></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License" /></a>
+  <a href="#"><img src="https://img.shields.io/badge/build-passing-brightgreen.svg" alt="Build Status" /></a>
+  <a href="#"><img src="https://img.shields.io/badge/tests-209%20passed-success.svg" alt="Tests Status" /></a>
+  <a href="#"><img src="https://img.shields.io/badge/coverage-95%25-success.svg" alt="Coverage" /></a>
+  <a href="#"><img src="https://img.shields.io/badge/release-v1.0.0-blue.svg" alt="Latest Release" /></a>
+  <a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code Style" /></a>
+  <a href="#-documentation-hub"><img src="https://img.shields.io/badge/docs-complete-brightgreen.svg" alt="Documentation Status" /></a>
+</p>
+
+<p align="center">
+  <a href="#-quick-start"><strong>Quick Start</strong></a> |
+  <a href="#-installation"><strong>Installation</strong></a> |
+  <a href="#-architecture-diagram"><strong>Architecture</strong></a> |
+  <a href="#-examples"><strong>Examples</strong></a> |
+  <a href="#-documentation-hub"><strong>Documentation</strong></a> |
+  <a href="./Docs/API_Reference.md"><strong>API Reference</strong></a> |
+  <a href="#-cli-showcase"><strong>CLI</strong></a> |
+  <a href="./CONTRIBUTING.md"><strong>Contributing</strong></a> |
+  <a href="./LICENSE"><strong>License</strong></a> |
+  <a href="#-citation"><strong>Citation</strong></a> |
+  <a href="#-project-roadmap"><strong>Roadmap</strong></a>
+</p>
 
 ---
 
 ## 🗺️ Table of Contents
-1. [🌟 Features](#-features)
-2. [📷 Screenshots / Demo](#-screenshots--demo)
-3. [📐 Architecture Diagram](#-architecture-diagram)
-4. [🔄 Project Workflow](#-project-workflow)
-5. [📂 Project Structure](#-project-structure)
-6. [📦 Installation](#-installation)
-7. [🚀 Quick Start](#-quick-start)
-8. [💻 CLI Usage](#-cli-usage)
-9. [🐍 Python API Usage](#-python-api-usage)
-10. [📚 Examples](#-examples)
-11. [⚙️ Configuration](#-configuration)
-12. [🏛️ Architecture Overview](#%EF%B8%8F-architecture-overview)
-13. [🛠️ Technology Stack](#%EF%B8%8F-technology-stack)
-14. [📊 Benchmarks](#-benchmarks)
-15. [📅 Roadmap](#-roadmap)
-16. [📖 Documentation](#-documentation)
-17. [🤝 Contributing](#-contributing)
-18. [🛡️ Security](#%EF%B8%8F-security)
-19. [🧪 Testing](#-testing)
-20. [📅 Release Information](#-release-information)
-21. [🏷️ Citation](#%EF%B8%8F-citation)
-22. [📜 License](#-license)
-23. [💖 Acknowledgements](#-acknowledgements)
-24. [✉️ Footer](#%EF%B8%8F-footer)
+1. [📖 Introduction](#-introduction)
+2. [🚀 Quick Start](#-quick-start)
+3. [📂 Documentation Hub](#-documentation-hub)
+4. [🌟 Feature Highlights](#-feature-highlights)
+5. [📷 Screenshots & Visual Showcase](#-screenshots--visual-showcase)
+6. [📐 Architecture Diagram](#-architecture-diagram)
+7. [🔄 Project Workflow](#-project-workflow)
+8. [📂 Project Structure](#-project-structure)
+9. [📦 Installation](#-installation)
+10. [💻 CLI Showcase](#-cli-showcase)
+11. [🐍 Python API Usage](#-python-api-usage)
+12. [📚 Examples](#-examples)
+13. [⚙️ Configuration](#-configuration)
+14. [🏛️ Architecture Overview](#%EF%B8%8F-architecture-overview)
+15. [🛠️ Technology Stack](#%EF%B8%8F-technology-stack)
+16. [📊 Benchmarks](#-benchmarks)
+17. [📅 Project Roadmap](#-project-roadmap)
+18. [🤝 Contributing](#-contributing)
+19. [🛡️ Security](#%EF%B8%8F-security)
+20. [🧪 Testing](#-testing)
+21. [📅 Release Information](#-release-information)
+22. [🏷️ Citation](#%EF%B8%8F-citation)
+23. [📜 License](#-license)
+24. [💖 Acknowledgements](#-acknowledgements)
+25. [✉️ Footer](#%EF%B8%8F-footer)
 
 ---
 
-## 🌟 Features
+## 📖 Introduction
+
+The **Quantum Security Toolkit (QST)** is designed to simulate the BB84 QKD protocol under real-world noise parameters and active eavesdropper intercepts. 
+
+### Why QST?
+* **Dual Execution Modes:** Execute Qiskit circuits locally using high-performance `AerSimulator` backends or route them to real remote QPUs via the **IBM Quantum Runtime**.
+* **Automatic Fallback:** Gracefully recovers from overloaded remote queues by falling back to local simulation.
+* **Noise-Aware Local Simulation:** Automatically pulls hardware calibration properties from remote IBM backends to model physical qubit errors locally.
+* **Extensible & Scientific:** Designed to evaluate post-processing protocols like Cascade error correction and 2-universal Toeplitz privacy amplification.
+
+---
+
+## 🚀 Quick Start
+
+Run your first BB84 simulation trial in under 30 seconds:
+
+### 1. Install QST
+```bash
+git clone https://github.com/shlok926/Project-Q-30-Days-Challenge.git
+cd "Project-Q-30-Days-Challenge/Mini_Project_3/Quantum Security Toolkit (QST)"
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+pip install -e ".[viz]"
+```
+
+### 2. Execute via Python
+Create a script (e.g. `quickstart.py`):
+```python
+from qst.models.config import SimulationConfig
+from qst.orchestration.orchestrator import SimulationOrchestrator
+
+config = SimulationConfig(n_qubits=20, seed=42)
+orchestrator = SimulationOrchestrator()
+result = orchestrator.run_once(config)
+trial = result.simulations[0]
+
+print(f"Sifted Key length: {trial.final_key_length}")
+print(f"Computed QBER:     {trial.qber}")
+```
+Execute:
+```bash
+python quickstart.py
+```
+
+### 3. Execute via CLI
+```bash
+qst simulate --qubits 20 --seed 42 --output trial.json
+```
+
+---
+
+## 📂 Documentation Hub
+
+Detailed guides, tutorials, and specifications are organized in the `Docs/` directory:
+
+| Guide | Purpose | Target Audience |
+| :--- | :--- | :--- |
+| 📖 **[User Guide](./Docs/User_Guide.md)** | Getting started, CLI parameters, and code configuration guides. | QKD students and software developers. |
+| 📐 **[Architecture](./Docs/Architecture.md)** | Core simulation designs and pipeline data flow specifications. | Systems and quantum software architects. |
+| 📝 **[API Reference](./Docs/API_Reference.md)** | Frozen configurations classes and public method signatures. | API clients and package integrators. |
+| 🛠️ **[Troubleshooting](./Docs/Troubleshooting.md)** | Resolving `QST-VAL-*` and `QST-SIM-*` error codes. | Sysadmins and execution pipeline reviewers. |
+| 📊 **[Benchmark Report](./Docs/Benchmark_Report.md)** | CPU execution timings, memory metrics, scaling characteristics. | Research software engineers. |
+| 📅 **[Roadmap](./Docs/Roadmap.md)** | Development milestones achievements and future updates path. | Contributors and release managers. |
+| ❓ **[FAQ](./Docs/FAQ.md)** | Common questions on backend selections and simulation sizes. | General toolkit users. |
+
+---
+
+## 🌟 Feature Highlights
 
 | Feature | Category | Icon | Description |
 | :--- | :--- | :---: | :--- |
-| **BB84 Protocol Engine** | Quantum Core | ⚛️ | Simulates Alice's state preparation, Bob's measurements, sifting, and QBER calculations. |
-| **Eve Simulation** | Threat Model | 🕵️ | Simulates quantum state collapse caused by measurement intercepts with adjustable probability. |
-| **Cascade Error Correction** | Reconciliation | 🧩 | Multi-pass recursive parity block calculations to correct errors without modifying sifted arrays. |
-| **Privacy Amplification** | Cryptography | 🔒 | Compress reconciled keys using universal Toeplitz matrix hashing; calculates Min-Entropy bounds. |
-| **IBM Quantum Integration** | Execution Routing | 🌐 | Run circuits on physical QPUs or remote simulators using Qiskit Runtime Service with Aer fallback. |
-| **Scientific Visualizer** | Analytics | 📈 | Light, dark, and scientific themes supporting PNG, SVG, and PDF vector exports. |
+| **BB84 Engine** | Quantum Core | ⚛️ | Quantum polarization preparation and measurements. |
+| **IBM QPU Integration** | Backend Router | 🌐 | Real hardware execution and automatic Aer fallbacks. |
+| **Cascade Error Correction** | Reconciliation | 🧩 | Multi-pass recursive key error correction. |
+| **Privacy Amplification** | Cryptography | 🔒 | 2-universal Toeplitz hashing compression. |
+| **Scientific Visualizer** | Analytics | 📈 | Matplotlib plotting backend supporting PNG, SVG, PDF. |
+| **CLI Showcase** | Executables | 💻 | CLI commands to simulate and parameter sweep. |
+| **JSON/CSV Export** | Telemetry | 📂 | Full serialization formatters and export utilities. |
+| **Parameter Sweeps** | Benchmarking | 📊 | Sweep parameter grids for trend analysis. |
+| **Modular SOLID Architecture** | Code Quality | 🏗️ | Dependency inversion using clean abstractions. |
 
 ---
 
-## 📷 Screenshots / Demo
+## 📷 Screenshots & Visual Showcase
 
-### Command-Line Execution
-*Terminal rendering output during parameter sweeps:*
+### CLI Demonstration
+*Placeholder for terminal recording showing CLI execution flow:*
 ```text
-[Placeholders: CLI execution demonstration showing 'qst sweep' logs and live throughput measurements]
+[Future GIF Placeholder: qst simulate execution flow]
 ```
 
-### Visualizer Plot Output
-*Example of QBER vs. Interception Probability trend analysis:*
+### Visual Showcase Cards
+*Placeholders for generated visualization outputs:*
 ```text
-[Placeholders: Matplotlib visualizer output showing error rate trends under dark and light styling themes]
+┌───────────────────────────────────────┐  ┌───────────────────────────────────────┐
+│        [Matplotlib QBER Plot]         │  │       [Parameter Sweep Trends]        │
+│                                       │  │                                       │
+│  Line plot showing rising QBER under  │  │   Heatmap matrix illustrating key     │
+│  eavesdropper interception levels.    │  │   yields across noise parameters.     │
+└───────────────────────────────────────┘  └───────────────────────────────────────┘
+┌───────────────────────────────────────┐  ┌───────────────────────────────────────┐
+│       [Security Metrics Cards]        │  │       [Exported Report Outputs]       │
+│                                       │  │                                       │
+│  Classification levels (LOW/MED/HIGH) │  │  Structured JSON and CSV reports with │
+│  based on trace distance bounds.      │  │  deterministic simulation results.    │
+└───────────────────────────────────────┘  └───────────────────────────────────────┘
 ```
 
 ---
 
 ## 📐 Architecture Diagram
+
+The diagram below outlines the structural boundaries and dependency flows between QST modules:
 
 ```mermaid
 graph TD
@@ -104,6 +199,8 @@ graph TD
 ---
 
 ## 🔄 Project Workflow
+
+The following flowchart explains the logical execution pipeline from configurations validation to output serialization:
 
 ```mermaid
 flowchart TD
@@ -154,9 +251,11 @@ qst/
 
 ## 📦 Installation
 
-### 1. Requirements
-* Python `>=3.10`
-* Operating Systems: Windows, macOS, Linux (Fully cross-platform)
+### 1. Operating System Targets
+QST is verified across:
+* **Windows 10 / 11**
+* **Linux (Ubuntu, Debian, CentOS)**
+* **macOS (Intel and Apple Silicon)**
 
 ### 2. Standard Installation
 Create a virtual environment and install QST in editable mode:
@@ -174,50 +273,25 @@ pip install -e ".[viz]"
 
 ---
 
-## 🚀 Quick Start
+## 💻 CLI Showcase
 
-Run a simple noise-free BB84 simulation trial in Python:
+Exposes command line utilities to simulate trials, parameter sweeps, and export telemetry formats:
 
-```python
-from qst.models.config import SimulationConfig
-from qst.orchestration.orchestrator import SimulationOrchestrator
-
-# Initialize configuration
-config = SimulationConfig(
-    n_qubits=20,
-    seed=42,
-    repetitions=1
-)
-
-# Run simulation
-orchestrator = SimulationOrchestrator()
-result = orchestrator.run_once(config)
-trial = result.simulations[0]
-
-print(f"Sifted Key length: {trial.final_key_length}")
-print(f"Computed QBER:     {trial.qber}")
-```
-
----
-
-## 💻 CLI Usage
-
-QST exposes a command line interface to run trials, sweeps, and exports.
-
-### Command Help
+### Generate Help Menu
 ```bash
 qst --help
 ```
 
-### Single Simulation CLI
+### Run Trial Simulation
 ```bash
-qst simulate --qubits 20 --seed 123 --interception-probability 0.05 --output trial.json
+qst simulate --qubits 20 --seed 42 --interception-probability 0.05 --output trial.json
 ```
 
-### Parameter Sweep CLI
+### Run Parameters Sweeps
 ```bash
-qst sweep --qubits 10,20 --interception 0.0,0.1 --output sweep.json
+qst sweep --qubits 10,20 --interception 0.0,0.1,0.2 --output sweep.json
 ```
+*Expected Output Format:* Logs simulation counts, sifting durations, QBER calculations, and writes outcome results to the target path.
 
 ---
 
@@ -320,7 +394,7 @@ The toolkit's modular packaging aligns with strict **SOLID design principles**:
 
 ---
 
-## 📅 Roadmap
+## 📅 Project Roadmap
 
 ### Completed Milestones
 - [x] **Phase 1-11 (Foundations & CLI):** Polarization state preps, basis reconciliation sifting, visualizer registry, JSON/CSV sweeps, and command line tools.
@@ -329,19 +403,6 @@ The toolkit's modular packaging aligns with strict **SOLID design principles**:
 - [x] **Phase 13B (Privacy Amplification):** 2-universal Toeplitz hashing matrices generators, Shannon/Min-entropy estimators, and trace distance bounds computations.
 - [x] **Phase 13C (Protocol Finalization):** Dedicated calculators and summaries, security level thresholds.
 - [x] **Phase 14 (Release Engineering):** Version freezes, packaging setup, supply-chain workflows, and complete guides.
-
----
-
-## 📖 Documentation
-
-Detailed guides and specifications are available under the `Docs/` directory:
-* 📖 **[User Guide](./Docs/User_Guide.md)** — Installation methods, configuration settings, and quick start scripts.
-* 📐 **[Architecture Guide](./Docs/Architecture.md)** — Core module designs and end-to-end QKD pipeline data flows.
-* 📝 **[API Reference](./Docs/API_Reference.md)** — Configuration dataclasses and orchestrator/service method signatures.
-* 🛠️ **[Troubleshooting](./Docs/Troubleshooting.md)** — Diagnostic steps for `QST-VAL-*` and `QST-SIM-*` error codes.
-* 📊 **[Benchmark Report](./Docs/Benchmark_Report.md)** — Execution timings, memory usage statistics, and reproducibility baselines.
-* 📅 **[Future Roadmap](./Docs/Roadmap.md)** — Completed phases milestones and target feature roadmap for subsequent versions.
-* ❓ **[FAQ](./Docs/FAQ.md)** — Frequently asked questions regarding local simulator bounds and customization plugins.
 
 ---
 
@@ -417,7 +478,15 @@ This project is licensed under the MIT License - see the [`LICENSE`](./LICENSE) 
 ## ✉️ Footer
 
 <p align="center">
+  <a href="./LICENSE">License</a> | 
+  <a href="#-documentation-hub">Documentation</a> | 
+  <a href="./CHANGELOG.md">Latest Release</a> | 
+  <a href="./CONTRIBUTING.md">Contributing</a> | 
+  <a href="#-citation">Citation</a> | 
+  <a href="https://github.com/shlok926/Project-Q-30-Days-Challenge">Repository</a>
+</p>
+
+<p align="center">
   Made with ❤️ by the Quantum Security Toolkit Authors. <br>
-  For support, email us at <a href="mailto:support@qst-project.org">support@qst-project.org</a>. <br>
   © 2026 QST Authors. All rights reserved.
 </p>
