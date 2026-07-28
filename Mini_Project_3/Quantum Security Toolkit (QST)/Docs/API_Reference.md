@@ -41,3 +41,12 @@ Lifecycle coordination wrapper:
 
 ### `ProtocolSummaryBuilder`
 * `build_summary(raw_len, sifted_len, corrected_len, final_len, qber, correction_enabled, privacy_enabled, overall_success, execution_mode) -> ProtocolSummary`
+
+---
+
+## 🔗 Quick Links
+* 📂 **[Home (README)](../README.md)**
+* 📖 **[User Guide](./User_Guide.md)** | **[Architecture Guide](./Architecture.md)** | **[API Reference](./API_Reference.md)**
+* 🛠️ **[Troubleshooting](./Troubleshooting.md)** | **[FAQ](./FAQ.md)**
+* 📈 **[Benchmark Report](./Benchmark_Report.md)** | **[Roadmap](./Roadmap.md)**
+* 💻 **[Developer Guide](./Developer_Guide.md)**

@@ -51,16 +51,16 @@ QST includes a set of documented example scripts located in the `examples/` dire
 
 | Script Name | Difficulty | Est. Time | Key Concepts Demonstrated |
 | :--- | :--- | :--- | :--- |
-| [`01_basic_bb84.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/01_basic_bb84.py) | Beginner | 2 mins | Configuration initialization, orchestrator run_once, console reporting |
-| [`02_eavesdropper_demo.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/02_eavesdropper_demo.py) | Intermediate | 3 mins | Eavesdropping intercepts, quantum state collapse explanation, QBER rise |
-| [`03_parameter_sweep.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/03_parameter_sweep.py) | Intermediate | 4 mins | Config sweeps generation, sweeps execution, statistical aggregations |
-| [`04_export_results.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/04_export_results.py) | Intermediate | 3 mins | Serializers, JSONExporter, CSVExporter, schema load verification |
-| [`05_visualization.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/05_visualization.py) | Intermediate | 4 mins | Visualizer, MatplotlibBackend, themes (Light, Dark, Scientific), multi-format plots (PNG, SVG, PDF) |
-| [`06_complete_pipeline.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/06_complete_pipeline.py) | Advanced | 5 mins | E2E sweeps, trend analysis, scientific plotting, serialization, JSON/CSV exports |
-| [`07_real_hardware_execution.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/07_real_hardware_execution.py) | Intermediate | 3 mins | IBM Quantum Runtime execution, backend discovery/selection, and Aer fallback |
-| [`08_error_correction.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/08_error_correction.py) | Intermediate | 3 mins | Cascade Error Correction integration, key reconciliation metrics, telemetry |
-| [`09_privacy_amplification.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/09_privacy_amplification.py) | Intermediate | 3 mins | Privacy Amplification, key compression ratio metrics, Min/Shannon Entropy |
-| [`10_protocol_summary.py`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/examples/10_protocol_summary.py) | Intermediate | 3 mins | Protocol Finalization, E2E key rates summary, classification levels, and losses |
+| [`01_basic_bb84.py`](./examples/01_basic_bb84.py) | Beginner | 2 mins | Configuration initialization, orchestrator run_once, console reporting |
+| [`02_eavesdropper_demo.py`](./examples/02_eavesdropper_demo.py) | Intermediate | 3 mins | Eavesdropping intercepts, quantum state collapse explanation, QBER rise |
+| [`03_parameter_sweep.py`](./examples/03_parameter_sweep.py) | Intermediate | 4 mins | Config sweeps generation, sweeps execution, statistical aggregations |
+| [`04_export_results.py`](./examples/04_export_results.py) | Intermediate | 3 mins | Serializers, JSONExporter, CSVExporter, schema load verification |
+| [`05_visualization.py`](./examples/05_visualization.py) | Intermediate | 4 mins | Visualizer, MatplotlibBackend, themes (Light, Dark, Scientific), multi-format plots (PNG, SVG, PDF) |
+| [`06_complete_pipeline.py`](./examples/06_complete_pipeline.py) | Advanced | 5 mins | E2E sweeps, trend analysis, scientific plotting, serialization, JSON/CSV exports |
+| [`07_real_hardware_execution.py`](./examples/07_real_hardware_execution.py) | Intermediate | 3 mins | IBM Quantum Runtime execution, backend discovery/selection, and Aer fallback |
+| [`08_error_correction.py`](./examples/08_error_correction.py) | Intermediate | 3 mins | Cascade Error Correction integration, key reconciliation metrics, telemetry |
+| [`09_privacy_amplification.py`](./examples/09_privacy_amplification.py) | Intermediate | 3 mins | Privacy Amplification, key compression ratio metrics, Min/Shannon Entropy |
+| [`10_protocol_summary.py`](./examples/10_protocol_summary.py) | Intermediate | 3 mins | Protocol Finalization, E2E key rates summary, classification levels, and losses |
 
 ---
 
@@ -68,9 +68,9 @@ QST includes a set of documented example scripts located in the `examples/` dire
 
 For interactive, visual tutorials, navigate to the `notebooks/` directory:
 
-1. **[`BB84_Introduction.ipynb`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/notebooks/BB84_Introduction.ipynb):** Introduces Quantum Key Distribution (QKD), BB84 steps (Alice/Bob polarization encoding/measurement, sifting, error estimation), and runs a basic noise-free simulation.
-2. **[`Security_Analysis.ipynb`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/notebooks/Security_Analysis.ipynb):** Explains how Eve's intercept-resend attack projects state collapses, causes QBER to increase up to 25%, and graphs QBER vs. Interception Probability.
-3. **[`Parameter_Sweeps.ipynb`](file:///d:/Downloads/Project%20-%20Q%2030%20%28Day%29/Mini_Project_3/Quantum%20Security%20Toolkit%20%28QST%29/notebooks/Parameter_Sweeps.ipynb):** Demonstrates sweeping parameter grids, running aggregators, performing trend analysis, and saving charts to disk.
+1. **[`BB84_Introduction.ipynb`](./notebooks/BB84_Introduction.ipynb):** Introduces Quantum Key Distribution (QKD), BB84 steps (Alice/Bob polarization encoding/measurement, sifting, error estimation), and runs a basic noise-free simulation.
+2. **[`Security_Analysis.ipynb`](./notebooks/Security_Analysis.ipynb):** Explains how Eve's intercept-resend attack projects state collapses, causes QBER to increase up to 25%, and graphs QBER vs. Interception Probability.
+3. **[`Parameter_Sweeps.ipynb`](./notebooks/Parameter_Sweeps.ipynb):** Demonstrates sweeping parameter grids, running aggregators, performing trend analysis, and saving charts to disk.
 
 To open the notebooks:
 ```bash
@@ -295,6 +295,18 @@ Configured via `SimulationConfig`:
 * **QST-SIM-301 (Authentication Denied):** Your credentials token is invalid, or the channel cannot be resolved. Check your environment setup.
 * **QST-SIM-303 (Backend Selection Error):** The requested device backend is inactive or unauthorized.
 * **QST-SIM-304 (QPU execution timeout/cancelled):** Job timed out or was cancelled by the remote queue scheduler. Configure `fallback_to_aer=True` to recover gracefully.
+---
+
+## 📖 Documentation
+
+Detailed guides and specifications are available under the `Docs/` directory:
+* 📖 **[User Guide](./Docs/User_Guide.md)** — Installation methods, configuration settings, and quick start scripts.
+* 📐 **[Architecture Guide](./Docs/Architecture.md)** — Core module designs and end-to-end QKD pipeline data flows.
+* 📝 **[API Reference](./Docs/API_Reference.md)** — Configuration dataclasses and orchestrator/service method signatures.
+* 🛠️ **[Troubleshooting](./Docs/Troubleshooting.md)** — Diagnostic steps for `QST-VAL-*` and `QST-SIM-*` error codes.
+* 📊 **[Benchmark Report](./Docs/Benchmark_Report.md)** — Execution timings, memory usage statistics, and reproducibility baselines.
+* 📅 **[Future Roadmap](./Docs/Roadmap.md)** — Completed phases milestones and target feature roadmap for subsequent versions.
+* ❓ **[FAQ](./Docs/FAQ.md)** — Frequently asked questions regarding local simulator bounds and customization plugins.
 
 ---
 
@@ -333,3 +345,21 @@ Below is a summary of the completed development milestones and the target roadma
 
 ### Future Roadmap (Coming Soon)
 * **[ ] Release & Packaging (Phase 14):** PyPI package deployment, public GitHub releases, and production v1.0.0 tag.
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions to the Quantum Security Toolkit! Please read our [Contributing Guide](./CONTRIBUTING.md) and [Code of Conduct](./CODE_OF_CONDUCT.md) for details on our code style, formatting, testing requirements, and pull request submission process.
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+
+---
+
+## 🏷️ Citation
+
+If you use QST in your research, please cite the toolkit using the citation metadata defined in [CITATION.cff](./CITATION.cff).
