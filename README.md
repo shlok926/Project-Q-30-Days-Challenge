@@ -1,4 +1,4 @@
-# ⚛️ Project Q: 30 Days Challenge — From Zero to Quantum Hero
+# Project Q: 30 Days Challenge — From Zero to Quantum Hero
 
 <p align="center">
   <img src="https://img.shields.io/badge/IBM-Quantum-blue?style=for-the-badge&logo=IBM&logoColor=white" alt="IBM Quantum" />
@@ -16,21 +16,41 @@
 </p>
 
 <p align="center">
-  <a href="#-about-the-challenge"><strong>About</strong></a> |
-  <a href="#-journey-timeline"><strong>Timeline</strong></a> |
-  <a href="#-featured-projects"><strong>Featured Projects</strong></a> |
-  <a href="#-project-comparison"><strong>Comparison Table</strong></a> |
-  <a href="#-repository-structure"><strong>Structure</strong></a> |
-  <a href="#-learning-outcomes"><strong>Learning Outcomes</strong></a> |
-  <a href="#-technology-stack"><strong>Tech Stack</strong></a> |
-  <a href="#-achievements-dashboard"><strong>Achievements</strong></a> |
-  <a href="#-screenshots"><strong>Screenshots</strong></a> |
-  <a href="#-how-to-explore"><strong>Onboarding Guide</strong></a>
+  <a href="#about-the-challenge"><strong>About</strong></a> |
+  <a href="#journey-timeline"><strong>Timeline</strong></a> |
+  <a href="#featured-projects"><strong>Featured Projects</strong></a> |
+  <a href="#project-comparison"><strong>Comparison Table</strong></a> |
+  <a href="#repository-structure"><strong>Structure</strong></a> |
+  <a href="#learning-outcomes"><strong>Learning Outcomes</strong></a> |
+  <a href="#technology-stack"><strong>Tech Stack</strong></a> |
+  <a href="#achievements-dashboard"><strong>Achievements</strong></a> |
+  <a href="#screenshots"><strong>Screenshots</strong></a> |
+  <a href="#how-to-explore"><strong>Onboarding Guide</strong></a>
 </p>
 
 ---
 
-## 📖 About the Challenge
+## Table of Contents
+1. [About the Challenge](#about-the-challenge)
+2. [Journey Timeline](#journey-timeline)
+3. [Featured Projects](#featured-projects)
+4. [Project Comparison Table](#project-comparison)
+5. [Repository Structure](#repository-structure)
+6. [Learning Outcomes](#learning-outcomes)
+7. [Technology Stack](#technology-stack)
+8. [Achievements Dashboard](#achievements-dashboard)
+9. [Screenshots](#screenshots)
+10. [How to Explore This Repository](#how-to-explore)
+11. [Future Roadmap](#future-roadmap)
+12. [Resources](#resources)
+13. [Contributing](#contributing)
+14. [License](#license)
+15. [Acknowledgements](#acknowledgements)
+16. [Footer](#footer)
+
+---
+
+## About the Challenge
 
 Project Q was started as an intensive 30-day sprint designed to bridge the gap between abstract quantum physics theory and practical software engineering. By applying an **engineering-first mindset**, the challenge progresses from basic single-qubit manipulations to building full-stack platforms and production-grade cryptographic frameworks.
 
@@ -42,7 +62,7 @@ Project Q was started as an intensive 30-day sprint designed to bridge the gap b
 
 ---
 
-## 📅 Journey Timeline
+## Journey Timeline
 
 Below is the chronological roadmap of the challenge, tracking skill acquisition across the four weeks of work:
 
@@ -82,7 +102,7 @@ Below is the chronological roadmap of the challenge, tracking skill acquisition 
 
 ---
 
-## 🌟 Featured Projects
+## Featured Projects
 
 ### Mini Project 1 — Quantum Randomness Laboratory
 * **Folder Link:** [`./Mini_Project_1/Quantum-Randomness-Lab`](./Mini_Project_1/Quantum-Randomness-Lab)
@@ -135,7 +155,7 @@ Below is the chronological roadmap of the challenge, tracking skill acquisition 
 
 ---
 
-## 📊 Project Comparison
+## Project Comparison
 
 | Project | Category | Language | Framework | Difficulty | Status | Documentation | Automated Tests |
 | :--- | :--- | :---: | :--- | :---: | :---: | :---: | :---: |
@@ -145,7 +165,7 @@ Below is the chronological roadmap of the challenge, tracking skill acquisition 
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 
 ```text
 Project-Q-30-Days-Challenge/
@@ -162,7 +182,7 @@ Project-Q-30-Days-Challenge/
 
 ---
 
-## 🎓 Learning Outcomes
+## Learning Outcomes
 
 * **Quantum Computing:** Mastered qubit polarization, quantum state vectors, Bloch sphere representation, and Oracle quantum computation models (Grover, Deutsch-Jozsa).
 * **Quantum Cryptography:** Implemented BB84 QKD, modeled eavesdropping collapse vectors, and calculated trace distance security limits.
@@ -173,7 +193,7 @@ Project-Q-30-Days-Challenge/
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 | Layer | Technology | Purpose |
 | :--- | :--- | :--- |
@@ -187,7 +207,7 @@ Project-Q-30-Days-Challenge/
 
 ---
 
-## 📊 Achievements Dashboard
+## Achievements Dashboard
 
 * **30 Learning Days:** Completed daily worksheets mapping quantum fundamentals.
 * **3 Major Projects:** Designed, implemented, and delivered three distinct repositories.
@@ -198,7 +218,7 @@ Project-Q-30-Days-Challenge/
 
 ---
 
-## 📷 Screenshots
+## Screenshots
 
 ### Mini Project 1: Histogram Outputs
 *True quantum randomness distribution generated from qubit superposition collapses:*
@@ -221,7 +241,7 @@ Project-Q-30-Days-Challenge/
 
 ---
 
-## 🚀 How to Explore This Repository
+## How to Explore This Repository
 
 We recommend recruiters and hiring managers explore the challenge in this order (Approx. 10 minutes):
 
@@ -243,41 +263,41 @@ We recommend recruiters and hiring managers explore the challenge in this order 
 
 ---
 
-## 📅 Future Roadmap
+## Future Roadmap
 
 * **LDPC Error Correction:** Integrate Low-Density Parity-Check algorithms into QST.
 * **Entanglement Protocols:** Implement E91 simulation scripts.
-* **Multi-Node Networking:** Support multi-hop quantum repeaters simulation models.
+* **Multi-Node Quantum Repeaters:** Support multi-hop quantum repeaters simulation models.
 * **Portfolio Deployments:** Host the FastAPI platform backend on Render/AWS.
 
 ---
 
-## 📚 Resources
+## Resources
 * **IBM Learning Platform:** [IBM Quantum Learning](https://learning.quantum.ibm.com/)
 * **Qiskit Documentation:** [Qiskit SDK Docs](https://docs.quantum.ibm.com/)
 * **Cascade Protocol Reference:** *Bras, G., & Bennett, C. H.* (QKD Cascade foundations papers).
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions to any part of this challenge repository! Please create an issue or pull request targeting the specific mini-project directory. Follow formatting guidelines (`black` for Python, `prettier` for Next.js) before submitting.
 
 ---
 
-## 📜 License
+## License
 
 This repository is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
 
 ---
 
-## 💖 Acknowledgements
+## Acknowledgements
 * The organizers and authors of the Project-Q 30-Day challenge.
 * The open-source teams maintaining Qiskit, FastAPI, Next.js, and Matplotlib.
 
 ---
 
-## ✉️ Footer
+## Footer
 
 <p align="center">
   Made with ❤️ by Shlok. <br>

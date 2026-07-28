@@ -1,4 +1,4 @@
-# 🌌 Quantum Security Toolkit (QST)
+# Quantum Security Toolkit (QST)
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/shlok926/Project-Q-30-Days-Challenge/main/Mini_Project_3/Quantum%20Security%20Toolkit%20(QST)/Docs/images/logo_placeholder.png" alt="QST Logo Placeholder" width="200" height="200" />
@@ -20,57 +20,57 @@
   <a href="#"><img src="https://img.shields.io/badge/coverage-95%25-success.svg" alt="Coverage" /></a>
   <a href="#"><img src="https://img.shields.io/badge/release-v1.0.0-blue.svg" alt="Latest Release" /></a>
   <a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code Style" /></a>
-  <a href="#-documentation-hub"><img src="https://img.shields.io/badge/docs-complete-brightgreen.svg" alt="Documentation Status" /></a>
+  <a href="#documentation-hub"><img src="https://img.shields.io/badge/docs-complete-brightgreen.svg" alt="Documentation Status" /></a>
 </p>
 
 <p align="center">
-  <a href="#-quick-start"><strong>Quick Start</strong></a> |
-  <a href="#-example-outputs"><strong>Example Outputs</strong></a> |
-  <a href="#-installation"><strong>Installation</strong></a> |
-  <a href="#-architecture-diagram"><strong>Architecture</strong></a> |
-  <a href="#-examples"><strong>Examples</strong></a> |
-  <a href="#-documentation-hub"><strong>Documentation</strong></a> |
+  <a href="#quick-start"><strong>Quick Start</strong></a> |
+  <a href="#example-outputs"><strong>Example Outputs</strong></a> |
+  <a href="#installation"><strong>Installation</strong></a> |
+  <a href="#architecture-diagram"><strong>Architecture</strong></a> |
+  <a href="#examples"><strong>Examples</strong></a> |
+  <a href="#documentation-hub"><strong>Documentation</strong></a> |
   <a href="./Docs/API_Reference.md"><strong>API Reference</strong></a> |
-  <a href="#-cli-showcase"><strong>CLI</strong></a> |
+  <a href="#cli-showcase"><strong>CLI</strong></a> |
   <a href="./CONTRIBUTING.md"><strong>Contributing</strong></a> |
   <a href="./LICENSE"><strong>License</strong></a> |
-  <a href="#-citation"><strong>Citation</strong></a> |
-  <a href="#-project-roadmap"><strong>Roadmap</strong></a>
+  <a href="#citation"><strong>Citation</strong></a> |
+  <a href="#project-roadmap"><strong>Roadmap</strong></a>
 </p>
 
 ---
 
-## 🗺️ Table of Contents
-1. [📖 Introduction](#-introduction)
-2. [🚀 Quick Start](#-quick-start)
-3. [📸 Example Outputs](#-example-outputs)
-4. [📂 Documentation Hub](#-documentation-hub)
-5. [🌟 Feature Highlights](#-feature-highlights)
-6. [📷 Screenshots & Visual Showcase](#-screenshots--visual-showcase)
-7. [📐 Architecture Diagram](#-architecture-diagram)
-8. [🔄 Project Workflow](#-project-workflow)
-9. [📂 Project Structure](#-project-structure)
-10. [📦 Installation](#-installation)
-11. [💻 CLI Showcase](#-cli-showcase)
-12. [🐍 Python API Usage](#-python-api-usage)
-13. [📚 Examples](#-examples)
-14. [⚙️ Configuration](#-configuration)
-15. [🏛️ Architecture Overview](#%EF%B8%8F-architecture-overview)
-16. [🛠️ Technology Stack](#%EF%B8%8F-technology-stack)
-17. [📊 Benchmarks](#-benchmarks)
-18. [📅 Project Roadmap](#-project-roadmap)
-19. [🤝 Contributing](#-contributing)
-20. [🛡️ Security](#%EF%B8%8F-security)
-21. [🧪 Testing](#-testing)
-22. [📅 Release Information](#-release-information)
-23. [🏷️ Citation](#%EF%B8%8F-citation)
-24. [📜 License](#-license)
-25. [💖 Acknowledgements](#-acknowledgements)
-26. [✉️ Footer](#%EF%B8%8F-footer)
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Quick Start](#quick-start)
+3. [Example Outputs](#example-outputs)
+4. [Documentation Hub](#documentation-hub)
+5. [Feature Highlights](#feature-highlights)
+6. [Screenshots & Visual Showcase](#screenshots--visual-showcase)
+7. [Architecture Diagram](#architecture-diagram)
+8. [Project Workflow](#project-workflow)
+9. [Project Structure](#project-structure)
+10. [Installation](#installation)
+11. [CLI Showcase](#cli-showcase)
+12. [Python API Usage](#python-api-usage)
+13. [Examples](#examples)
+14. [Configuration](#configuration)
+15. [Architecture Overview](#architecture-overview)
+16. [Technology Stack](#technology-stack)
+17. [Benchmarks](#benchmarks)
+18. [Project Roadmap](#project-roadmap)
+19. [Contributing](#contributing)
+20. [Security](#security)
+21. [Testing](#testing)
+22. [Release Information](#release-information)
+23. [Citation](#citation)
+24. [License](#license)
+25. [Acknowledgements](#acknowledgements)
+26. [Footer](#footer)
 
 ---
 
-## 📖 Introduction
+## Introduction
 
 The **Quantum Security Toolkit (QST)** is designed to simulate the BB84 QKD protocol under real-world noise parameters and active eavesdropper intercepts. 
 
@@ -82,7 +82,7 @@ The **Quantum Security Toolkit (QST)** is designed to simulate the BB84 QKD prot
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 Run your first BB84 simulation trial in under 30 seconds:
 
@@ -121,7 +121,7 @@ qst simulate --qubits 20 --seed 42 --output trial.json
 
 ---
 
-## 📸 Example Outputs
+## Example Outputs
 
 This section showcases the real outputs produced by the toolkit's simulation and visualizer pipelines, including the command-line summaries and scientific plots generated during execution.
 
@@ -203,7 +203,7 @@ This plot represents the end-to-end parameter sweep tracking overall secret key 
 
 ---
 
-## 📂 Documentation Hub
+## Documentation Hub
 
 Detailed guides, tutorials, and specifications are organized in the `Docs/` directory:
 
@@ -219,7 +219,7 @@ Detailed guides, tutorials, and specifications are organized in the `Docs/` dire
 
 ---
 
-## 🌟 Feature Highlights
+## Feature Highlights
 
 | Feature | Category | Icon | Description |
 | :--- | :--- | :---: | :--- |
@@ -235,7 +235,7 @@ Detailed guides, tutorials, and specifications are organized in the `Docs/` dire
 
 ---
 
-## 📷 Screenshots & Visual Showcase
+## Screenshots & Visual Showcase
 
 ### CLI Demonstration
 *Placeholder for terminal recording showing CLI execution flow:*
@@ -262,7 +262,7 @@ Detailed guides, tutorials, and specifications are organized in the `Docs/` dire
 
 ---
 
-## 📐 Architecture Diagram
+## Architecture Diagram
 
 The diagram below outlines the structural boundaries and dependency flows between QST modules:
 
@@ -282,7 +282,7 @@ graph TD
 
 ---
 
-## 🔄 Project Workflow
+## Project Workflow
 
 The following flowchart explains the logical execution pipeline from configurations validation to output serialization:
 
@@ -307,7 +307,7 @@ flowchart TD
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 qst/
@@ -333,7 +333,7 @@ qst/
 
 ---
 
-## 📦 Installation
+## Installation
 
 ### 1. Operating System Targets
 QST is verified across:
@@ -357,7 +357,7 @@ pip install -e ".[viz]"
 
 ---
 
-## 💻 CLI Showcase
+## CLI Showcase
 
 Exposes command line utilities to simulate trials, parameter sweeps, and export telemetry formats:
 
@@ -379,7 +379,7 @@ qst sweep --qubits 10,20 --interception 0.0,0.1,0.2 --output sweep.json
 
 ---
 
-## 🐍 Python API Usage
+## Python API Usage
 
 ```python
 from qst.models.config import SimulationConfig
@@ -408,7 +408,7 @@ print(f"Min-Entropy Parameter: {trial.final_secret_key.min_entropy_estimate}")
 
 ---
 
-## 📚 Examples
+## Examples
 
 | Tutorial Script | Difficulty | Est. Time | Key Concepts Demonstrated |
 | :--- | :--- | :--- | :--- |
@@ -425,7 +425,7 @@ print(f"Min-Entropy Parameter: {trial.final_secret_key.min_entropy_estimate}")
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 | Configuration Attribute | Type | Default | Description |
 | :--- | :---: | :---: | :--- |
@@ -438,7 +438,7 @@ print(f"Min-Entropy Parameter: {trial.final_secret_key.min_entropy_estimate}")
 
 ---
 
-## 🏛️ Architecture Overview
+## Architecture Overview
 
 The toolkit's modular packaging aligns with strict **SOLID design principles**:
 * **Dependency Inversion:** Execution backends implement `ExecutorInterface`, allowing simulators (Aer) and physical hardware (IBM QPU Runtime) to be swapped transparently.
@@ -447,7 +447,7 @@ The toolkit's modular packaging aligns with strict **SOLID design principles**:
 
 ---
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 | Component | Library / Framework | Version |
 | :--- | :--- | :---: |
@@ -460,7 +460,7 @@ The toolkit's modular packaging aligns with strict **SOLID design principles**:
 
 ---
 
-## 📊 Benchmarks
+## Benchmarks
 
 *Measurements collected on Qiskit Aer statevector simulators (CPU: Intel i7 / Ryzen 7 equivalents):*
 
@@ -478,7 +478,7 @@ The toolkit's modular packaging aligns with strict **SOLID design principles**:
 
 ---
 
-## 📅 Project Roadmap
+## Project Roadmap
 
 ### Completed Milestones
 - [x] **Phase 1-11 (Foundations & CLI):** Polarization state preps, basis reconciliation sifting, visualizer registry, JSON/CSV sweeps, and command line tools.
@@ -490,19 +490,19 @@ The toolkit's modular packaging aligns with strict **SOLID design principles**:
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions to the Quantum Security Toolkit! Please read our [Contributing Guide](./CONTRIBUTING.md) and [Code of Conduct](./CODE_OF_CONDUCT.md) for details on code style guidelines, formatting, testing targets, and pull request submission steps.
 
 ---
 
-## 🛡️ Security
+## Security
 
 Please review [`SECURITY.md`](./SECURITY.md) for information regarding vulnerability reporting channels and security disclosures policies.
 
 ---
 
-## 🧪 Testing
+## Testing
 
 Execute the test suites using pytest:
 ```bash
@@ -522,7 +522,7 @@ ruff check src/
 
 ---
 
-## 📅 Release Information
+## Release Information
 
 This project adheres to **Semantic Versioning (SemVer)**:
 * **Stable public APIs** (defined in `Docs/API_Reference.md`) are frozen for the `v1.x` release series. No breaking modifications will be introduced.
@@ -530,7 +530,7 @@ This project adheres to **Semantic Versioning (SemVer)**:
 
 ---
 
-## 🏷️ Citation
+## Citation
 
 For academic or research citation, please reference the CITATION metadata:
 ```bibtex
@@ -546,27 +546,27 @@ For academic or research citation, please reference the CITATION metadata:
 
 ---
 
-## 📜 License
+## License
 
 This project is licensed under the MIT License - see the [`LICENSE`](./LICENSE) file for details.
 
 ---
 
-## 💖 Acknowledgements
+## Acknowledgements
 * IBM Qiskit and Qiskit Aer simulation teams.
 * Charles Bennett and Gilles Brassard (BB84 Protocol inventors).
 * Cascade error correction protocol research authors.
 
 ---
 
-## ✉️ Footer
+## Footer
 
 <p align="center">
   <a href="./LICENSE">License</a> | 
-  <a href="#-documentation-hub">Documentation</a> | 
+  <a href="#documentation-hub">Documentation</a> | 
   <a href="./CHANGELOG.md">Latest Release</a> | 
   <a href="./CONTRIBUTING.md">Contributing</a> | 
-  <a href="#-citation">Citation</a> | 
+  <a href="#citation">Citation</a> | 
   <a href="https://github.com/shlok926/Project-Q-30-Days-Challenge">Repository</a>
 </p>
 
