@@ -279,11 +279,28 @@ We recommend recruiters and hiring managers explore the challenge in this order 
 
 ---
 
-## Contributing
+## 🤝 Contributing & Feedback
 
-We welcome contributions to any part of this challenge repository! Please create an issue or pull request targeting the specific mini-project directory. Follow formatting guidelines (`black` for Python, `prettier` for Next.js) before submitting.
+Contributions, suggestions, and feedback are highly welcome!
+
+* **Got suggestions or feature requests?** Feel free to open a new [Issue](https://github.com/shlok926/Project-Q-30-Days-Challenge/issues) or share your ideas.
+* **Want to contribute?** Feel free to fork this repository, make your changes, and submit a Pull Request.
 
 ---
+
+## ⭐ Show Your Support
+
+```text
+                   Love this tool? Help us grow:
+✨ Star the repository   (GitHub Star Button)
+🐛 Report bugs          (GitHub Issues)
+💡 Suggest features     (GitHub Discussions)
+📢 Share with others    (LinkedIn/Twitter)
+🤝 Contribute code      (Pull Requests)
+```
+
+---
+
 
 ## License
 
@@ -297,10 +314,20 @@ This repository is licensed under the MIT License - see the [LICENSE](./LICENSE)
 
 ---
 
-## Footer
+## 👤 Author & Contact
 
 <p align="center">
-  Made with ❤️ by Shlok. <br>
-  Explore my GitHub Profile at <a href="https://github.com/shlok926">github.com/shlok926</a>. <br>
-  © 2026 Shlok. All rights reserved.
+  👨‍💼 <strong>Shlok Thorat</strong> <br>
+  <em>Let's connect on LinkedIn, collaborate, and build amazing things together!</em>
 </p>
+
+<p align="center">
+  <a href="mailto:shlokthorat29075@gmail.com"><img src="https://img.shields.io/badge/Email-shlokthorat29075@gmail.com-red?style=flat-square&logo=gmail&logoColor=white" alt="Email" /></a>
+  <a href="https://github.com/shlok926"><img src="https://img.shields.io/badge/GitHub-@shlok926-black?style=flat-square&logo=github&logoColor=white" alt="GitHub" /></a>
+  <a href="https://www.linkedin.com/in/shlok-thorat-39916a405/"><img src="https://img.shields.io/badge/LinkedIn-shlok--thorat--39916a405-blue?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
+</p>
+
+<p align="center">
+  Made with Shlok! for Quantum Computing Innovation • <a href="#">Back to Top</a>
+</p>
+
