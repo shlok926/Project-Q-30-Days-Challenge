@@ -217,7 +217,7 @@ Project-Q-30-Days-Challenge/
 ### Mini Project 3: Flagship QST Simulation Sweep
 *Scientific plot illustrating QBER vs. Interception Probability trend analysis:*
 
-![QST Plot](./Mini_Project_3/Quantum%20Security%20Toolkit%20(QST)/examples/outputs/figures/qber_trend.png)
+![QST Plot](./assets/qber_trend.png)
 
 ---
 

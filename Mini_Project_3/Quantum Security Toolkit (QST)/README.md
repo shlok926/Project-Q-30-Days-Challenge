@@ -123,13 +123,46 @@ qst simulate --qubits 20 --seed 42 --output trial.json
 
 ## 📸 Example Outputs
 
-This section showcases the real visual outputs produced by the toolkit's simulation and visualizer pipelines, illustrating the scientific plots generated during execution.
+This section showcases the real outputs produced by the toolkit's simulation and visualizer pipelines, including the command-line summaries and scientific plots generated during execution.
+
+### Example 01 — Basic BB84 Simulation
+
+This console output demonstrates the execution of a basic noise-free single BB84 quantum simulation trial. It shows sifting rates, key rates, and security classification status.
+
+![Basic BB84 Simulation Terminal Output](../../assets/example01_terminal.png)
+
+#### What this demonstrates
+* BB84 protocol execution.
+* Alice/Bob basis reconciliation.
+* Deterministic simulation using a fixed seed.
+* Secure communication with QBER calculation.
+* Automatic key rate computation.
+* Security status evaluation.
+
+---
+
+### Example 10 — Protocol Summary & Finalization
+
+This console execution represents the end-to-end QKD pipeline demonstrating key rates at every stage of reconciliation, Cascade error correction efficiency, universal hashing privacy amplification, and overall protocol loss metrics.
+
+![Protocol Summary & Finalization Terminal Output](../../assets/example10_terminal.png)
+
+#### What this demonstrates
+* End-to-end QKD pipeline.
+* Raw ➔ Sifted ➔ Corrected ➔ Final Secret Key.
+* Cascade Error Correction.
+* Privacy Amplification.
+* Security Metrics.
+* Protocol Loss Analysis.
+* Execution Backend.
+
+---
 
 ### Example 05 — QBER Trend Analysis
 
 This plot illustrates the relationship between the observed Quantum Bit Error Rate (QBER) and the interception probability of the eavesdropper (Eve). It demonstrates the linear growth in transition errors caused by state collapses under measurement intercepts, helping researchers benchmark detection limits.
 
-![QBER Trend Analysis](./examples/outputs/figures/qber_trend.png)
+![QBER Trend Analysis](../../assets/qber_trend.png)
 
 #### What this demonstrates
 * Alice/Bob polarization basis sifting reconciliation yields.
@@ -144,7 +177,7 @@ This plot illustrates the relationship between the observed Quantum Bit Error Ra
 
 This chart visualizes QBER occurrences across different key segments and blocks. It provides spatial profiling of error distributions, helping to evaluate block size selections for post-processing error correction algorithms.
 
-![QBER Heatmap Matrix](./examples/outputs/figures/qber_heatmap.png)
+![QBER Heatmap Matrix](../../assets/qber_heatmap.png)
 
 #### What this demonstrates
 * Spatial distribution of error density across key blocks.
@@ -158,7 +191,7 @@ This chart visualizes QBER occurrences across different key segments and blocks.
 
 This plot represents the end-to-end parameter sweep tracking overall secret key rate and QBER trends. It details key rate attenuation and error margins as interception levels increase.
 
-![Complete Pipeline Sweep](./examples/outputs/figures/qber_vs_intercept_trend.png)
+![Complete Pipeline Sweep](../../assets/qber_vs_intercept_trend.png)
 
 #### What this demonstrates
 * End-to-end QKD pipeline simulation (Raw → Sifted → Corrected → Final Secret Key).
