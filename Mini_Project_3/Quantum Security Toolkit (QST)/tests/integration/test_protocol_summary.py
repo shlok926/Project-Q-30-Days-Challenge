@@ -48,9 +48,10 @@ def test_orchestration_summary_and_metrics_full_run() -> None:
     assert metrics is not None
     assert metrics.raw_key_rate == 1.0
     assert metrics.sifted_key_rate > 0.0
+    assert metrics.final_key_rate > 0.0
     assert metrics.final_secret_key_rate > 0.0
     assert metrics.compression_ratio == 0.5
-    assert metrics.overall_efficiency == metrics.final_secret_key_rate
+    assert metrics.overall_efficiency == metrics.final_key_rate
     assert metrics.total_protocol_loss > 0.0
 
     # Verify security level exists

@@ -31,13 +31,18 @@ class SecretKeyMetrics:
     raw_key_rate: float
     sifted_key_rate: float
     corrected_key_rate: float
-    final_secret_key_rate: float
+    final_key_rate: float
     compression_ratio: float
     overall_efficiency: float
     security_parameter_summary: float
     privacy_amplification_loss: float
     error_correction_loss: float
     total_protocol_loss: float
+
+    @property
+    def final_secret_key_rate(self) -> float:
+        """Alias for final_key_rate (maintained for backward compatibility)."""
+        return self.final_key_rate
 
 
 @dataclass(frozen=True)

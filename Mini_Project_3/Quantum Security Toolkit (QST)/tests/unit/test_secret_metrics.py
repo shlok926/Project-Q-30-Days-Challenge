@@ -27,6 +27,7 @@ def test_calculator_rates_and_losses() -> None:
     assert metrics.raw_key_rate == 1.0
     assert metrics.sifted_key_rate == 0.5
     assert metrics.corrected_key_rate == 0.45
+    assert metrics.final_key_rate == 0.3
     assert metrics.final_secret_key_rate == 0.3
     assert metrics.compression_ratio == pytest.approx(30 / 45)
     assert metrics.overall_efficiency == 0.3

@@ -65,7 +65,7 @@ class SecretMetricsCalculator:
                 if (corrected_len is not None)
                 else sifted_key_rate
             )
-            final_secret_key_rate = final_len / denom
+            final_key_rate = final_len / denom
 
             privacy_amplification_loss = (active_corrected_len - final_len) / denom
             error_correction_loss = (
@@ -78,7 +78,7 @@ class SecretMetricsCalculator:
             raw_key_rate = 0.0
             sifted_key_rate = 0.0
             corrected_key_rate = 0.0
-            final_secret_key_rate = 0.0
+            final_key_rate = 0.0
             privacy_amplification_loss = 0.0
             error_correction_loss = 0.0
             total_protocol_loss = 0.0
@@ -89,20 +89,20 @@ class SecretMetricsCalculator:
                 "raw_key_rate": raw_key_rate,
                 "sifted_key_rate": sifted_key_rate,
                 "corrected_key_rate": corrected_key_rate,
-                "final_secret_key_rate": final_secret_key_rate,
+                "final_key_rate": final_key_rate,
             }
         )
 
         compression_ratio = (
             final_len / active_corrected_len if active_corrected_len > 0 else 0.0
         )
-        overall_efficiency = final_secret_key_rate
+        overall_efficiency = final_key_rate
 
         return SecretKeyMetrics(
             raw_key_rate=raw_key_rate,
             sifted_key_rate=sifted_key_rate,
             corrected_key_rate=corrected_key_rate,
-            final_secret_key_rate=final_secret_key_rate,
+            final_key_rate=final_key_rate,
             compression_ratio=compression_ratio,
             overall_efficiency=overall_efficiency,
             security_parameter_summary=security_parameter,

@@ -101,7 +101,7 @@ def main() -> None:
         print("  v")
         print(f"Corrected Key Rate:      {metrics.corrected_key_rate:.4f}")
         print("  v")
-        print(f"Final Key Rate:          {metrics.final_secret_key_rate:.4f}")
+        print(f"Final Key Rate:          {metrics.final_key_rate:.4f}")
         print("------------------------")
         print(f"QBER:                    {summary.qber:.4f}")
         print(f"Security Parameter:      {metrics.security_parameter_summary:.4f}")
