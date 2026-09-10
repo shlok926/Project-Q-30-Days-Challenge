@@ -5,6 +5,8 @@ References:
     Docs/14_TESTING_STRATEGY.md §3
 """
 
+from typing import Any, Optional
+
 import pytest
 
 from qst.models.results import SimulationResult
@@ -14,14 +16,14 @@ from qst.visualization.backend import (
     VisualizationResult,
 )
 from qst.visualization.datasets import (
+    HeatmapMatrix,
+    HistogramSeries,
     LineSeries,
     ScatterSeries,
-    HistogramSeries,
-    HeatmapMatrix,
 )
-from qst.visualization.styles import Theme, LightTheme
-from qst.visualization.visualizer import Visualizer
 from qst.visualization.registry import VisualizationBackendRegistry
+from qst.visualization.styles import Theme
+from qst.visualization.visualizer import Visualizer
 
 
 class FakeBackend(VisualizationBackend):
@@ -34,6 +36,7 @@ class FakeBackend(VisualizationBackend):
         theme: Theme,
         filepath: Optional[str] = None,
     ) -> VisualizationResult:
+        """Render fake visualization dataset."""
         super().render(dataset, chart_type, theme, filepath)
         return VisualizationResult(
             figure="stub-fig",
@@ -43,12 +46,6 @@ class FakeBackend(VisualizationBackend):
             dpi=theme.figure.dpi,
             format="PNG" if filepath else None,
         )
-
-
-# Add Optional/Any helper imports inside the test file if needed, but wait!
-# FakeBackend uses Any and Optional. Let's make sure they are imported!
-# Let's import them at the top of test_visualizer.py.
-from typing import Any, Optional
 
 
 @pytest.mark.unit
