@@ -5,6 +5,7 @@ References:
 """
 
 from typing import Sequence
+
 from qst.correction.exceptions import CorrectionError
 from qst.correction.models import CascadeConfiguration
 
