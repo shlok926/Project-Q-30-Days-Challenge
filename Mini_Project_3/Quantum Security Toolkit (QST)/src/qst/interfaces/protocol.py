@@ -21,15 +21,21 @@ class ProtocolInterface(abc.ABC):
     """
 
     @abc.abstractmethod
-    def initialize(self, n_qubits: int, seed: Optional[int] = None) -> None:
+    def initialize(
+        self,
+        n_qubits: int,
+        seed: Optional[int] = None,
+        eve_intercept_probability: float = 0.0,
+    ) -> None:
         """Initialize the protocol state and random generators.
 
         Args:
             n_qubits: The number of qubits to process in the simulation.
             seed: An optional seed for reproducible randomness.
+            eve_intercept_probability: Optional eavesdropper intercept probability.
 
         Raises:
-            ValidationError: If n_qubits or seed are invalid.
+            ValidationError: If n_qubits, seed, or interception probability are invalid.
         """
         pass
 
