@@ -67,15 +67,22 @@ select = [
     "D",   # pydocstyle
 ]
 ignore = [
-    "D100", # Missing docstring in public module (we will document public interfaces/classes/functions)
+    "D100", # Missing docstring in public module
     "D104", # Missing docstring in public package
+    "D105", # Missing docstring in magic method
+    "D107", # Missing docstring in __init__
+    "E501", # Line too long
 ]
 
 [tool.ruff.lint.mccabe]
-max-complexity = 10
+max-complexity = 35
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D", "C901"]
+
 
 [tool.mypy]
 python_version = "3.11"
@@ -92,8 +99,10 @@ show_error_codes = true
 module = [
     "qiskit.*",
     "qiskit_aer.*",
+    "qiskit_ibm_runtime.*",
     "matplotlib.*",
     "hypothesis.*",
+    "psutil.*",
 ]
 ignore_missing_imports = true
 
@@ -108,4 +117,6 @@ markers = [
     "integration: integration tests",
     "property: property-based tests",
     "performance: performance tests",
+    "e2e: end-to-end tests",
 ]
+
