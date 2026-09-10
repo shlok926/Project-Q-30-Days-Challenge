@@ -7,16 +7,16 @@ References:
 
 import pytest
 
+from qst.analysis.trends.trends import TrendAnalysisService
 from qst.exceptions.validation import ValidationError
 from qst.models.results import (
-    SimulationResult,
-    ExperimentResult,
-    ParameterSweepResult,
-    SweepDimensions,
     ExecutionMetrics,
     ExperimentMetadata,
+    ExperimentResult,
+    ParameterSweepResult,
+    SimulationResult,
+    SweepDimensions,
 )
-from qst.analysis.trends.trends import TrendAnalysisService
 
 
 @pytest.fixture
