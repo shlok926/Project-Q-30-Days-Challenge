@@ -5,9 +5,10 @@ References:
 """
 
 import pytest
+
+from qst.correction.cascade import CascadeReconciler
 from qst.correction.exceptions import CorrectionError
 from qst.correction.models import CascadeConfiguration
-from qst.correction.cascade import CascadeReconciler
 
 
 @pytest.mark.unit
