@@ -5,10 +5,11 @@ References:
 """
 
 from typing import Optional
+
 from qst.secret.models import (
     SecretKeyMetrics,
-    SecurityLevel,
     SecurityClassificationConfig,
+    SecurityLevel,
 )
 from qst.secret.validators import validate_key_lengths, validate_rates
 
