@@ -6,7 +6,7 @@ References:
 """
 
 from qst.models.results import ParameterSweepResult
-from qst.models.visualization import LineSeries
+from qst.visualization.datasets import LineSeries
 
 
 class TrendAnalysisService:
