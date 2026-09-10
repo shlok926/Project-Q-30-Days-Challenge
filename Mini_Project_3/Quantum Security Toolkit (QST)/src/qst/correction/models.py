@@ -4,9 +4,7 @@ References:
     Docs/10_API_SPECIFICATION.md §5
 """
 
-import math
 from dataclasses import dataclass, field
-from typing import Optional, Sequence
 
 
 @dataclass(frozen=True)
