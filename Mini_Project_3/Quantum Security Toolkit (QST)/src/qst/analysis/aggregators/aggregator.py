@@ -6,7 +6,8 @@ References:
 """
 
 from dataclasses import dataclass
-from qst.models.results import ParameterSweepResult, SecurityStatus
+
+from qst.models.results import ParameterSweepResult, SecurityStatus, SimulationResult
 
 
 @dataclass(frozen=True)
@@ -40,8 +41,8 @@ class ExperimentAggregator:
         Returns:
             An AggregationResult holding combined values.
         """
-        all_sims = []
-        throughputs = []
+        all_sims: list[SimulationResult] = []
+        throughputs: list[float] = []
 
         for exp in sweep_result.experiments:
             all_sims.extend(exp.simulations)
@@ -66,11 +67,11 @@ class ExperimentAggregator:
         )
 
         # Success ratio: secure runs / total simulations count
-        secure_count = sum(
-            1
+        secure_count = len([
+            s
             for s in all_sims
             if s.security_metrics and s.security_metrics.status == SecurityStatus.SECURE
-        )
+        ])
         success_ratio = float(secure_count / len(all_sims))
 
         return AggregationResult(
