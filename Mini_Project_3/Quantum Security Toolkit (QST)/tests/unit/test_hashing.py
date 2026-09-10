@@ -5,9 +5,10 @@ References:
 """
 
 import pytest
+
+from qst.privacy.amplifier import PrivacyAmplifier
 from qst.privacy.exceptions import PrivacyAmplificationError
 from qst.privacy.models import PrivacyAmplificationConfiguration
-from qst.privacy.amplifier import PrivacyAmplifier
 
 
 @pytest.mark.unit
