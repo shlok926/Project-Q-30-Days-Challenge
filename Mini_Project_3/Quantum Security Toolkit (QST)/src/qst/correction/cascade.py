@@ -4,20 +4,20 @@ References:
     Docs/10_API_SPECIFICATION.md
 """
 
-import time
 import math
+import time
 from typing import Sequence
-from qst.correction.exceptions import CorrectionError
-from qst.correction.validators import validate_keys, validate_cascade_config
-from qst.correction.parity import calculate_parity
-from qst.correction.block import generate_blocks
+
 from qst.correction.binary_search import perform_binary_search
+from qst.correction.block import KeyBlock, generate_blocks
 from qst.correction.models import (
     CascadeConfiguration,
     CorrectedKey,
-    CorrectionStatistics,
     CorrectionResult,
+    CorrectionStatistics,
 )
+from qst.correction.parity import calculate_parity
+from qst.correction.validators import validate_cascade_config, validate_keys
 
 
 class CascadeReconciler:
@@ -70,9 +70,9 @@ class CascadeReconciler:
         t_start = time.perf_counter()
 
         # Track blocks by pass number
-        blocks_by_pass = {}
+        blocks_by_pass: dict[int, list[KeyBlock]] = {}
 
-        corrected_in_chain = set()
+        corrected_in_chain: set[int] = set()
 
         def cascade_feedback(error_idx: int, current_pass: int) -> None:
             """Recursively resolves parity mismatches in all shuffles up to current_pass."""
