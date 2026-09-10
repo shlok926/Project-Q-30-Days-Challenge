@@ -4,10 +4,9 @@ References:
     Docs/10_API_SPECIFICATION.md §5
 """
 
-import time
 import math
+import time
 from dataclasses import dataclass, field
-from typing import Optional
 
 
 @dataclass(frozen=True)
