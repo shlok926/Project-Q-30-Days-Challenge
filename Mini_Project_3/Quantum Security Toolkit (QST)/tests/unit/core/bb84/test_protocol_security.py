@@ -9,7 +9,7 @@ References:
 import pytest
 
 from qst.core.bb84.protocol import BB84Protocol
-from qst.models.results import SimulationResult, SecurityStatus
+from qst.models.results import SecurityStatus, SimulationResult
 
 
 @pytest.mark.unit
