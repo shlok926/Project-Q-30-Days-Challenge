@@ -7,6 +7,7 @@ References:
 
 import os
 from unittest import mock
+
 import pytest
 
 from qst.exceptions.export import ExportError
@@ -110,3 +111,27 @@ def test_json_exporter_write_file_error(tmp_path) -> None:
         with pytest.raises(ExportError) as exc:
             exporter.export(filepath, {}, {})
         assert "QST-EXP-001" in str(exc.value)
+
+
+@pytest.mark.unit
+def test_json_exporter_path_traversal_blocked(tmp_path) -> None:
+    """Verify JSONExporter blocks writing outside allowed_base_dir."""
+    allowed_dir = tmp_path / "allowed"
+    allowed_dir.mkdir()
+    exporter = JSONExporter(allowed_base_dir=allowed_dir)
+
+    outside_file = tmp_path / "outside.json"
+    with pytest.raises(ValidationError) as exc:
+        exporter.export(outside_file, {"test": 1}, {})
+    assert "QST-VAL-405" in str(exc.value)
+    assert "Path traversal detected" in str(exc.value)
+
+
+@pytest.mark.unit
+def test_json_exporter_null_byte_rejected() -> None:
+    """Verify JSONExporter blocks filepaths containing null bytes."""
+    exporter = JSONExporter()
+    with pytest.raises(ValidationError) as exc:
+        exporter.export("output\0.json", {}, {})
+    assert "QST-VAL-401" in str(exc.value)
+
