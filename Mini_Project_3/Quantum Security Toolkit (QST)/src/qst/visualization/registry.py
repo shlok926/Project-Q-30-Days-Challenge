@@ -5,8 +5,10 @@ References:
     Docs/07_SYSTEM_ARCHITECTURE.md §11
 """
 
-from typing import Dict, Type
+from typing import Any, Dict, Type
+
 from qst.visualization.backend import VisualizationBackend
+from qst.visualization.matplotlib_backend import MatplotlibBackend
 
 
 class VisualizationBackendRegistry:
@@ -25,7 +27,7 @@ class VisualizationBackendRegistry:
         cls._registry[name.lower()] = backend_class
 
     @classmethod
-    def get(cls, name: str, *args, **kwargs) -> VisualizationBackend:
+    def get(cls, name: str, *args: Any, **kwargs: Any) -> VisualizationBackend:
         """Instantiate and return the requested backend.
 
         Args:
@@ -46,6 +48,5 @@ class VisualizationBackendRegistry:
 
 
 # Pre-register default Matplotlib backend
-from qst.visualization.matplotlib_backend import MatplotlibBackend
-
 VisualizationBackendRegistry.register("matplotlib", MatplotlibBackend)
+
