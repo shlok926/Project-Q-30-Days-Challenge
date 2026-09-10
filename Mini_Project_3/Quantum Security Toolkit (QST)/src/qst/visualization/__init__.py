@@ -4,31 +4,31 @@ References:
     Docs/07_SYSTEM_ARCHITECTURE.md §5, §11
 """
 
-from qst.visualization.visualizer import Visualizer
 from qst.visualization.backend import (
+    ChartType,
     VisualizationBackend,
     VisualizationResult,
-    ChartType,
+)
+from qst.visualization.datasets import (
+    HeatmapMatrix,
+    HistogramSeries,
+    ImageFormat,
+    LineSeries,
+    ScatterSeries,
 )
 from qst.visualization.matplotlib_backend import MatplotlibBackend
 from qst.visualization.registry import VisualizationBackendRegistry
 from qst.visualization.styles import (
-    Theme,
-    LightTheme,
-    DarkTheme,
-    ScientificTheme,
-    Typography,
     Colors,
-    GridStyle,
+    DarkTheme,
     FigureStyle,
+    GridStyle,
+    LightTheme,
+    ScientificTheme,
+    Theme,
+    Typography,
 )
-from qst.visualization.datasets import (
-    ImageFormat,
-    LineSeries,
-    ScatterSeries,
-    HistogramSeries,
-    HeatmapMatrix,
-)
+from qst.visualization.visualizer import Visualizer
 
 __all__ = [
     "Visualizer",
