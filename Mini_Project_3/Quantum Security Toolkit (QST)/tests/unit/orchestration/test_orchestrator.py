@@ -8,12 +8,12 @@ References:
 import pytest
 
 from qst.interfaces.protocol import ProtocolInterface
-from qst.models.config import ProtocolType, SimulationConfig
+from qst.models.config import SimulationConfig
 from qst.models.results import (
     ExperimentResult,
-    SimulationResult,
-    SecurityStatus,
     SecurityMetrics,
+    SecurityStatus,
+    SimulationResult,
 )
 from qst.orchestration.orchestrator import SimulationOrchestrator
 
