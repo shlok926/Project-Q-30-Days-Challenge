@@ -5,9 +5,9 @@ References:
     Docs/05_PRODUCT_REQUIREMENTS.md §1
 """
 
-from enum import Enum
 from dataclasses import dataclass, field
-from typing import Optional, TYPE_CHECKING
+from enum import Enum
+from typing import TYPE_CHECKING, Optional
 
 if TYPE_CHECKING:
     from qst.correction.models import CascadeConfiguration
@@ -84,10 +84,16 @@ class SimulationConfig:
     run_privacy_amplification: bool = False
     privacy_configuration: Optional["PrivacyAmplificationConfiguration"] = None
     security_classification_thresholds: Optional["SecurityClassificationConfig"] = None
+    max_qubits: int = 2048
+    simulation_method: str = "automatic"
 
     def __post_init__(self) -> None:
         """Perform validation on configured parameters after initialization."""
-        validate_qubit_count(self.n_qubits)
+        validate_qubit_count(
+            self.n_qubits,
+            max_qubits=self.max_qubits,
+            simulation_method=self.simulation_method,
+        )
         validate_seed(self.seed)
 
         # Synchronize interception probabilities to keep backward compatibility
@@ -104,3 +110,4 @@ class SimulationConfig:
                 f"Repetitions must be greater than zero, got {self.repetitions}.",
                 code="QST-VAL-303",
             )
+
