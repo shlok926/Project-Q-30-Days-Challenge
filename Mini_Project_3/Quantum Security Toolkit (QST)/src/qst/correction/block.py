@@ -4,7 +4,8 @@ References:
     Docs/10_API_SPECIFICATION.md
 """
 
-from typing import Any, Sequence
+from typing import Sequence
+
 import numpy as np
 
 
