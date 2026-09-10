@@ -4,8 +4,9 @@ References:
     Docs/14_TESTING_STRATEGY.md
 """
 
-import pytest
 import numpy as np
+import pytest
+
 from qst.privacy.algorithms.toeplitz import ToeplitzHasher
 
 
