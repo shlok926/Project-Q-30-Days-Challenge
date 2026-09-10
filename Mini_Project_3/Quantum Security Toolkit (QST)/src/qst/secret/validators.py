@@ -4,7 +4,8 @@ References:
     Docs/10_API_SPECIFICATION.md §4
 """
 
-from typing import Optional, Dict
+from typing import Dict, Optional
+
 from qst.secret.exceptions import SecretKeyError
 
 
