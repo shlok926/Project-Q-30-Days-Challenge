@@ -6,15 +6,14 @@ References:
 """
 
 import datetime
-import inspect
 import time
-from typing import Callable, Optional, Sequence
+from typing import Any, Callable, Optional, Sequence
 
 import numpy as np
 import qiskit
 
-from qst.interfaces.protocol import ProtocolInterface
-from qst.models.config import ProtocolType, SimulationConfig
+from qst.logging.logger import get_logger
+from qst.models.config import SimulationConfig
 from qst.models.results import (
     ExecutionMetrics,
     ExperimentMetadata,
@@ -25,19 +24,23 @@ from qst.models.results import (
     SweepDimensions,
 )
 
+logger = get_logger("qst.orchestration")
+
+
 
 class SimulationOrchestrator:
     """Coordinates execution of QKD protocol simulations over interfaces."""
 
     def __init__(
         self,
-        protocol_factory: Optional[Callable[[ProtocolType], ProtocolInterface]] = None,
+        protocol_factory: Optional[Callable[..., Any]] = None,
     ) -> None:
         """Initialize the SimulationOrchestrator.
 
         Args:
             protocol_factory: Optional factory function mapping ProtocolType to ProtocolInterface.
         """
+        self.logger = logger
         if protocol_factory is None:
             from qst.core.bb84.protocol import BB84Protocol
 
@@ -111,9 +114,10 @@ class SimulationOrchestrator:
                     raise e
 
         # Generate seed sub-sequence to preserve determinism
+        seeds: list[Optional[int]]
         if config.seed is not None:
             rng = np.random.default_rng(config.seed)
-            seeds = rng.integers(0, 1000000, size=repetitions)
+            seeds = [int(s) for s in rng.integers(0, 1000000, size=repetitions)]
         else:
             seeds = [None] * repetitions
 
@@ -121,6 +125,13 @@ class SimulationOrchestrator:
         simulation_times: list[float] = []
 
         t_start_batch = time.perf_counter()
+
+        logger.info(
+            "Starting simulation run: protocol=%s, qubits=%d, repetitions=%d",
+            config.protocol.value,
+            config.n_qubits,
+            repetitions,
+        )
 
         for j in range(repetitions):
             # Instantiate protocol, supporting custom lambdas or legacy factories
@@ -133,18 +144,17 @@ class SimulationOrchestrator:
 
             t_start_run = time.perf_counter()
 
-            # Dynamically inspect parameter requirements of initialize
-            sig = inspect.signature(protocol.initialize)
-            init_kwargs = {
-                "n_qubits": n_qubits,
-                "seed": int(seeds[j]) if seeds[j] is not None else None,
-            }
-            if "eve_intercept_probability" in sig.parameters:
-                init_kwargs["eve_intercept_probability"] = (
-                    config.interception_probability
+            # Clean initialization conforming to ProtocolInterface
+            s_j = seeds[j]
+            seed_val = int(s_j) if s_j is not None else None
+            try:
+                protocol.initialize(
+                    n_qubits=n_qubits,
+                    seed=seed_val,
+                    eve_intercept_probability=config.interception_probability,
                 )
-
-            protocol.initialize(**init_kwargs)
+            except TypeError:
+                protocol.initialize(n_qubits=n_qubits, seed=seed_val)
 
             fell_back = False
             try:
@@ -156,8 +166,9 @@ class SimulationOrchestrator:
                     config, "fallback_to_aer", True
                 ):
                     fell_back = True
-                    print(
-                        f"[Warning] Fallback to AerExecutor triggered during execution due to error: {e}"
+                    logger.warning(
+                        "Fallback to AerExecutor triggered during execution due to error: %s",
+                        e,
                     )
                     from qst.core.shared.execution.executor import AerExecutor
 
@@ -170,7 +181,14 @@ class SimulationOrchestrator:
                         protocol = self._protocol_factory(config.protocol)
                         if hasattr(protocol, "_executor"):
                             object.__setattr__(protocol, "_executor", fallback_exec)
-                    protocol.initialize(**init_kwargs)
+                    try:
+                        protocol.initialize(
+                            n_qubits=n_qubits,
+                            seed=seed_val,
+                            eve_intercept_probability=config.interception_probability,
+                        )
+                    except TypeError:
+                        protocol.initialize(n_qubits=n_qubits, seed=seed_val)
                     protocol.execute()
                     protocol.measure()
                 else:
@@ -179,9 +197,10 @@ class SimulationOrchestrator:
             res = protocol.export()
 
             if getattr(config, "run_error_correction", False):
+                from dataclasses import replace
+
                 from qst.correction.cascade import CascadeReconciler
                 from qst.correction.models import CascadeConfiguration
-                from dataclasses import replace
 
                 cascade_config = getattr(config, "cascade_configuration", None)
                 if cascade_config is None:
@@ -200,9 +219,10 @@ class SimulationOrchestrator:
                     )
 
             if getattr(config, "run_privacy_amplification", False):
+                from dataclasses import replace
+
                 from qst.privacy.amplifier import PrivacyAmplifier
                 from qst.privacy.models import PrivacyAmplificationConfiguration
-                from dataclasses import replace
 
                 privacy_config = getattr(config, "privacy_configuration", None)
                 if privacy_config is None:
@@ -242,10 +262,10 @@ class SimulationOrchestrator:
             else:
                 execution_mode = "Local Aer"
 
+            from dataclasses import replace
+
             from qst.secret.metrics import SecretMetricsCalculator
             from qst.secret.summary import ProtocolSummaryBuilder
-            from qst.secret.models import SecurityClassificationConfig
-            from dataclasses import replace
 
             classification_config = getattr(
                 config, "security_classification_thresholds", None
@@ -269,8 +289,7 @@ class SimulationOrchestrator:
             sec_param = 0.0
             if res.privacy_result is not None:
                 sec_param = res.privacy_result.statistics.estimated_security_parameter
-
-            metrics = metrics_calc.calculate_metrics(
+            sec_metrics = metrics_calc.calculate_metrics(
                 raw_len=raw_len,
                 sifted_len=sifted_len,
                 corrected_len=corrected_len,
@@ -295,7 +314,7 @@ class SimulationOrchestrator:
             res = replace(
                 res,
                 protocol_summary=summary,
-                secret_key_metrics=metrics,
+                secret_key_metrics=sec_metrics,
                 security_level=sec_level,
             )
 
@@ -340,7 +359,7 @@ class SimulationOrchestrator:
             float(repetitions / t_elapsed_batch) if t_elapsed_batch > 0 else 0.0
         )
 
-        metrics = ExecutionMetrics(
+        exec_metrics = ExecutionMetrics(
             execution_time=t_elapsed_batch,
             average_simulation_time=avg_sim_time,
             throughput=throughput,
@@ -366,7 +385,7 @@ class SimulationOrchestrator:
             secure_runs=secure_count,
             warning_runs=warning_count,
             compromised_runs=compromised_count,
-            metrics=metrics,
+            metrics=exec_metrics,
             metadata=metadata,
         )
 
@@ -392,6 +411,11 @@ class SimulationOrchestrator:
             experiments.append(self.run_many(config))
 
         t_elapsed_sweep = time.perf_counter() - t_start_sweep
+        self.logger.info(
+            "Completed parameter sweep across %d configurations in %.3fs",
+            len(configs),
+            t_elapsed_sweep,
+        )
 
         # Construct global metadata using the first configuration as reference
         ref_config = configs[0] if configs else SimulationConfig(n_qubits=10)
