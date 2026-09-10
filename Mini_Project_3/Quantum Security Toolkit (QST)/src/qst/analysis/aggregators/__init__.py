@@ -5,8 +5,8 @@ References:
 """
 
 from qst.analysis.aggregators.aggregator import (
-    ExperimentAggregator,
     AggregationResult,
+    ExperimentAggregator,
 )
 
 __all__ = ["ExperimentAggregator", "AggregationResult"]
