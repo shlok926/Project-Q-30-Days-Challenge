@@ -9,10 +9,10 @@ import pytest
 
 from qst.exceptions.validation import ValidationError
 from qst.visualization.datasets import (
+    HeatmapMatrix,
+    HistogramSeries,
     LineSeries,
     ScatterSeries,
-    HistogramSeries,
-    HeatmapMatrix,
 )
 
 
