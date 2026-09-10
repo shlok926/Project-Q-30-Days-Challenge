@@ -5,35 +5,47 @@ References:
 """
 
 import pytest
-import numpy as np
+from hypothesis import given
+from hypothesis import strategies as st
+
 from qst.secret.validators import validate_key_lengths
 
 
 @pytest.mark.property
-def test_key_lengths_monotonically_decreasing() -> None:
-    """Verify Raw >= Sifted >= Corrected >= Final holds for varying sizes."""
-    rng = np.random.default_rng(12345)
+@given(
+    raw=st.integers(min_value=50, max_value=2000),
+    r1=st.floats(min_value=0.1, max_value=0.99),
+    r2=st.floats(min_value=0.1, max_value=0.99),
+    r3=st.floats(min_value=0.1, max_value=0.99),
+)
+def test_key_lengths_monotonically_decreasing(
+    raw: int, r1: float, r2: float, r3: float
+) -> None:
+    """Verify Raw >= Sifted >= Corrected >= Final holds across generated sizes."""
+    sifted = max(1, int(raw * r1))
+    corrected = max(1, int(sifted * r2))
+    final = max(1, int(corrected * r3))
 
-    for _ in range(50):
-        # Generate random ordered sizes
-        raw = rng.integers(50, 1000)
-        sifted = rng.integers(10, raw + 1)
-        corrected = rng.integers(5, sifted + 1)
-        final = rng.integers(1, corrected + 1)
+    validate_key_lengths(
+        raw=raw,
+        sifted=sifted,
+        corrected=corrected,
+        final=final,
+    )
 
-        # Validator should pass without raising exceptions
+
+@pytest.mark.property
+@given(
+    smaller=st.integers(min_value=10, max_value=500),
+    larger=st.integers(min_value=501, max_value=1000),
+)
+def test_invalid_key_length_ordering_raises(smaller: int, larger: int) -> None:
+    """Verify out-of-order key lengths always fail validation."""
+    with pytest.raises(Exception):
         validate_key_lengths(
-            raw=raw,
-            sifted=sifted,
-            corrected=corrected,
-            final=final,
+            raw=smaller,
+            sifted=larger,
+            corrected=smaller,
+            final=smaller,
         )
 
-        # Invalid cases should raise ValidationError / SecretKeyError
-        with pytest.raises(Exception):
-            validate_key_lengths(
-                raw=raw,
-                sifted=corrected,  # invalid order
-                corrected=sifted,
-                final=final,
-            )
