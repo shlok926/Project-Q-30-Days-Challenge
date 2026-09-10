@@ -5,8 +5,8 @@ References:
 """
 
 from qst.analysis.comparisons.comparison import (
-    ComparisonService,
     ComparisonResult,
+    ComparisonService,
 )
 
 __all__ = ["ComparisonService", "ComparisonResult"]
