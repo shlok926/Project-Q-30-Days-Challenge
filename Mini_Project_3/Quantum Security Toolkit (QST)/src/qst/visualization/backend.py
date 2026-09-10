@@ -11,10 +11,10 @@ from enum import Enum
 from typing import Any, Optional
 
 from qst.visualization.datasets import (
+    HeatmapMatrix,
+    HistogramSeries,
     LineSeries,
     ScatterSeries,
-    HistogramSeries,
-    HeatmapMatrix,
 )
 from qst.visualization.styles import Theme
 
