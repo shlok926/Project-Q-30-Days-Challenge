@@ -7,9 +7,9 @@ References:
 
 from typing import Sequence
 
+from qst.core.bb84.validators import validate_bb84_bases
 from qst.exceptions.validation import ValidationError
 from qst.models.results import ReconciliationResult
-from qst.core.bb84.validators import validate_bb84_bases
 
 
 class ReconciliationStatistics:
