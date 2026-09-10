@@ -9,11 +9,13 @@ import os
 from typing import Any, Optional
 
 try:
+    import matplotlib.pyplot as plt
     from matplotlib.figure import Figure
 
     HAS_MATPLOTLIB = True
 except ImportError:
     Figure = Any  # type: ignore
+    plt = Any  # type: ignore
     HAS_MATPLOTLIB = False
 
 import numpy as np
@@ -27,11 +29,11 @@ from qst.visualization.backend import (
     VisualizationResult,
 )
 from qst.visualization.datasets import (
+    HeatmapMatrix,
+    HistogramSeries,
     ImageFormat,
     LineSeries,
     ScatterSeries,
-    HistogramSeries,
-    HeatmapMatrix,
 )
 from qst.visualization.styles import Theme
 
@@ -214,10 +216,13 @@ class MatplotlibBackend(VisualizationBackend):
                     edgecolor="none",
                 )
             except (OSError, PermissionError) as e:
+                plt.close(fig)
                 raise ExportError(
                     f"Failed to save plot to file {filepath}: {str(e)}",
                     code="QST-EXP-001",
                 )
+            finally:
+                plt.close(fig)
 
         return VisualizationResult(
             figure=fig,
