@@ -49,6 +49,22 @@ def test_validate_qubit_count_invalid() -> None:
         validate_qubit_count(True)
     assert "QST-VAL-101" in str(exc.value)
 
+    # Exceeding default ceiling of 2048
+    with pytest.raises(ValidationError) as exc:
+        validate_qubit_count(2049)
+    assert "QST-VAL-103" in str(exc.value)
+
+    # Exceeding custom configured ceiling
+    with pytest.raises(ValidationError) as exc:
+        validate_qubit_count(64, max_qubits=32)
+    assert "QST-VAL-103" in str(exc.value)
+
+    # Statevector memory explosion guard
+    with pytest.raises(ValidationError) as exc:
+        validate_qubit_count(35, simulation_method="statevector")
+    assert "QST-VAL-104" in str(exc.value)
+
+
 
 @pytest.mark.unit
 def test_validate_probability_valid() -> None:
