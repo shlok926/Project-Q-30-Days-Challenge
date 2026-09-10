@@ -7,13 +7,12 @@ References:
 
 from typing import Any, Sequence
 
-from qst.core.bb84.constants import SUPPORTED_BASES, SUPPORTED_BITS
+from qst.core.bb84.constants import SUPPORTED_BASES
 from qst.core.shared.validation.validators import (
     validate_basis_values,
     validate_bit_values,
     validate_circuit_registers,
     validate_matching_lengths,
-    validate_qubit_count,
 )
 
 
