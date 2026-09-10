@@ -7,10 +7,12 @@ References:
 
 import sys
 from unittest import mock
+
 import pytest
-from qst.models.config import SimulationConfig, ProtocolType
-from qst.orchestration.orchestrator import SimulationOrchestrator
+
 from qst.exceptions.simulation import SimulationError
+from qst.models.config import SimulationConfig
+from qst.orchestration.orchestrator import SimulationOrchestrator
 
 
 class FailingExecutor:
