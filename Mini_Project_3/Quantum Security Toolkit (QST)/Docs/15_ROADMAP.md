@@ -103,13 +103,12 @@ graph TD
 
 No phase is considered exited until its criteria are met **and** `docs/` is updated to reflect reality (per `00_PROJECT_CONSTITUTION.md` §8 Definition of Done) — this prevents the documentation-first process from drifting out of sync with the implementation it was meant to guide.
 
-## 8. Technical Debt Backlog
+## 8. Technical Debt & Architecture Backlog
 
-> **Status:** Empty at present — no code exists, so no debt has been incurred yet. This section exists as a placeholder to be populated during implementation, per the practice established in `01_REPOSITORY_AUDIT.md`.
+| ID | Backlog / Debt Item | Status | Target Phase | Risk / Impact |
+|---|---|---|---|---|
+| `QST-ROADMAP-001` | **Quantum-native intercept-resend simulation**: Transition from classical probabilistic intercept-resend emulation prior to circuit compilation to genuine mid-circuit quantum measurement and density-matrix quantum channel modeling. | Backlog | Phase 1.5 / 2 | Medium pedagogical fidelity gap; classical emulation matches BB84 statistics exactly for idealized intercept-resend but lacks true quantum channel physics and POVM intermediate states. |
 
-| ID | Debt Item | Incurred In | Risk if Unaddressed |
-|---|---|---|---|
-| _(none yet)_ | — | — | — |
 
 **Policy:** Any deliberate shortcut taken during implementation (e.g., "hardcode X for now, generalize later") must be logged here with the responsible phase/PR, not left as an undocumented TODO — consistent with the "no hidden information" spirit of `00_PROJECT_CONSTITUTION.md`.
 
