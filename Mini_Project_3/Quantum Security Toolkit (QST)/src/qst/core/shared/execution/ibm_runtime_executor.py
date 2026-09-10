@@ -8,11 +8,12 @@ References:
 """
 
 import logging
-from typing import Any, Optional, Union
+from typing import Any, Optional
 
 from qiskit import transpile
-from qst.exceptions.simulation import SimulationError
+
 from qst.core.shared.execution.executor import ExecutorInterface
+from qst.exceptions.simulation import SimulationError
 
 logger = logging.getLogger("qst.execution.ibm")
 
