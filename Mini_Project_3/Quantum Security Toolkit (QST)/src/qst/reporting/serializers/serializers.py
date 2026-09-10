@@ -10,14 +10,14 @@ from enum import Enum
 from typing import Any, Optional
 
 from qst.models.results import (
-    SimulationResult,
+    EveSimulationResult,
     ExperimentResult,
     ParameterSweepResult,
-    ReconciliationResult,
-    SiftedKeyResult,
-    EveSimulationResult,
     QBERResult,
+    ReconciliationResult,
     SecurityMetrics,
+    SiftedKeyResult,
+    SimulationResult,
 )
 
 
