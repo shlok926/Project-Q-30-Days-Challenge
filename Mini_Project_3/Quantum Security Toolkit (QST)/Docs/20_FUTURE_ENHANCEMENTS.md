@@ -29,9 +29,13 @@ This document is an explicit parking lot for ideas that are **not** part of the 
 - **AI Tutor / Anomaly Detector:** per `08_AI_ARCHITECTURE.md` §3.
 
 ## 3. Research Opportunities
-
+ 
 - Empirical study comparing simulated QBER distributions against published theoretical bounds across different Eve strategies, potentially publishable as a small research note.
 - Extension to a full privacy-amplification pipeline (`11_SECURITY_ARCHITECTURE.md` §7), turning QST into a more complete (if still educational) QKD stack.
+- **`QST-ROADMAP-001`: Quantum-native intercept-resend simulation**:
+  - Current implementation models Eve's intercept-resend attack classically prior to quantum circuit compilation (altering initial Alice states and bases probabilistically).
+  - Target Phase 1.5/2 research enhancement: Implement mid-circuit projective measurement (`measure_and_reset` or dynamic circuits) and density-matrix quantum channel modeling (Kraus operators, depolarizing / phase-flip channels) directly on the Qiskit quantum circuit representation. This will enable rigorous simulation of advanced quantum attacks (e.g. collective attacks, beam-splitting, photon-number-splitting) alongside idealized intercept-resend.
+
 
 ## 4. Advanced Features
 
