@@ -60,7 +60,7 @@ def test_aer_executor_invalid() -> None:
 @pytest.mark.unit
 def test_abstract_executor() -> None:
     """Verify abstract methods can be compiled and called using super()."""
-    from typing import Any
+    from typing import Any, Optional
 
     class MockExecutor(ExecutorInterface):
         def execute(self, circuit: Any, seed: Optional[int] = None) -> dict[str, int]:
@@ -94,3 +94,19 @@ def test_aer_executor_non_dict_counts() -> None:
             executor.execute(qc)
         assert "QST-SIM-101" in str(exc.value)
         assert "did not return a counts dictionary" in str(exc.value)
+
+
+@pytest.mark.unit
+def test_aer_executor_qubit_limit_guard() -> None:
+    """Verify AerExecutor rejects execution of circuits exceeding 2048 qubits."""
+    from unittest import mock
+
+    executor = AerExecutor()
+    mock_qc = mock.MagicMock()
+    mock_qc.num_qubits = 2049
+
+    with pytest.raises(SimulationError) as exc:
+        executor.execute(mock_qc)
+    assert "QST-SIM-103" in str(exc.value)
+    assert "exceeds AerExecutor safety ceiling of 2048" in str(exc.value)
+
