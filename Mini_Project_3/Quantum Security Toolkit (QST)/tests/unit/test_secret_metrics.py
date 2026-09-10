@@ -5,9 +5,10 @@ References:
 """
 
 import pytest
+
 from qst.secret.exceptions import SecretKeyError
-from qst.secret.models import SecurityClassificationConfig, SecurityLevel
 from qst.secret.metrics import SecretMetricsCalculator
+from qst.secret.models import SecurityClassificationConfig, SecurityLevel
 
 
 @pytest.mark.unit
