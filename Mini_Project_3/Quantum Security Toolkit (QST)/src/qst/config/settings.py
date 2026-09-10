@@ -8,7 +8,6 @@ References:
 """
 
 import os
-from typing import Any, Optional
 
 from qst.exceptions.configuration import ConfigurationError
 
