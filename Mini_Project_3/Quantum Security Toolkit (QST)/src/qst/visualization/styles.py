@@ -6,6 +6,7 @@ References:
 """
 
 from dataclasses import dataclass, field
+
 from qst.exceptions.validation import ValidationError
 
 
