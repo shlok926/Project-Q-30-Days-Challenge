@@ -5,6 +5,7 @@ References:
 """
 
 import pytest
+
 from qst.models.config import SimulationConfig
 from qst.orchestration.orchestrator import SimulationOrchestrator
 from qst.privacy.models import PrivacyAmplificationConfiguration
