@@ -8,7 +8,6 @@ References:
 import pytest
 
 from qst.exceptions.validation import ValidationError
-from qst.models.config import ProtocolType, SecurityThresholds
 from qst.models.results import ParameterSweepResult, SweepDimensions
 from qst.orchestration.orchestrator import SimulationOrchestrator
 from qst.orchestration.sweep_generator import ParameterSweepGenerator
