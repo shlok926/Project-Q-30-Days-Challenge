@@ -5,6 +5,7 @@ References:
 """
 
 import pytest
+
 from qst.analytics.security import SecurityAnalytics
 
 
