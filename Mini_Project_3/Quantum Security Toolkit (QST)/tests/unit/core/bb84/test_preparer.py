@@ -7,8 +7,8 @@ References:
 
 import pytest
 
-from qst.core.shared.random.random_provider import NumpyRandomProvider
 from qst.core.bb84.state_preparation import AliceStatePreparer
+from qst.core.shared.random.random_provider import NumpyRandomProvider
 from qst.exceptions.validation import ValidationError
 
 
