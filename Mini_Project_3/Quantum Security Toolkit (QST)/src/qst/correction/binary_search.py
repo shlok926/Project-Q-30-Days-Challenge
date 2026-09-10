@@ -5,8 +5,9 @@ References:
 """
 
 from typing import Sequence
-from qst.correction.parity import calculate_parity
+
 from qst.correction.block import KeyBlock
+from qst.correction.parity import calculate_parity
 
 
 def perform_binary_search(
