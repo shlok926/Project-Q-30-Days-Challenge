@@ -6,6 +6,7 @@ References:
 """
 
 from dataclasses import dataclass
+
 from qst.analysis.aggregators.aggregator import ExperimentAggregator
 from qst.models.results import ExperimentResult, ParameterSweepResult
 
