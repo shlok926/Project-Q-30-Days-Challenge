@@ -5,8 +5,9 @@ References:
 """
 
 import pytest
-from qst.correction.block import KeyBlock
+
 from qst.correction.binary_search import perform_binary_search
+from qst.correction.block import KeyBlock
 
 
 @pytest.mark.unit
