@@ -4,8 +4,8 @@ References:
     Docs/10_API_SPECIFICATION.md §5
 """
 
+from dataclasses import dataclass
 from enum import Enum
-from dataclasses import dataclass, field
 
 
 class SecurityLevel(Enum):
