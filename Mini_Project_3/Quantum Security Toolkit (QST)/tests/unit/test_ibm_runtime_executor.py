@@ -7,10 +7,12 @@ References:
 
 import sys
 from unittest import mock
+
 import pytest
 from qiskit.circuit import QuantumCircuit
-from qst.exceptions.simulation import SimulationError
+
 from qst.core.shared.execution.ibm_runtime_executor import IBMRuntimeExecutor
+from qst.exceptions.simulation import SimulationError
 
 
 # 1. Create Mocks for Qiskit IBM Runtime Service
