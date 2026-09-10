@@ -4,24 +4,30 @@ References:
     Docs/14_TESTING_STRATEGY.md
 """
 
-import pytest
 import numpy as np
-from qst.correction.models import CascadeConfiguration
+import pytest
+from hypothesis import given
+from hypothesis import strategies as st
+
 from qst.correction.cascade import CascadeReconciler
+from qst.correction.models import CascadeConfiguration
 
 
 @pytest.mark.property
-def test_cascade_determinism() -> None:
+@given(
+    seed=st.integers(min_value=0, max_value=10000),
+    num_passes=st.integers(min_value=1, max_value=4),
+)
+def test_cascade_determinism(seed: int, num_passes: int) -> None:
     """Verify that execution is fully deterministic given identical inputs and configurations."""
-    rng = np.random.default_rng(42)
-    alice_key = list(rng.integers(0, 2, size=200))
-    # Introduce 10 random errors
+    rng = np.random.default_rng(seed)
+    alice_key = list(rng.integers(0, 2, size=100))
     bob_key = list(alice_key)
-    err_indices = rng.choice(200, size=10, replace=False)
+    err_indices = rng.choice(100, size=4, replace=False)
     for idx in err_indices:
         bob_key[idx] = 1 - bob_key[idx]
 
-    config = CascadeConfiguration(seed=99, num_passes=4, block_sizes=(8, 16))
+    config = CascadeConfiguration(seed=seed, num_passes=num_passes, block_sizes=(8, 16))
     reconciler = CascadeReconciler(config)
 
     # Run multiple times
@@ -35,6 +41,22 @@ def test_cascade_determinism() -> None:
     assert res1.communication_rounds == res2.communication_rounds
     assert res1.correction_efficiency == res2.correction_efficiency
     assert res1.estimated_qber_after_correction == res2.estimated_qber_after_correction
+
+
+@pytest.mark.property
+@given(
+    key=st.lists(st.integers(min_value=0, max_value=1), min_size=16, max_size=64),
+    seed=st.integers(min_value=0, max_value=10000),
+)
+def test_cascade_identity_reconciliation(key: list[int], seed: int) -> None:
+    """When Alice and Bob share identical keys, Cascade reconciles without modifying bits."""
+    config = CascadeConfiguration(seed=seed, num_passes=2, block_sizes=(4, 8))
+    reconciler = CascadeReconciler(config)
+    res = reconciler.reconcile(key, list(key))
+    assert list(res.corrected_key.key_bits) == key
+    assert res.estimated_qber_after_correction == 0.0
+    assert res.corrected_error_count == 0
+
 
 
 @pytest.mark.property
