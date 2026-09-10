@@ -5,11 +5,12 @@ References:
     Docs/11_SECURITY_ARCHITECTURE.md §3, §4
 """
 
+
 from typing import Optional
 
+from qst.core.shared.random.random_provider import RandomProvider
 from qst.exceptions.validation import ValidationError
 from qst.models.results import EveSimulationResult
-from qst.core.shared.random.random_provider import RandomProvider
 
 
 class InterceptResendChannel:
@@ -62,7 +63,7 @@ class InterceptResendChannel:
         # Generate Eve's basis choices for all positions
         eve_bases_choice = self._random_provider.generate_bases(length, ["Z", "X"])
         eve_bases_list = []
-        eve_measurements_list = []
+        eve_measurements_list: list[Optional[int]] = []
         reconstructed_bits_list = []
         reconstructed_bases_list = []
 
