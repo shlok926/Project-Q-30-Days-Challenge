@@ -6,16 +6,18 @@ References:
 """
 
 import os
+
 import pytest
-from qst.visualization.styles import LightTheme, DarkTheme, ScientificTheme
-from qst.visualization.matplotlib_backend import MatplotlibBackend
-from qst.visualization.visualizer import Visualizer
+
 from qst.visualization.datasets import (
+    HeatmapMatrix,
+    HistogramSeries,
     LineSeries,
     ScatterSeries,
-    HistogramSeries,
-    HeatmapMatrix,
 )
+from qst.visualization.matplotlib_backend import MatplotlibBackend
+from qst.visualization.styles import DarkTheme, LightTheme, ScientificTheme
+from qst.visualization.visualizer import Visualizer
 
 
 @pytest.mark.integration
