@@ -6,17 +6,15 @@ References:
     Docs/QBER_SPEC.md §6
 """
 
-from enum import Enum
 from dataclasses import dataclass, field
-from typing import Any, Optional
+from enum import Enum
+from typing import TYPE_CHECKING, Any, Optional
 
 from qst.exceptions.validation import ValidationError
-from qst.models.metadata import SimulationMetadata
-from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from qst.correction.models import CorrectionResult
-    from qst.privacy.models import PrivacyAmplificationResult, FinalSecretKey
+    from qst.privacy.models import FinalSecretKey, PrivacyAmplificationResult
     from qst.secret.models import ProtocolSummary, SecretKeyMetrics, SecurityLevel
 
 
