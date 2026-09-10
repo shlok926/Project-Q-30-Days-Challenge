@@ -4,22 +4,25 @@ References:
     Docs/10_API_SPECIFICATION.md
 """
 
-import time
 import math
+import time
 from typing import Sequence
+
+from qst.privacy.algorithms.toeplitz import ToeplitzHasher
+from qst.privacy.algorithms.universal_hash import UniversalHash
 from qst.privacy.exceptions import PrivacyAmplificationError
+from qst.privacy.interfaces import HashAlgorithm
+from qst.privacy.models import (
+    FinalSecretKey,
+    PrivacyAmplificationConfiguration,
+    PrivacyAmplificationResult,
+    PrivacyStatistics,
+)
 from qst.privacy.validators import (
+    validate_dimensions,
     validate_key,
     validate_privacy_config,
-    validate_dimensions,
 )
-from qst.privacy.models import (
-    PrivacyAmplificationConfiguration,
-    FinalSecretKey,
-    PrivacyStatistics,
-    PrivacyAmplificationResult,
-)
-from qst.privacy.algorithms.toeplitz import ToeplitzHasher
 
 
 class PrivacyAmplifier:
@@ -64,13 +67,18 @@ class PrivacyAmplifier:
         t_start = time.perf_counter()
 
         # Instantiate algorithm
-        if self.config.hash_algorithm.lower() == "toeplitz":
+        algo = self.config.hash_algorithm.lower()
+        hasher: HashAlgorithm
+        if algo == "toeplitz":
             hasher = ToeplitzHasher(seed=self.config.seed)
+        elif algo in ("universal_hash", "universal"):
+            hasher = UniversalHash(seed=self.config.seed)
         else:
             raise PrivacyAmplificationError(
                 f"Unsupported hash algorithm '{self.config.hash_algorithm}'.",
                 code="QST-PRIV-704",
             )
+
 
         # Hash key
         secret_bits = hasher.hash_key(key, output_key_length)
