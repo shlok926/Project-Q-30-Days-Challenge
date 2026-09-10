@@ -9,33 +9,31 @@ import argparse
 import json
 import os
 import sys
-import numpy as np
 from typing import Any, Optional, Sequence
+
+import numpy as np
 
 from qst.config.settings import QST_VERSION
 from qst.exceptions.base import QSTError
 from qst.exceptions.validation import ValidationError
-from qst.models.config import ProtocolType, SecurityThresholds, SimulationConfig
+from qst.models.config import ProtocolType, SimulationConfig
 from qst.models.results import SweepDimensions
 from qst.orchestration.orchestrator import SimulationOrchestrator
 from qst.orchestration.sweep_generator import ParameterSweepGenerator
+from qst.privacy.models import PrivacyAmplificationConfiguration
 from qst.reporting.exporters.csv_exporter import CSVExporter
 from qst.reporting.exporters.json_exporter import JSONExporter
 from qst.reporting.serializers.serializers import (
     ExperimentSerializer,
     ParameterSweepSerializer,
 )
-from qst.visualization.backend import ChartType
 from qst.visualization.datasets import (
     HeatmapMatrix,
     HistogramSeries,
-    ImageFormat,
-    LineSeries,
     ScatterSeries,
 )
 from qst.visualization.matplotlib_backend import MatplotlibBackend
-from qst.visualization.registry import VisualizationBackendRegistry
-from qst.visualization.styles import DarkTheme, LightTheme, ScientificTheme
+from qst.visualization.styles import DarkTheme, LightTheme, ScientificTheme, Theme
 from qst.visualization.visualizer import Visualizer
 
 
@@ -85,9 +83,9 @@ def load_sweep_result_from_dict(d: dict[str, Any]) -> Any:
                     else 0.0
                 ),
                 sifted_key=(
-                    tuple(sim_d.get("sifted_key", ()))
+                    list(sim_d.get("sifted_key", []))
                     if sim_d.get("sifted_key") is not None
-                    else ()
+                    else []
                 ),
                 n_qubits=(
                     sim_d.get("n_qubits", 0) if sim_d.get("n_qubits") is not None else 0
@@ -198,6 +196,31 @@ def get_parser() -> argparse.ArgumentParser:
         default=None,
         help="Output save path (JSON extension required)",
     )
+    sim_p.add_argument(
+        "--error-correction",
+        action="store_true",
+        default=False,
+        help="Enable Cascade error correction",
+    )
+    sim_p.add_argument(
+        "--privacy-amplification",
+        action="store_true",
+        default=False,
+        help="Enable privacy amplification",
+    )
+    sim_p.add_argument(
+        "--privacy-algorithm",
+        type=str,
+        default="toeplitz",
+        choices=["toeplitz", "universal_hash", "TOEPLITZ", "UNIVERSAL_HASH"],
+        help="Privacy amplification hash family",
+    )
+    sim_p.add_argument(
+        "--compression-ratio",
+        type=float,
+        default=0.5,
+        help="Privacy amplification compression ratio (0.0, 1.0]",
+    )
 
     # qst sweep
     sweep_p = subparsers.add_parser("sweep", help="Run parameter sweeps")
@@ -224,6 +247,31 @@ def get_parser() -> argparse.ArgumentParser:
         type=str,
         default=None,
         help="Output save path (JSON extension required)",
+    )
+    sweep_p.add_argument(
+        "--error-correction",
+        action="store_true",
+        default=False,
+        help="Enable Cascade error correction across sweep",
+    )
+    sweep_p.add_argument(
+        "--privacy-amplification",
+        action="store_true",
+        default=False,
+        help="Enable privacy amplification across sweep",
+    )
+    sweep_p.add_argument(
+        "--privacy-algorithm",
+        type=str,
+        default="toeplitz",
+        choices=["toeplitz", "universal_hash", "TOEPLITZ", "UNIVERSAL_HASH"],
+        help="Privacy amplification hash family",
+    )
+    sweep_p.add_argument(
+        "--compression-ratio",
+        type=float,
+        default=0.5,
+        help="Privacy amplification compression ratio (0.0, 1.0]",
     )
 
     # qst export
@@ -310,12 +358,23 @@ def handle_simulate(args: argparse.Namespace) -> None:
             code="QST-VAL-102",
         )
 
+    privacy_cfg = None
+    if getattr(args, "privacy_amplification", False):
+        privacy_cfg = PrivacyAmplificationConfiguration(
+            compression_ratio=getattr(args, "compression_ratio", 0.5),
+            hash_algorithm=getattr(args, "privacy_algorithm", "toeplitz").lower(),
+            seed=args.seed or 42,
+        )
+
     config = SimulationConfig(
         n_qubits=args.qubits,
         seed=args.seed,
         interception_probability=args.interception_probability,
         repetitions=1,
         protocol=ProtocolType.BB84,
+        run_error_correction=getattr(args, "error_correction", False),
+        run_privacy_amplification=getattr(args, "privacy_amplification", False),
+        privacy_configuration=privacy_cfg,
     )
     orchestrator = SimulationOrchestrator()
     res = orchestrator.run_once(config)
@@ -378,12 +437,23 @@ def handle_sweep(args: argparse.Namespace) -> None:
             code="QST-VAL-105",
         )
 
+    privacy_cfg = None
+    if getattr(args, "privacy_amplification", False):
+        privacy_cfg = PrivacyAmplificationConfiguration(
+            compression_ratio=getattr(args, "compression_ratio", 0.5),
+            hash_algorithm=getattr(args, "privacy_algorithm", "toeplitz").lower(),
+            seed=42,
+        )
+
     # Generate configs and dimensions
     configs = ParameterSweepGenerator.generate_configs(
         qubit_counts=qubit_counts,
         interception_probabilities=probabilities,
         seeds=[None],
         repetitions=args.repetitions,
+        run_error_correction=getattr(args, "error_correction", False),
+        run_privacy_amplification=getattr(args, "privacy_amplification", False),
+        privacy_configuration=privacy_cfg,
     )
     sweep_dimensions = SweepDimensions(
         qubit_counts=tuple(qubit_counts),
@@ -460,6 +530,7 @@ def handle_visualize(args: argparse.Namespace) -> None:
     from qst.analysis.trends.trends import TrendAnalysisService
 
     trend_service = TrendAnalysisService()
+    dataset: Any
 
     if c_type == "LINE":
         # Select appropriate line trend
@@ -532,6 +603,7 @@ def handle_visualize(args: argparse.Namespace) -> None:
 
     # 3. Resolve theme
     t_name = args.theme.upper()
+    theme: Theme
     if t_name == "LIGHT":
         theme = LightTheme()
     elif t_name == "DARK":
