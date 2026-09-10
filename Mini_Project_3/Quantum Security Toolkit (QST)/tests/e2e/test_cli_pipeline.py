@@ -6,8 +6,9 @@ References:
 """
 
 import os
-import json
+
 import pytest
+
 from qst.cli.main import main
 
 
