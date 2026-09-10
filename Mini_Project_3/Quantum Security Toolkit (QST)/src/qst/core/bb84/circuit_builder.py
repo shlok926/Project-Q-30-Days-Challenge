@@ -5,11 +5,11 @@ References:
     Docs/07_SYSTEM_ARCHITECTURE.md §5
 """
 
-from typing import Any, Sequence
+from typing import Sequence
 
 from qiskit import ClassicalRegister, QuantumCircuit, QuantumRegister
 
-from qst.core.bb84.constants import BASIS_X, BASIS_Z
+from qst.core.bb84.constants import BASIS_X
 from qst.core.bb84.validators import validate_bb84_circuit, validate_bb84_inputs
 
 
