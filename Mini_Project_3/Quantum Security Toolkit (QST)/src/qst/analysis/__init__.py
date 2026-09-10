@@ -5,14 +5,14 @@ References:
 """
 
 from qst.analysis.aggregators.aggregator import (
-    ExperimentAggregator,
     AggregationResult,
+    ExperimentAggregator,
+)
+from qst.analysis.comparisons.comparison import (
+    ComparisonResult,
+    ComparisonService,
 )
 from qst.analysis.trends.trends import TrendAnalysisService
-from qst.analysis.comparisons.comparison import (
-    ComparisonService,
-    ComparisonResult,
-)
 
 __all__ = [
     "ExperimentAggregator",
