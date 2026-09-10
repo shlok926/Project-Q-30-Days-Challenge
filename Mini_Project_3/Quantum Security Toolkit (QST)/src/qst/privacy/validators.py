@@ -5,6 +5,7 @@ References:
 """
 
 from typing import Sequence
+
 from qst.privacy.exceptions import PrivacyAmplificationError
 from qst.privacy.models import PrivacyAmplificationConfiguration
 
@@ -47,7 +48,7 @@ def validate_privacy_config(config: PrivacyAmplificationConfiguration) -> None:
             code="QST-PRIV-702",
         )
 
-    valid_algos = ("toeplitz",)
+    valid_algos = ("toeplitz", "universal_hash", "universal")
     if config.hash_algorithm.lower() not in valid_algos:
         raise PrivacyAmplificationError(
             f"Unsupported hashing algorithm '{config.hash_algorithm}'. Supported: {valid_algos}.",
