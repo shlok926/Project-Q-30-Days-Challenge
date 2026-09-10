@@ -5,6 +5,7 @@ References:
 """
 
 import pytest
+
 from qst.correction.parity import calculate_parity
 
 
