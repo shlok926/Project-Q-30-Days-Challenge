@@ -11,31 +11,31 @@ References:
 
 from typing import Any, Optional
 
-from qst.interfaces.protocol import ProtocolInterface
-from qst.core.shared.random.random_provider import NumpyRandomProvider, RandomProvider
-from qst.core.shared.execution.executor import AerExecutor, ExecutorInterface
-from qst.core.bb84.state_preparation import AliceStatePreparer
 from qst.core.bb84.circuit_builder import (
     CircuitBuilder,
     GateApplier,
     RegisterAllocator,
     StateEncoder,
 )
+from qst.core.bb84.eavesdropper import InterceptResendChannel
 from qst.core.bb84.measurement import MeasurementBasisGenerator, MeasurementBuilder
-from qst.core.bb84.validators import validate_bb84_inputs
-from qst.models.results import (
-    SimulationResult,
-    ReconciliationResult,
-    SiftedKeyResult,
-    EveSimulationResult,
-    QBERResult,
-    SecurityMetrics,
-)
+from qst.core.bb84.metrics import SecurityMetricsService
+from qst.core.bb84.qber import QBERService
 from qst.core.bb84.reconciliation import BasisReconciliationService
 from qst.core.bb84.sifting import KeySiftingService
-from qst.core.bb84.eavesdropper import InterceptResendChannel
-from qst.core.bb84.qber import QBERService
-from qst.core.bb84.metrics import SecurityMetricsService
+from qst.core.bb84.state_preparation import AliceStatePreparer
+from qst.core.bb84.validators import validate_bb84_inputs
+from qst.core.shared.execution.executor import AerExecutor, ExecutorInterface
+from qst.core.shared.random.random_provider import NumpyRandomProvider, RandomProvider
+from qst.interfaces.protocol import ProtocolInterface
+from qst.models.results import (
+    EveSimulationResult,
+    QBERResult,
+    ReconciliationResult,
+    SecurityMetrics,
+    SiftedKeyResult,
+    SimulationResult,
+)
 
 
 class BB84Protocol(ProtocolInterface):
