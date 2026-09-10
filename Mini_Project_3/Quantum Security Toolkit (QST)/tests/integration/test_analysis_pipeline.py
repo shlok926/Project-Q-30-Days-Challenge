@@ -6,13 +6,13 @@ References:
 """
 
 import pytest
-from qst.models.config import SimulationConfig, ProtocolType
-from qst.orchestration.orchestrator import SimulationOrchestrator
-from qst.orchestration.sweep_generator import ParameterSweepGenerator
-from qst.models.results import SweepDimensions
+
 from qst.analysis.aggregators.aggregator import ExperimentAggregator
 from qst.analysis.comparisons.comparison import ComparisonService
 from qst.analysis.trends.trends import TrendAnalysisService
+from qst.models.results import SweepDimensions
+from qst.orchestration.orchestrator import SimulationOrchestrator
+from qst.orchestration.sweep_generator import ParameterSweepGenerator
 
 
 @pytest.mark.integration
