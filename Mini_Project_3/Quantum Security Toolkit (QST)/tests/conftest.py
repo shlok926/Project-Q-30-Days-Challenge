@@ -4,7 +4,7 @@ References:
     Docs/14_TESTING_STRATEGY.md
 """
 
-from typing import Any, Generator
+from typing import Any
 
 import pytest
 
