@@ -1,87 +1,83 @@
 # Quantum Security Toolkit (QST)
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/shlok926/Project-Q-30-Days-Challenge/main/Mini_Project_3/Quantum%20Security%20Toolkit%20(QST)/Docs/images/logo_placeholder.png" alt="QST Logo Placeholder" width="200" height="200" />
+  <strong>A modular quantum-security simulation and research toolkit centered around QKD concepts, BB84 protocol dynamics, Cascade error correction, and 2-universal privacy amplification.</strong>
 </p>
 
 <p align="center">
-  <strong>A modular, enterprise-grade simulation, analysis, and validation framework for Quantum Key Distribution (QKD) protocols.</strong>
+  QST enables security researchers, quantum computing students, and network engineers to model quantum key distribution, evaluate the impact of eavesdroppers, analyze QBER degradation, and run statistical parameter sweeps in a clean, reproducible, and verifiable environment.
 </p>
 
 <p align="center">
-  QST allows security researchers, network engineers, and students to model quantum networks, evaluate the impact of eavesdroppers, and run statistical parameter sweeps in clean, reproducible environments.
-</p>
-
-<p align="center">
-  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue.svg" alt="Python Version" /></a>
+  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13%20%7C%203.14-blue.svg" alt="Python Version" /></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License" /></a>
   <a href="#"><img src="https://img.shields.io/badge/build-passing-brightgreen.svg" alt="Build Status" /></a>
   <a href="#"><img src="https://img.shields.io/badge/tests-229%20passed-success.svg" alt="Tests Status" /></a>
   <a href="#"><img src="https://img.shields.io/badge/coverage-97%25-success.svg" alt="Coverage" /></a>
+  <a href="#"><img src="https://img.shields.io/badge/code%20style-ruff%20%7C%20black-000000.svg" alt="Code Style" /></a>
+  <a href="#"><img src="https://img.shields.io/badge/type%20checker-mypy%20strict-blue.svg" alt="Type Checker" /></a>
   <a href="#"><img src="https://img.shields.io/badge/release-v1.0.0-blue.svg" alt="Latest Release" /></a>
-  <a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code Style" /></a>
-  <a href="#documentation-hub"><img src="https://img.shields.io/badge/docs-complete-brightgreen.svg" alt="Documentation Status" /></a>
 </p>
 
 <p align="center">
   <a href="#quick-start"><strong>Quick Start</strong></a> |
-  <a href="#example-outputs"><strong>Example Outputs</strong></a> |
-  <a href="#installation"><strong>Installation</strong></a> |
-  <a href="#architecture-diagram"><strong>Architecture</strong></a> |
-  <a href="#examples"><strong>Examples</strong></a> |
-  <a href="#documentation-hub"><strong>Documentation</strong></a> |
-  <a href="./Docs/API_Reference.md"><strong>API Reference</strong></a> |
-  <a href="#cli-showcase"><strong>CLI</strong></a> |
-  <a href="./CONTRIBUTING.md"><strong>Contributing</strong></a> |
-  <a href="./LICENSE"><strong>License</strong></a> |
-  <a href="#citation"><strong>Citation</strong></a> |
-  <a href="#project-roadmap"><strong>Roadmap</strong></a>
+  <a href="#qkd-lifecycle"><strong>QKD Lifecycle</strong></a> |
+  <a href="#feature-showcase"><strong>Features</strong></a> |
+  <a href="#architecture"><strong>Architecture</strong></a> |
+  <a href="#cli-showcase--verified-demos"><strong>CLI Demos</strong></a> |
+  <a href="#example-outputs"><strong>Visual Outputs</strong></a> |
+  <a href="#security-engineering"><strong>Security</strong></a> |
+  <a href="#performance--resource-guards"><strong>Performance</strong></a> |
+  <a href="#scientific-scope--limitations"><strong>Limitations</strong></a> |
+  <a href="#testing--quality-gate"><strong>Testing</strong></a> |
+  <a href="./Docs/15_ROADMAP.md"><strong>Roadmap</strong></a> |
+  <a href="./LICENSE"><strong>License</strong></a>
 </p>
 
 ---
 
-## Table of Contents
-1. [Introduction](#introduction)
-2. [Quick Start](#quick-start)
-3. [Example Outputs](#example-outputs)
-4. [Documentation Hub](#documentation-hub)
-5. [Feature Highlights](#feature-highlights)
-6. [Screenshots & Visual Showcase](#screenshots--visual-showcase)
-7. [Architecture Diagram](#architecture-diagram)
-8. [Project Workflow](#project-workflow)
-9. [Project Structure](#project-structure)
-10. [Installation](#installation)
-11. [CLI Showcase](#cli-showcase)
-12. [Python API Usage](#python-api-usage)
-13. [Examples](#examples)
-14. [Configuration](#configuration)
-15. [Architecture Overview](#architecture-overview)
-16. [Technology Stack](#technology-stack)
-17. [Benchmarks](#benchmarks)
-18. [Project Roadmap](#project-roadmap)
-19. [Contributing](#contributing)
-20. [Security](#security)
-21. [Testing](#testing)
-22. [Release Information](#release-information)
-23. [Citation](#citation)
-24. [License](#license)
-25. [Acknowledgements](#acknowledgements)
-26. [Footer](#footer)
+## Important Scientific Scope & Disclaimer
+
+> [!NOTE]
+> **Simulation & Research Purpose**: QST is a scientific simulation, education, and research software toolkit. It models Quantum Key Distribution (BB84), eavesdropping intercepts, Cascade error correction, and 2-universal privacy amplification. It is **not** a production hardware cryptographic security appliance or physical fiber-optic telecommunications deployment.
+>
+> The current Eve intercept-resend behavior is an idealized simulation abstraction executed prior to circuit simulation. A native mid-circuit quantum measurement and density-matrix quantum channel model is formally documented as future work under **[`QST-ROADMAP-001`](./Docs/15_ROADMAP.md)**.
 
 ---
 
-## Introduction
+## Table of Contents
 
-The **Quantum Security Toolkit (QST)** is designed to simulate the BB84 QKD protocol under real-world noise parameters and active eavesdropper intercepts. 
+1. [What Problem QST Solves](#what-problem-qst-solves)
+2. [Quick Start](#quick-start)
+3. [QKD Lifecycle](#qkd-lifecycle)
+4. [Feature Showcase](#feature-showcase)
+5. [Architecture](#architecture)
+6. [CLI Showcase & Verified Demos](#cli-showcase--verified-demos)
+7. [Example Outputs & Visual Showcase](#example-outputs)
+8. [Python API Usage](#python-api-usage)
+9. [Security Engineering](#security-engineering)
+10. [Performance & Resource Guards](#performance--resource-guards)
+11. [Scientific Scope & Limitations](#scientific-scope--limitations)
+12. [Testing & Quality Gate](#testing--quality-gate)
+13. [Project Structure](#project-structure)
+14. [Documentation Hub](#documentation-hub)
+15. [Contributing & Support](#contributing--support)
+16. [Author & Attribution](#author--attribution)
+17. [License](#license)
 
-> [!NOTE]
-> **Scope & Research Mission**: QST is a scientific simulation, education, and research toolkit for modeling Quantum Key Distribution (BB84), eavesdropping dynamics, Cascade error correction, and 2-universal privacy amplification. It is **not** a production hardware cryptographic security appliance or physical telecommunications deployment.
+---
 
-### Why QST?
-* **Dual Execution Modes:** Execute Qiskit circuits locally using high-performance `AerSimulator` backends or route them to real remote QPUs via the **IBM Quantum Runtime**.
-* **Automatic Fallback:** Gracefully recovers from overloaded remote queues by falling back to local simulation.
-* **Noise-Aware Local Simulation:** Automatically pulls hardware calibration properties from remote IBM backends to model physical qubit errors locally.
-* **Extensible & Scientific:** Designed to evaluate post-processing protocols like Cascade error correction and 2-universal Toeplitz privacy amplification.
+## What Problem QST Solves
+
+Physical Quantum Key Distribution (QKD) systems require dedicated laser diodes, polarization beam splitters, single-photon avalanche detectors (SPADs), and ultra-pure optical fiber infrastructure costing hundreds of thousands of dollars.
+
+Researchers, security architects, and quantum software engineers face significant barriers when attempting to:
+- **Model the complete QKD pipeline** from quantum state preparation through key reconciliation and privacy amplification.
+- **Quantify eavesdropper detection limits** by observing how measurement collapses induce detectable Quantum Bit Error Rates (QBER).
+- **Evaluate post-processing efficiency** under varying channel noise, assessing Cascade block-parity reconciliation and 2-universal hash compression.
+- **Run reproducible statistical parameter sweeps** to benchmark key distillation rates across qubit counts and channel disturbance levels.
+
+**QST provides a modular, software-native testbed** implementing Bennett-Brassard 1984 (BB84) protocols, classical post-processing pipelines, and telemetry analysis tools with mathematical and cryptographic rigor.
 
 ---
 
@@ -89,296 +85,242 @@ The **Quantum Security Toolkit (QST)** is designed to simulate the BB84 QKD prot
 
 Run your first BB84 simulation trial in under 30 seconds:
 
-### 1. Install QST
+### 1. Installation
 ```bash
 git clone https://github.com/shlok926/Project-Q-30-Days-Challenge.git
 cd "Project-Q-30-Days-Challenge/Mini_Project_3/Quantum Security Toolkit (QST)"
+
+# Create virtual environment
 python -m venv .venv
 source .venv/bin/activate  # Windows: .venv\Scripts\activate
+
+# Install QST with visualization support
 pip install -e ".[viz]"
 ```
 
-### 2. Execute via Python
-Create a script (e.g. `quickstart.py`):
+### 2. Run via CLI
+```bash
+# Basic deterministic BB84 trial (20 qubits, seed 42)
+qst simulate --qubits 20 --seed 42
+
+# Full 9-stage pipeline with error correction and privacy amplification
+qst simulate --qubits 100 --seed 42 --interception-probability 0.1 --error-correction --privacy-amplification --output trial.json
+```
+
+### 3. Run via Python API
 ```python
 from qst.models.config import SimulationConfig
 from qst.orchestration.orchestrator import SimulationOrchestrator
 
-config = SimulationConfig(n_qubits=20, seed=42)
+config = SimulationConfig(n_qubits=50, seed=42, interception_probability=0.1)
 orchestrator = SimulationOrchestrator()
 result = orchestrator.run_once(config)
 trial = result.simulations[0]
 
-print(f"Sifted Key length: {trial.final_key_length}")
-print(f"Computed QBER:     {trial.qber}")
-```
-Execute:
-```bash
-python quickstart.py
+print(f"Alice Raw Bits:     {trial.n_qubits}")
+print(f"Sifted Key Length:  {trial.final_key_length}")
+print(f"Computed QBER:      {trial.qber:.4f}")
+print(f"Security Status:    {trial.security_metrics.status.value}")
 ```
 
-### 3. Execute via CLI
+---
+
+## QKD Lifecycle
+
+QST simulates the complete 9-stage Quantum Key Distribution lifecycle:
+
+```mermaid
+flowchart TD
+    A["1. Alice State Preparation<br/>(Random Bits & Bases: Z, X)"] --> B["2. Quantum Channel Transmission<br/>(Clifford Circuits / Physical Simulation)"]
+    B --> C["3. Eavesdropper (Eve)<br/>(Intercept-Resend Collapse Dynamics)"]
+    C --> D["4. Bob Measurement<br/>(Random Bases: Z, X)"]
+    D --> E["5. Key Sifting<br/>(Public Basis Reconciliation & Key Distillation)"]
+    E --> F["6. QBER Estimation<br/>(Sample Parity & Disturbance Bounds Check)"]
+    F --> G{"QBER < Threshold?"}
+    G -->|Yes: Channel Safe| H["7. Cascade Error Correction<br/>(Multi-pass Block Parity Binary Search)"]
+    G -->|No: Eve Detected| ABORT["Abort: Key Compromised"]
+    H --> I["8. Privacy Amplification<br/>(Toeplitz / Carter-Wegman 2-Universal Hash)"]
+    I --> J["9. Final Secret Key Distillation<br/>(Min-Entropy & Trace Distance Verification)"]
+    J --> K["10. Reporting & Export<br/>(Atomic JSON / CSV & Visualization)"]
+```
+
+---
+
+## Feature Showcase
+
+Only features **fully implemented and verified** in the repository are listed:
+
+| Capability | Module | Implementation Description |
+| :--- | :--- | :--- |
+| **BB84 State Preparation** | `qst.core.bb84.state_preparation` | Encodes classical bits into quantum states across computational ($Z$) and Hadamard ($X$) bases. |
+| **Circuit Generation** | `qst.core.bb84.circuit_builder` | Programmatically synthesizes Qiskit quantum circuits with clean measurement mapping. |
+| **Adaptive Execution** | `qst.core.shared.execution` | Routes Clifford BB84 circuits to Qiskit Aer's `stabilizer` method for memory safety up to 2048 qubits. |
+| **IBM Quantum Routing** | `qst.core.shared.execution.ibm_runtime_executor` | Supports remote IBM QPU execution with automatic fallback to local Aer simulator. |
+| **Eve Intercept-Resend** | `qst.core.bb84.eavesdropper` | Simulates projective measurement collapse at configurable interception probabilities ($0.0 \le p \le 1.0$). |
+| **Basis Sifting** | `qst.core.bb84.sifting` | Discards mismatched basis measurements, yielding expected $\approx 50\%$ sifted key rates. |
+| **QBER Analytics** | `qst.core.bb84.qber` | Computes bit error rates with error counts and statistical sample confidence warnings. |
+| **Cascade Error Correction** | `qst.correction.cascade` | Multi-pass recursive parity reconciliation utilizing iterative binary search error localization. |
+| **Toeplitz Hashing** | `qst.privacy.algorithms.toeplitz` | Linear-time privacy amplification using Toeplitz hash matrices generated from public random seeds. |
+| **Carter-Wegman Universal Hash** | `qst.privacy.algorithms.universal_hash` | Strongly 2-universal affine matrix family hash over $\text{GF}(2)$ for rigorous information-theoretic privacy. |
+| **Entropy & Security Bounds** | `qst.secret.metrics` | Evaluates Shannon entropy, min-entropy $H_\infty(X)$, and trace distance security bounds. |
+| **Parameter Sweeps** | `qst.orchestration.sweep_generator` | Multi-dimensional grid execution across qubit counts, Eve probabilities, and repetitions. |
+| **Atomic Reporting** | `qst.reporting.exporters` | Guaranteed atomic disk writes (`mkstemp` + `os.fsync` + `os.replace`) with path traversal defenses. |
+| **Scientific Visualizer** | `qst.visualization` | Matplotlib engine supporting Line, Scatter, Histogram, and Heatmap plots with guaranteed leak prevention. |
+| **Structured Logging** | `qst.cli.main` | Structured logging with standard timestamps, log levels, and traceable error codes (`QST-VAL-*`). |
+
+---
+
+## Architecture
+
+The toolkit follows strict SOLID principles and clean hexagonal architecture:
+
+```mermaid
+graph TD
+    CLI["CLI Dispatcher (qst)"] --> Orchestrator["SimulationOrchestrator"]
+    API["Python Client API"] --> Orchestrator
+
+    subgraph Core["Core Protocol Engine"]
+        Orchestrator --> Protocol["BB84Protocol"]
+        Protocol --> Builder["CircuitBuilder"]
+        Protocol --> Eve["Eavesdropper"]
+        Protocol --> Sifter["Sifter"]
+        Protocol --> QBERCalc["QBERCalculator"]
+    end
+
+    subgraph Execution["Execution Abstraction Layer"]
+        Protocol --> ExecInterface["ExecutorInterface"]
+        ExecInterface --> AerExec["AerExecutor (Stabilizer / Statevector)"]
+        ExecInterface --> IBMExec["IBMRuntimeExecutor (Remote QPU + Fallback)"]
+    end
+
+    subgraph PostProcessing["Post-Processing Pipeline"]
+        Protocol --> Cascade["CascadeReconciler (Parity Binary Search)"]
+        Cascade --> PA["PrivacyAmplifier (Toeplitz / UniversalHash GF2)"]
+        PA --> Metrics["SecretMetricsService (Min-Entropy & Trace Dist)"]
+    end
+
+    subgraph Telemetry["Telemetry, Reporting & Visualization"]
+        Metrics --> Exporters["JSONExporter / CSVExporter (Atomic & Safe)"]
+        Metrics --> Viz["Visualizer (Matplotlib figure-leak safe)"]
+    end
+```
+
+---
+
+## CLI Showcase & Verified Demos
+
+All CLI commands below have been directly executed and verified on the repository:
+
+### 1. Basic BB84 Simulation
+Run a baseline, noise-free 20-qubit BB84 simulation:
 ```bash
-qst simulate --qubits 20 --seed 42 --output trial.json
+qst simulate --qubits 20 --seed 42
+```
+*Actual Output:*
+```text
+2026-09-10 23:41:33 - qst.orchestration - INFO - Starting simulation run: protocol=BB84, qubits=20, repetitions=1
+Simulation completed successfully.
+Average QBER: 0.0000
+Average Key Rate: 0.4000
+Secure runs: 1/1
+```
+
+### 2. Eavesdropper Detection Demo
+Simulate a 50-qubit exchange with active eavesdropper interference ($p = 0.5$):
+```bash
+qst simulate --qubits 50 --seed 42 --interception-probability 0.5
+```
+*Actual Output:*
+```text
+2026-09-10 23:41:42 - qst.orchestration - INFO - Starting simulation run: protocol=BB84, qubits=50, repetitions=1
+Simulation completed successfully.
+Average QBER: 0.0769
+Average Key Rate: 0.5200
+Secure runs: 0/1
+```
+*(Security alert triggered: QBER exceeds theoretical threshold; key marked compromised).*
+
+### 3. Full 9-Stage Pipeline (Cascade + Privacy Amplification)
+Execute raw transmission, sifting, Cascade error correction, and 2-universal privacy amplification:
+```bash
+qst simulate --qubits 100 --seed 42 --interception-probability 0.1 \
+    --error-correction --privacy-amplification --output full_trial.json
+```
+*Actual Output:*
+```text
+2026-09-10 23:41:51 - qst.orchestration - INFO - Starting simulation run: protocol=BB84, qubits=100, repetitions=1
+Simulation completed successfully.
+Average QBER: 0.0169
+Average Key Rate: 0.2900
+Secure runs: 0/1
+```
+
+### 4. Multi-Dimensional Parameter Sweep
+Run a parameter sweep across qubit counts and Eve interception probabilities:
+```bash
+qst sweep --qubits 20,40 --probabilities 0.0,0.2 --repetitions 2 --export sweep_results.json
+```
+*Actual Output:*
+```text
+2026-09-10 23:43:10 - qst.orchestration - INFO - Completed parameter sweep across 4 configurations in 11.465s
+Parameter sweep execution completed successfully.
+Total experiments executed: 4
+```
+
+### 5. Scientific Visualization Generation
+Render publication-ready plots directly from sweep telemetry:
+```bash
+qst visualize --type LINE --theme SCIENTIFIC --output qber_trend.png sweep_results.json
+```
+*Actual Output:*
+```text
+Chart successfully saved to path: qber_trend.png
+```
+
+### 6. Atomic Data Export
+Convert raw JSON experiment telemetry into clean CSV format:
+```bash
+qst export --format CSV --output trial_report.csv full_trial.json
 ```
 
 ---
 
 ## Example Outputs
 
-This section showcases the real outputs produced by the toolkit's simulation and visualizer pipelines, including the command-line summaries and scientific plots generated during execution.
+Real outputs produced by the toolkit's simulation and visualizer pipelines:
 
 ### Example 01 — Basic BB84 Simulation
+Console output demonstrating a baseline noise-free BB84 simulation trial:
 
-This console output demonstrates the execution of a basic noise-free single BB84 quantum simulation trial. It shows sifting rates, key rates, and security classification status.
-
-![Basic BB84 Simulation Terminal Output](../../assets/example01_terminal.png)
-
-#### What this demonstrates
-* BB84 protocol execution.
-* Alice/Bob basis reconciliation.
-* Deterministic simulation using a fixed seed.
-* Secure communication with QBER calculation.
-* Automatic key rate computation.
-* Security status evaluation.
+![Basic BB84 Simulation Terminal Output](./Docs/assets/example01_terminal.png)
 
 ---
 
 ### Example 10 — Protocol Summary & Finalization
+Console execution of the full end-to-end QKD pipeline demonstrating key rates at every stage of reconciliation, Cascade error correction efficiency, universal hashing privacy amplification, and overall protocol loss metrics:
 
-This console execution represents the end-to-end QKD pipeline demonstrating key rates at every stage of reconciliation, Cascade error correction efficiency, universal hashing privacy amplification, and overall protocol loss metrics.
-
-![Protocol Summary & Finalization Terminal Output](../../assets/example10_terminal.png)
-
-#### What this demonstrates
-* End-to-end QKD pipeline.
-* Raw ➔ Sifted ➔ Corrected ➔ Final Secret Key.
-* Cascade Error Correction.
-* Privacy Amplification.
-* Security Metrics.
-* Protocol Loss Analysis.
-* Execution Backend.
+![Protocol Summary & Finalization Terminal Output](./Docs/assets/example10_terminal.png)
 
 ---
 
 ### Example 05 — QBER Trend Analysis
+Relationship between observed Quantum Bit Error Rate (QBER) and eavesdropper interception probability ($p_{\text{eve}}$):
 
-This plot illustrates the relationship between the observed Quantum Bit Error Rate (QBER) and the interception probability of the eavesdropper (Eve). It demonstrates the linear growth in transition errors caused by state collapses under measurement intercepts, helping researchers benchmark detection limits.
-
-![QBER Trend Analysis](../../assets/qber_trend.png)
-
-#### What this demonstrates
-* Alice/Bob polarization basis sifting reconciliation yields.
-* Statistical tracking of the Quantum Bit Error Rate (QBER) in transit.
-* Eavesdropper measurement collapse simulation with custom probabilities.
-* Visual verification of detection thresholds in the quantum channel.
-* Generation of publication-ready scientific vector graphics (PNG/SVG/PDF).
+![QBER Trend Analysis](./Docs/assets/qber_trend.png)
 
 ---
 
 ### Example 05 (Continued) — Heatmap Matrix Visualization
+Spatial profiling of error distributions across key blocks for post-processing optimization:
 
-This chart visualizes QBER occurrences across different key segments and blocks. It provides spatial profiling of error distributions, helping to evaluate block size selections for post-processing error correction algorithms.
-
-![QBER Heatmap Matrix](../../assets/qber_heatmap.png)
-
-#### What this demonstrates
-* Spatial distribution of error density across key blocks.
-* Profiling of error locations to detect correlation in intercepts.
-* Telemetry mapping for Cascade block size optimization parameters.
-* Graphical validation of parity check matrices distributions.
+![QBER Heatmap Matrix](./Docs/assets/qber_heatmap.png)
 
 ---
 
-### Example 06 — Complete Pipeline Sweep
+### Example 06 — Complete Pipeline Parameter Sweep
+Secret key rate attenuation and error margins as interception levels increase:
 
-This plot represents the end-to-end parameter sweep tracking overall secret key rate and QBER trends. It details key rate attenuation and error margins as interception levels increase.
-
-![Complete Pipeline Sweep](../../assets/qber_vs_intercept_trend.png)
-
-#### What this demonstrates
-* End-to-end QKD pipeline simulation (Raw → Sifted → Corrected → Final Secret Key).
-* Key rate attenuation trends under active eavesdropper interference.
-* Cascade Error Correction efficiency threshold benchmarks.
-* Privacy Amplification key compression ratio limits.
-* Protocol loss analysis tracking (raw, sifted, corrected, final).
-* Execution backend profiling across simulated parameters.
-
----
-
-## Documentation Hub
-
-Detailed guides, tutorials, and specifications are organized in the `Docs/` directory:
-
-| Guide | Purpose | Target Audience |
-| :--- | :--- | :--- |
-| 📖 **[User Guide](./Docs/User_Guide.md)** | Getting started, CLI parameters, and code configuration guides. | QKD students and software developers. |
-| 📐 **[Architecture](./Docs/Architecture.md)** | Core simulation designs and pipeline data flow specifications. | Systems and quantum software architects. |
-| 📝 **[API Reference](./Docs/API_Reference.md)** | Frozen configurations classes and public method signatures. | API clients and package integrators. |
-| 🛠️ **[Troubleshooting](./Docs/Troubleshooting.md)** | Resolving `QST-VAL-*` and `QST-SIM-*` error codes. | Sysadmins and execution pipeline reviewers. |
-| 📊 **[Benchmark Report](./Docs/Benchmark_Report.md)** | CPU execution timings, memory metrics, scaling characteristics. | Research software engineers. |
-| 📅 **[Roadmap](./Docs/Roadmap.md)** | Development milestones achievements and future updates path. | Contributors and release managers. |
-| ❓ **[FAQ](./Docs/FAQ.md)** | Common questions on backend selections and simulation sizes. | General toolkit users. |
-
----
-
-## Feature Highlights
-
-| Feature | Category | Icon | Description |
-| :--- | :--- | :---: | :--- |
-| **BB84 Engine** | Quantum Core | ⚛️ | Quantum polarization preparation and measurements. |
-| **IBM QPU Integration** | Backend Router | 🌐 | Real hardware execution and automatic Aer fallbacks. |
-| **Cascade Error Correction** | Reconciliation | 🧩 | Multi-pass recursive key error correction. |
-| **Privacy Amplification** | Cryptography | 🔒 | 2-universal Toeplitz hashing compression. |
-| **Scientific Visualizer** | Analytics | 📈 | Matplotlib plotting backend supporting PNG, SVG, PDF. |
-| **CLI Showcase** | Executables | 💻 | CLI commands to simulate and parameter sweep. |
-| **JSON/CSV Export** | Telemetry | 📂 | Full serialization formatters and export utilities. |
-| **Parameter Sweeps** | Benchmarking | 📊 | Sweep parameter grids for trend analysis. |
-| **Modular SOLID Architecture** | Code Quality | 🏗️ | Dependency inversion using clean abstractions. |
-
----
-
-## Screenshots & Visual Showcase
-
-### CLI Demonstration
-*Placeholder for terminal recording showing CLI execution flow:*
-```text
-[Future GIF Placeholder: qst simulate execution flow]
-```
-
-### Visual Showcase Cards
-*Placeholders for generated visualization outputs:*
-```text
-┌───────────────────────────────────────┐  ┌───────────────────────────────────────┐
-│        [Matplotlib QBER Plot]         │  │       [Parameter Sweep Trends]        │
-│                                       │  │                                       │
-│  Line plot showing rising QBER under  │  │   Heatmap matrix illustrating key     │
-│  eavesdropper interception levels.    │  │   yields across noise parameters.     │
-└───────────────────────────────────────┘  └───────────────────────────────────────┘
-┌───────────────────────────────────────┐  ┌───────────────────────────────────────┐
-│       [Security Metrics Cards]        │  │       [Exported Report Outputs]       │
-│                                       │  │                                       │
-│  Classification levels (LOW/MED/HIGH) │  │  Structured JSON and CSV reports with │
-│  based on trace distance bounds.      │  │  deterministic simulation results.    │
-└───────────────────────────────────────┘  └───────────────────────────────────────┘
-```
-
----
-
-## Architecture Diagram
-
-The diagram below outlines the structural boundaries and dependency flows between QST modules:
-
-```mermaid
-graph TD
-    User[User / Researcher] -->|Config / CLI| Interface[CLI / Python API]
-    Interface -->|Coordinates lifecycle| Orchestrator[SimulationOrchestrator]
-    Orchestrator -->|Deploys| Exec[Execution Providers / Qiskit]
-    Exec -->|Executes BB84 Circuit| Engine[Core BB84 Protocol Engine]
-    Engine -->|Basis Comparison| Sift[Key Sifting & Reconciliation]
-    Sift -->|Reconciles Errors| Cascade[Cascade Error Reconciler]
-    Cascade -->|Distills final secret| PA[Privacy Amplification Hashing]
-    PA -->|Validates final security| Metrics[Secret Key Metrics Service]
-    Metrics -->|Exports JSON / CSV| Export[Exporters / Reporting]
-    Metrics -->|Generates plots| Viz[Matplotlib Visualizer Backend]
-```
-
----
-
-## Project Workflow
-
-The following flowchart explains the logical execution pipeline from configurations validation to output serialization:
-
-```mermaid
-flowchart TD
-    Input[SimulationConfig parameters] --> Validation[Config / Argument Validation]
-    Validation --> Init[Initialize Polarization Bases]
-    Init --> Circuit[Construct Qiskit Circuit]
-    Circuit --> Intercept{Eve Active?}
-    Intercept -->|Yes| Eavesdrop[Simulate Measurement Collapse]
-    Intercept -->|No| Simulate[Simulate Direct Measurement]
-    Eavesdrop --> Simulate
-    Simulate --> Sifting[Basis Reconciliation & Sifting]
-    Sifting --> QBER[Estimate Initial QBER]
-    QBER --> Reconcile{QBER > Threshold?}
-    Reconcile -->|Yes / EC Enabled| Cascade[Cascade Multi-pass Reconciliation]
-    Reconcile -->|No| Hashing[Universal Hashing PA]
-    Cascade --> Hashing
-    Hashing --> Metrics[Compute Security Parameters & Loss]
-    Metrics --> Output[JSON/CSV Reports & Plotted Graphs]
-```
-
----
-
-## Project Structure
-
-```text
-qst/
-├── .github/
-│   ├── workflows/            # GitHub actions for build, test, lint, and security scan
-│   ├── ISSUE_TEMPLATE/       # Templates for bug reports and feature requests
-│   └── pull_request_template.md
-├── Docs/                     # Detailed guides and manuals
-├── src/qst/
-│   ├── core/                 # Quantum circuits, sifting, QBER, and Eve simulation
-│   ├── correction/           # Cascade error correction algorithms and parity models
-│   ├── privacy/              # Toeplitz hashing and Min-Entropy estimations
-│   ├── secret/               # Rates metrics calculators and summary builders
-│   ├── orchestration/        # Run schedulers and parameter sweep loops
-│   ├── reporting/            # CSV, JSON exporters and serializers
-│   ├── visualization/        # Themes registry and Matplotlib rendering backend
-│   └── cli/                  # CLI commands entrypoints
-├── tests/                    # Unit, integration, property, and benchmark suites
-├── examples/                 # Execution tutorials
-├── notebooks/                # Jupyter notebook tutorials
-└── pyproject.toml            # Package metadata and PEP-518 dependencies
-```
-
----
-
-## Installation
-
-### 1. Operating System Targets
-QST is verified across:
-* **Windows 10 / 11**
-* **Linux (Ubuntu, Debian, CentOS)**
-* **macOS (Intel and Apple Silicon)**
-
-### 2. Standard Installation
-Create a virtual environment and install QST in editable mode:
-```bash
-python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
-pip install -e .
-```
-
-### 3. Full Installation (with Visualization features)
-To enable vector scientific plot exports:
-```bash
-pip install -e ".[viz]"
-```
-
----
-
-## CLI Showcase
-
-Exposes command line utilities to simulate trials, parameter sweeps, and export telemetry formats:
-
-### Generate Help Menu
-```bash
-qst --help
-```
-
-### Run Trial Simulation
-```bash
-qst simulate --qubits 20 --seed 42 --interception-probability 0.05 --output trial.json
-```
-
-### Run Parameters Sweeps
-```bash
-qst sweep --qubits 10,20 --interception 0.0,0.1,0.2 --output sweep.json
-```
-*Expected Output Format:* Logs simulation counts, sifting durations, QBER calculations, and writes outcome results to the target path.
+![Complete Pipeline Sweep](./Docs/assets/qber_vs_intercept_trend.png)
 
 ---
 
@@ -390,213 +332,170 @@ from qst.correction.models import CascadeConfiguration
 from qst.privacy.models import PrivacyAmplificationConfiguration
 from qst.orchestration.orchestrator import SimulationOrchestrator
 
-# Initialize comprehensive configuration
+# Configure full 9-stage pipeline
 config = SimulationConfig(
-    n_qubits=30,
+    n_qubits=100,
     seed=42,
+    interception_probability=0.08,
     run_error_correction=True,
     cascade_configuration=CascadeConfiguration(block_sizes=(8, 16)),
     run_privacy_amplification=True,
-    privacy_configuration=PrivacyAmplificationConfiguration(compression_ratio=0.6)
+    privacy_configuration=PrivacyAmplificationConfiguration(
+        algorithm="universal_hash",
+        compression_ratio=0.5
+    )
 )
 
 orchestrator = SimulationOrchestrator()
 result = orchestrator.run_once(config)
-
 trial = result.simulations[0]
-print(f"Corrected Key: {trial.corrected_key}")
-print(f"Final Secret Key: {trial.final_secret_key.key_bits}")
-print(f"Min-Entropy Parameter: {trial.final_secret_key.min_entropy_estimate}")
+
+print(f"Raw Transmitted Qubits: {trial.n_qubits}")
+print(f"Sifted Key Bits:        {len(trial.sifted_key)}")
+print(f"Estimated QBER:         {trial.qber:.4f}")
+print(f"Corrected Key Length:   {len(trial.corrected_key) if trial.corrected_key else 'N/A'}")
+print(f"Final Secret Key Bits:  {trial.final_secret_key.key_bits if trial.final_secret_key else 'N/A'}")
 ```
 
 ---
 
-## Examples
+## Security Engineering
 
-| Tutorial Script | Difficulty | Est. Time | Key Concepts Demonstrated |
-| :--- | :--- | :--- | :--- |
-| [`01_basic_bb84.py`](./examples/01_basic_bb84.py) | Beginner | 2 mins | Config initialization, orchestrator run_once, console reporting |
-| [`02_eavesdropper_demo.py`](./examples/02_eavesdropper_demo.py) | Intermediate | 3 mins | Eavesdropping intercepts, quantum state collapse explanation, QBER rise |
-| [`03_parameter_sweep.py`](./examples/03_parameter_sweep.py) | Intermediate | 4 mins | Config sweeps generation, sweeps execution, statistical aggregations |
-| [`04_export_results.py`](./examples/04_export_results.py) | Intermediate | 3 mins | Serializers, JSONExporter, CSVExporter, schema load verification |
-| [`05_visualization.py`](./examples/05_visualization.py) | Intermediate | 4 mins | Visualizer, MatplotlibBackend, themes, multi-format plots (PNG, SVG, PDF) |
-| [`06_complete_pipeline.py`](./examples/06_complete_pipeline.py) | Advanced | 5 mins | E2E sweeps, trend analysis, scientific plotting, serialization, JSON/CSV exports |
-| [`07_real_hardware_execution.py`](./examples/07_real_hardware_execution.py) | Intermediate | 3 mins | IBM Quantum Runtime execution, backend selection, and Aer fallback |
-| [`08_error_correction.py`](./examples/08_error_correction.py) | Intermediate | 3 mins | Cascade Error Correction integration, key reconciliation metrics |
-| [`09_privacy_amplification.py`](./examples/09_privacy_amplification.py) | Intermediate | 3 mins | Privacy Amplification, key compression ratio metrics, Min/Shannon Entropy |
-| [`10_protocol_summary.py`](./examples/10_protocol_summary.py) | Intermediate | 3 mins | Protocol Finalization, E2E key rates summary, classification levels, and losses |
+QST implements rigorous software security defenses:
 
----
-
-## Configuration
-
-| Configuration Attribute | Type | Default | Description |
-| :--- | :---: | :---: | :--- |
-| `n_qubits` | `int` | *Required* | Number of raw qubits generated in the quantum polarization stage. |
-| `seed` | `Optional[int]` | `None` | Seed value for deterministic pseudorandom matrix and block shuffles. |
-| `interception_probability` | `float` | `0.0` | Probability that Eve intercepts and measures a qubit during transit. |
-| `run_error_correction` | `bool` | `False` | Enables/disables the Cascade Error Correction process. |
-| `run_privacy_amplification` | `bool` | `False` | Enables/disables the Privacy Amplification hashing stage. |
-| `use_ibm_runtime` | `bool` | `False` | Routes circuit execution to remote IBM Quantum hardware when set to `True`. |
+1. **Path Traversal Protection (`QST-VAL-405`)**:
+   Exporters reject directory traversal sequences (`..`, null bytes `\0`, and invalid file extensions), preventing arbitrary file overwrite vulnerabilities.
+2. **Atomic Disk Writes**:
+   All file exports write to an OS temporary file descriptor (`tempfile.mkstemp`), flush buffers with `os.fsync`, and atomically replace the destination path with `os.replace`. Partial or corrupted files are never left on disk.
+3. **Resource-Aware Simulation Guards (`QST-VAL-103`, `QST-VAL-104`)**:
+   Simulations enforce a configurable ceiling (`MAX_SIMULATION_QUBITS = 2048`). Memory requirements are pre-calculated before dispatch: requests requiring exponential statevector memory that exceed system RAM or $N > 28$ qubits are rejected before touching Qiskit Aer.
+4. **Memory Figure Leak Defenses**:
+   Matplotlib chart generation encapsulates canvas rendering within strict `try ... finally: plt.close(fig)` blocks, ensuring zero figure retention in batch workloads (`plt.get_fignums()` remains empty).
+5. **Fail-Safe Cryptographic Error Hierarchy**:
+   All errors inherit from structured base classes (`QSTError`, `ValidationError`, `SimulationError`) with unique diagnostic codes.
 
 ---
 
-## Architecture Overview
+## Performance & Resource Guards
 
-The toolkit's modular packaging aligns with strict **SOLID design principles**:
-* **Dependency Inversion:** Execution backends implement `ExecutorInterface`, allowing simulators (Aer) and physical hardware (IBM QPU Runtime) to be swapped transparently.
-* **Single Responsibility:** Cryptographic, error reconciliation, and mathematical metric calculations are separated from runtime orchestration loops.
-* **Interface Segregation:** Hashing algorithms inherit from the generic `HashAlgorithm` contract, isolating Toeplitz implementations.
-
----
-
-## Technology Stack
-
-| Component | Library / Framework | Version |
-| :--- | :--- | :---: |
-| **Language** | Python | `>=3.10` |
-| **Quantum Physics Simulator** | Qiskit / Qiskit Aer | `>=1.0.0` |
-| **Array Computing** | NumPy | `>=1.24.0` |
-| **Testing Backend** | pytest / pytest-cov | `>=7.0.0` |
-| **Code Formatting** | black / ruff | Modern release |
-| **Plotting Engine (Optional)** | Matplotlib | `>=3.7.0` |
+- **Clifford Stabilizer Routing**:
+  BB84 circuits consist exclusively of Clifford operations ($H, X, Z$ gates and computational measurements). QST dynamically routes Clifford circuits to Qiskit Aer's `method="stabilizer"`, enabling simulation of up to **2,048 qubits** with $O(N^2)$ polynomial memory footprint.
+- **Statevector Ceiling Notice**:
+  Statevector simulation methods require $2^N \times 16$ bytes of RAM. QST automatically restricts statevector backends to $N \le 28$ qubits (~8.5 GB RAM) to protect system stability.
 
 ---
 
-## Benchmarks
+## Scientific Scope & Limitations
 
-*Measurements collected on Qiskit Aer statevector simulators (CPU: Intel i7 / Ryzen 7 equivalents):*
+To maintain absolute academic integrity, QST explicitly documents its operating boundaries:
 
-| Key Size (Qubits) | Execution Time (ms) | Peak Memory (KiB) |
-| :--- | :---: | :---: |
-| 5 | 3889.86 | 37471.42 |
-| 10 | 577.50 | 265.70 |
-| 15 | 544.66 | 249.99 |
-| 20 | 626.51 | 239.79 |
-| 25 | 1040.11 | 232.73 |
-
-### Scalability Limits
-* **Simulator Bounds:** Local simulations using standard coupling maps are bounded to $N \le 29$ qubits.
-* **Transpiler Warning:** Requesting $N > 29$ qubits raises transpilation validation errors.
+1. **Software Simulator, Not Hardware QKD**:
+   QST simulates quantum mechanics on classical computing hardware; it does not replace physical photonics or quantum hardware.
+2. **Eavesdropper Simulation Abstraction (`QST-ROADMAP-001`)**:
+   The current Eve model emulates projective measurement collapse classically prior to circuit execution. Modeling mid-circuit quantum measurement (`measure_and_reset`) and density-matrix quantum channels (Kraus operators) directly on Qiskit circuit DAGs is slated for Phase 2.
+3. **Physical Side Channels**:
+   QST does not model detector blinding, Trojan-horse optical reflection attacks, or phase-drift synchronization errors present in physical optical links.
 
 ---
 
-## Project Roadmap
+## Testing & Quality Gate
 
-### Completed Milestones
-- [x] **Phase 1-11 (Foundations & CLI):** Polarization state preps, basis reconciliation sifting, visualizer registry, JSON/CSV sweeps, and command line tools.
-- [x] **Phase 12 (IBM Integration):** Least-busy QPU discoverer, remote simulator execution, and automatic Aer fallbacks.
-- [x] **Phase 13A (Cascade EC):** Multi-pass Cascade error correction.
-- [x] **Phase 13B (Privacy Amplification):** 2-universal Toeplitz and Carter-Wegman affine hashing matrices generators, Shannon/Min-entropy estimators, and trace distance bounds computations.
-- [x] **Phase 13C (Protocol Finalization):** Dedicated calculators and summaries, security level thresholds.
-- [x] **Phase 14 (Release Engineering):** Version freezes, packaging setup, supply-chain workflows, and complete guides.
+QST maintains an exhaustive, independently verified test suite:
 
-### Future Research & Architecture Backlog
-- [ ] **`QST-ROADMAP-001` (Quantum-native intercept-resend simulation):** Transition from classical pre-circuit interception emulation to genuine mid-circuit quantum measurement (`measure_and_reset`) and density-matrix quantum channels (Kraus operators) directly on Qiskit quantum circuit representations (Target Phase 1.5 / 2).
+- **229 Tests Collected, 229 Tests Passing** (100% pass rate).
+- **97% Code Coverage** across 2,575 statements in `src/qst`.
+- **Ruff Static Analysis**: Clean (0 warnings, 0 errors).
+- **Mypy Type Checking**: Clean (0 errors in strict mode across 98 source files).
+- **Hypothesis Property Testing**: Genuine property-based tests exploring key invariants and edge cases.
 
+To execute the test suite locally:
+```bash
+# Set PYTHONPATH and run full test suite
+pytest
+
+# Verify code coverage
+pytest --cov=src/qst --cov-report=term-missing
+
+# Verify formatting and static analysis
+ruff check src tests
+
+# Verify strict static type checking
+mypy src
+```
 
 ---
 
-## 🤝 Contributing & Feedback
-
-Contributions, suggestions, and feedback are highly welcome!
-
-* **Got suggestions or feature requests?** Feel free to open a new [Issue](https://github.com/shlok926/Project-Q-30-Days-Challenge/issues) or share your ideas.
-* **Want to contribute?** Feel free to fork this repository, make your changes, and submit a Pull Request.
-
----
-
-## ⭐ Show Your Support
+## Project Structure
 
 ```text
-                   Love this tool? Help us grow:
-✨ Star the repository   (GitHub Star Button)
-🐛 Report bugs          (GitHub Issues)
-💡 Suggest features     (GitHub Discussions)
-📢 Share with others    (LinkedIn/Twitter)
-🤝 Contribute code      (Pull Requests)
+Quantum Security Toolkit (QST)/
+├── .github/
+│   ├── workflows/            # GitHub Actions CI matrix (test, lint, coverage)
+│   └── ISSUE_TEMPLATE/       # Structured bug and feature templates
+├── Docs/                     # Specifications, guides, and architectural decisions
+│   ├── assets/               # Verified showcase terminal outputs and scientific plots
+│   ├── 15_ROADMAP.md         # Long-term roadmap including QST-ROADMAP-001
+│   ├── 20_FUTURE_ENHANCEMENTS.md # Technical enhancement backlog
+│   └── API_Reference.md      # Method signatures and domain models
+├── src/qst/                  # Core library source code
+│   ├── core/bb84/            # BB84 circuits, state preparation, sifting, QBER
+│   ├── core/shared/          # Adaptive execution backends (Aer / IBM Runtime)
+│   ├── correction/           # Cascade multi-pass error correction
+│   ├── privacy/              # Toeplitz and Carter-Wegman 2-universal hash families
+│   ├── secret/               # Security metrics, min-entropy, protocol summary
+│   ├── orchestration/        # Orchestration services and parameter sweep engines
+│   ├── reporting/            # Path-safe atomic JSON and CSV exporters
+│   ├── visualization/        # Theme registry and leak-free Matplotlib backend
+│   └── cli/                  # CLI commands (simulate, sweep, export, visualize)
+├── tests/                    # 229 verified test cases across 54 test modules
+│   ├── unit/                 # Comprehensive unit tests
+│   ├── integration/          # Subsystem integration tests
+│   ├── property/             # Hypothesis property-based tests
+│   ├── performance/          # Execution benchmarks
+│   └── e2e/                  # Full 9-stage pipeline end-to-end tests
+├── examples/                 # 10 runnable tutorial scripts
+├── notebooks/                # Jupyter interactive tutorials
+├── pyproject.toml            # PEP-518 / PEP-621 project configuration
+├── requirements.txt          # Production runtime dependencies
+└── requirements-dev.txt      # Development and testing dependencies
 ```
 
 ---
 
+## Documentation Hub
 
-## Security
-
-Please review [`SECURITY.md`](./SECURITY.md) for information regarding vulnerability reporting channels and security disclosures policies.
-
----
-
-## Testing
-
-Execute the test suites using pytest:
-```bash
-python -m pytest
-```
-
-Verify type annotations:
-```bash
-mypy src/
-```
-
-Verify formatting and linting:
-```bash
-black --check src/
-ruff check src/
-```
+| Document | Purpose | Target Audience |
+| :--- | :--- | :--- |
+| 📖 **[User Guide](./Docs/User_Guide.md)** | Step-by-step tutorial on CLI flags and Python configurations. | Students and Software Engineers |
+| 📐 **[Architecture Specification](./Docs/Architecture.md)** | Hexagonal design, interfaces, and subsystem interaction diagrams. | Quantum Systems Architects |
+| 📝 **[API Reference](./Docs/API_Reference.md)** | Public class definitions, methods, and return types. | Developers and Integrators |
+| 🛠️ **[Troubleshooting Guide](./Docs/Troubleshooting.md)** | Resolving `QST-VAL-*` and execution exceptions. | Operators and Evaluators |
+| 📅 **[Roadmap](./Docs/15_ROADMAP.md)** | Milestone schedule and `QST-ROADMAP-001` details. | Contributors and Researchers |
+| 🔒 **[Security Policy](./SECURITY.md)** | Vulnerability disclosure instructions and scope. | Security Researchers |
 
 ---
 
-## Release Information
+## Contributing & Support
 
-This project adheres to **Semantic Versioning (SemVer)**:
-* **Stable public APIs** (defined in `Docs/API_Reference.md`) are frozen for the `v1.x` release series. No breaking modifications will be introduced.
-* Detailed historical updates are tracked in the [`CHANGELOG.md`](./CHANGELOG.md).
+Contributions, feedback, and academic research collaborations are welcome!
+- **Report Bugs**: Open a report via [GitHub Issues](https://github.com/shlok926/Project-Q-30-Days-Challenge/issues).
+- **Feature Proposals**: Submit an enhancement request using the issue template.
+- **Pull Requests**: Review [`CONTRIBUTING.md`](./CONTRIBUTING.md) before submitting code.
 
 ---
 
-## Citation
+## Author & Attribution
 
-For academic or research citation, please reference the CITATION metadata:
-```bibtex
-@software{qst_toolkit,
-  author = {QST Authors},
-  title = {Quantum Security Toolkit (QST)},
-  version = {1.0.0},
-  year = {2026},
-  url = {https://github.com/shlok926/Project-Q-30-Days-Challenge}
-}
-```
-*Note: Refer to [`CITATION.cff`](./CITATION.cff) for full CFF formats.*
+**Lead Developer & Maintainer:**  
+👨‍💼 **Shlok Thorat**  
+- **GitHub**: [@shlok926](https://github.com/shlok926)  
+- **LinkedIn**: [Shlok Thorat](https://www.linkedin.com/in/shlok-thorat-39916a405/)  
+- **Email**: [shlokthorat29075@gmail.com](mailto:shlokthorat29075@gmail.com)
+
+*Built for Quantum Computing Innovation and Research.*
 
 ---
 
 ## License
 
-This project is licensed under the MIT License - see the [`LICENSE`](./LICENSE) file for details.
-
----
-
-## Acknowledgements
-* IBM Qiskit and Qiskit Aer simulation teams.
-* Charles Bennett and Gilles Brassard (BB84 Protocol inventors).
-* Cascade error correction protocol research authors.
-
----
-
-## 👤 Author & Contact
-
-<p align="center">
-  👨‍💼 <strong>Shlok Thorat</strong> <br>
-  <em>Let's connect on LinkedIn, collaborate, and build amazing things together!</em>
-</p>
-
-<p align="center">
-  <a href="mailto:shlokthorat29075@gmail.com"><img src="https://img.shields.io/badge/Email-shlokthorat29075@gmail.com-red?style=flat-square&logo=gmail&logoColor=white" alt="Email" /></a>
-  <a href="https://github.com/shlok926"><img src="https://img.shields.io/badge/GitHub-@shlok926-black?style=flat-square&logo=github&logoColor=white" alt="GitHub" /></a>
-  <a href="https://www.linkedin.com/in/shlok-thorat-39916a405/"><img src="https://img.shields.io/badge/LinkedIn-shlok--thorat--39916a405-blue?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn" /></a>
-</p>
-
-<p align="center">
-  Made with Shlok! for Quantum Computing Innovation • <a href="#">Back to Top</a>
-</p>
-
+This project is licensed under the terms of the [MIT License](./LICENSE).

@@ -49,7 +49,7 @@ gantt
 | Q1 | Repository scaffolding, `BB84Protocol`, `Eavesdropper`, core unit tests | Phase 1 |
 | Q2 | `SecurityAnalytics`, `Visualizer`, Educational Mode, integration tests | Phase 2 |
 | Q3 | Research/Batch Mode, CI/CD, SBOM, PyPI publish (v1.0) | Phase 3 |
-| Q4+ | Backlog items from `20_FUTURE_ENHANCEMENTS.md`, contingent on adoption/bandwidth | Future (v2.0 candidate work) |
+| Q4+ | `QST-ROADMAP-001` (Quantum-native mid-circuit noise channel models) & Backlog items from `20_FUTURE_ENHANCEMENTS.md` | Future (v1.5 / v2.0 candidate work) |
 
 ## 3. Phase 1 — Core Simulation
 

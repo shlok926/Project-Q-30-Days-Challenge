@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "qst"
 version = "1.0.0"
-description = "A production-grade toolkit for simulating BB84 Quantum Key Distribution, Eve eavesdropping collapse, Cascade parity error correction, and Toeplitz privacy amplification."
+description = "A modular quantum-security simulation and research toolkit for modeling BB84 Quantum Key Distribution, Eve eavesdropping dynamics, Cascade error correction, and 2-universal privacy amplification."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }
