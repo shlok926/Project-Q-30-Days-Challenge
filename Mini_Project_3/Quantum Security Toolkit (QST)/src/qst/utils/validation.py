@@ -10,18 +10,54 @@ from typing import Any, Optional
 
 from qst.exceptions.validation import ValidationError
 
+DEFAULT_MAX_QUBITS: int = 2048
 
-def validate_qubit_count(value: Any) -> int:
-    """Validate that the qubit count is a positive integer.
+
+def estimate_simulation_memory_bytes(
+    n_qubits: int, simulation_method: str = "automatic"
+) -> int:
+    """Estimate memory requirement in bytes for simulating n_qubits.
+
+    Args:
+        n_qubits: Number of qubits.
+        simulation_method: Simulation approach ('statevector', 'density_matrix', 'stabilizer', 'automatic').
+
+    Returns:
+        Estimated required memory in bytes.
+    """
+    method = simulation_method.lower()
+    if method == "statevector":
+        if n_qubits >= 60:
+            return 2**60
+        return (2**n_qubits) * 16
+    elif method == "density_matrix":
+        if n_qubits >= 30:
+            return 2**60
+        return (4**n_qubits) * 16
+    elif method in ("stabilizer", "extended_stabilizer"):
+        return max(1024 * 1024, (2 * n_qubits * (2 * n_qubits + 1) // 8) + n_qubits * 1024)
+    else:  # "automatic"
+        return max(1024 * 1024, n_qubits * 16384)
+
+
+def validate_qubit_count(
+    value: Any,
+    max_qubits: int = DEFAULT_MAX_QUBITS,
+    simulation_method: str = "automatic",
+) -> int:
+    """Validate that the qubit count is a positive integer within safe resource bounds.
 
     Args:
         value: Input value to validate.
+        max_qubits: Configurable maximum qubit ceiling (default 2048).
+        simulation_method: Simulation method (default 'automatic').
 
     Returns:
         The validated qubit count as an integer.
 
     Raises:
-        ValidationError: If qubit count is <= 0 or not an integer.
+        ValidationError: If qubit count is <= 0, not an integer, exceeds max_qubits,
+                         or exceeds available system resources.
     """
     if not isinstance(value, int) or isinstance(value, bool):
         raise ValidationError(
@@ -33,7 +69,34 @@ def validate_qubit_count(value: Any) -> int:
             f"Qubit count must be a positive integer, got {value}",
             code="QST-VAL-102",
         )
+    if value > max_qubits:
+        raise ValidationError(
+            f"Qubit count {value} exceeds maximum allowed ceiling of {max_qubits}.",
+            code="QST-VAL-103",
+        )
+
+    # Conservative resource-aware memory check
+    estimated_bytes = estimate_simulation_memory_bytes(value, simulation_method)
+    if simulation_method.lower() == "statevector" and value > 28:
+        raise ValidationError(
+            f"Statevector simulation of {value} qubits requires ~{estimated_bytes / (1024**3):.1f} GB, exceeding safe limits.",
+            code="QST-VAL-104",
+        )
+
+    try:
+        import psutil
+
+        available_ram = psutil.virtual_memory().available
+        if estimated_bytes > available_ram * 0.8:
+            raise ValidationError(
+                f"Estimated simulation memory ({estimated_bytes / (1024**2):.1f} MB) exceeds available system RAM ({available_ram / (1024**2):.1f} MB).",
+                code="QST-VAL-104",
+            )
+    except ImportError:
+        pass
+
     return value
+
 
 
 def validate_probability(value: Any, name: str = "Probability") -> float:
