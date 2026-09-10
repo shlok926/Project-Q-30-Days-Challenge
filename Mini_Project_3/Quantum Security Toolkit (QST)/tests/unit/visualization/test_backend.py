@@ -7,6 +7,7 @@ References:
 
 import os
 from unittest import mock
+
 import pytest
 from matplotlib.figure import Figure
 
@@ -14,19 +15,18 @@ from qst.exceptions.export import ExportError
 from qst.exceptions.validation import ValidationError
 from qst.visualization.backend import ChartType, VisualizationResult
 from qst.visualization.datasets import (
+    HeatmapMatrix,
+    HistogramSeries,
     LineSeries,
     ScatterSeries,
-    HistogramSeries,
-    HeatmapMatrix,
 )
 from qst.visualization.matplotlib_backend import MatplotlibBackend
 from qst.visualization.styles import (
-    Theme,
-    LightTheme,
     DarkTheme,
+    FigureStyle,
+    LightTheme,
     ScientificTheme,
     Typography,
-    FigureStyle,
 )
 
 
@@ -194,3 +194,26 @@ def test_matplotlib_backend_savefig_error(tmp_path, line_dataset) -> None:
         with pytest.raises(ExportError) as exc:
             backend.line_chart(line_dataset, theme, filepath)
         assert "QST-EXP-001" in str(exc.value)
+
+
+@pytest.mark.unit
+def test_matplotlib_backend_figure_cleanup(tmp_path, line_dataset) -> None:
+    """Verify backend closes figures to prevent memory leak in pyplot figure manager."""
+    import matplotlib.pyplot as plt
+
+    backend = MatplotlibBackend()
+    theme = LightTheme()
+
+    # Clear any preexisting figures
+    plt.close("all")
+    assert len(plt.get_fignums()) == 0
+
+    # Render multiple plots to disk
+    for i in range(5):
+        plot_path = os.path.join(tmp_path, f"leak_test_{i}.png")
+        backend.line_chart(line_dataset, theme, plot_path)
+        assert os.path.exists(plot_path)
+
+    # Verify no open figures remain in the pyplot manager
+    assert len(plt.get_fignums()) == 0
+
