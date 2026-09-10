@@ -6,7 +6,7 @@ References:
 """
 
 from itertools import product
-from typing import Optional, Sequence
+from typing import Any, Optional, Sequence
 
 from qst.exceptions.validation import ValidationError
 from qst.models.config import ProtocolType, SecurityThresholds, SimulationConfig
@@ -28,6 +28,12 @@ class ParameterSweepGenerator:
         repetitions: int = 1,
         security_thresholds: Optional[SecurityThresholds] = None,
         protocol: ProtocolType = ProtocolType.BB84,
+        run_error_correction: bool = False,
+        cascade_configuration: Optional[Any] = None,
+        run_privacy_amplification: bool = False,
+        privacy_configuration: Optional[Any] = None,
+        max_qubits: int = 2048,
+        simulation_method: str = "automatic",
     ) -> list[SimulationConfig]:
         """Validate inputs and generate a Cartesian product of simulation configs.
 
@@ -38,6 +44,12 @@ class ParameterSweepGenerator:
             repetitions: Execution loop iterations for each combination.
             security_thresholds: Security status classification limits.
             protocol: Protocol variant target.
+            run_error_correction: Whether to execute Cascade error reconciliation.
+            cascade_configuration: Optional Cascade tuning configuration.
+            run_privacy_amplification: Whether to execute privacy amplification.
+            privacy_configuration: Optional privacy amplification configuration.
+            max_qubits: Configurable qubit safety limit.
+            simulation_method: Simulation backend method.
 
         Returns:
             A list of SimulationConfig configuration objects.
@@ -59,7 +71,9 @@ class ParameterSweepGenerator:
 
         # Validate each coordinate element
         for count in qubit_counts:
-            validate_qubit_count(count)
+            validate_qubit_count(
+                count, max_qubits=max_qubits, simulation_method=simulation_method
+            )
         for prob in interception_probabilities:
             validate_probability(prob, name="interception_probability")
         for s in seeds:
@@ -78,7 +92,14 @@ class ParameterSweepGenerator:
                     repetitions=repetitions,
                     security_thresholds=thresholds,
                     protocol=protocol,
+                    run_error_correction=run_error_correction,
+                    cascade_configuration=cascade_configuration,
+                    run_privacy_amplification=run_privacy_amplification,
+                    privacy_configuration=privacy_configuration,
+                    max_qubits=max_qubits,
+                    simulation_method=simulation_method,
                 )
             )
 
         return configs
+
