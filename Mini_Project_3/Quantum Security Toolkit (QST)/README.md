@@ -16,8 +16,8 @@
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue.svg" alt="Python Version" /></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License" /></a>
   <a href="#"><img src="https://img.shields.io/badge/build-passing-brightgreen.svg" alt="Build Status" /></a>
-  <a href="#"><img src="https://img.shields.io/badge/tests-209%20passed-success.svg" alt="Tests Status" /></a>
-  <a href="#"><img src="https://img.shields.io/badge/coverage-95%25-success.svg" alt="Coverage" /></a>
+  <a href="#"><img src="https://img.shields.io/badge/tests-229%20passed-success.svg" alt="Tests Status" /></a>
+  <a href="#"><img src="https://img.shields.io/badge/coverage-97%25-success.svg" alt="Coverage" /></a>
   <a href="#"><img src="https://img.shields.io/badge/release-v1.0.0-blue.svg" alt="Latest Release" /></a>
   <a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code Style" /></a>
   <a href="#documentation-hub"><img src="https://img.shields.io/badge/docs-complete-brightgreen.svg" alt="Documentation Status" /></a>
@@ -73,6 +73,9 @@
 ## Introduction
 
 The **Quantum Security Toolkit (QST)** is designed to simulate the BB84 QKD protocol under real-world noise parameters and active eavesdropper intercepts. 
+
+> [!NOTE]
+> **Scope & Research Mission**: QST is a scientific simulation, education, and research toolkit for modeling Quantum Key Distribution (BB84), eavesdropping dynamics, Cascade error correction, and 2-universal privacy amplification. It is **not** a production hardware cryptographic security appliance or physical telecommunications deployment.
 
 ### Why QST?
 * **Dual Execution Modes:** Execute Qiskit circuits locally using high-performance `AerSimulator` backends or route them to real remote QPUs via the **IBM Quantum Runtime**.
@@ -484,9 +487,13 @@ The toolkit's modular packaging aligns with strict **SOLID design principles**:
 - [x] **Phase 1-11 (Foundations & CLI):** Polarization state preps, basis reconciliation sifting, visualizer registry, JSON/CSV sweeps, and command line tools.
 - [x] **Phase 12 (IBM Integration):** Least-busy QPU discoverer, remote simulator execution, and automatic Aer fallbacks.
 - [x] **Phase 13A (Cascade EC):** Multi-pass Cascade error correction.
-- [x] **Phase 13B (Privacy Amplification):** 2-universal Toeplitz hashing matrices generators, Shannon/Min-entropy estimators, and trace distance bounds computations.
+- [x] **Phase 13B (Privacy Amplification):** 2-universal Toeplitz and Carter-Wegman affine hashing matrices generators, Shannon/Min-entropy estimators, and trace distance bounds computations.
 - [x] **Phase 13C (Protocol Finalization):** Dedicated calculators and summaries, security level thresholds.
 - [x] **Phase 14 (Release Engineering):** Version freezes, packaging setup, supply-chain workflows, and complete guides.
+
+### Future Research & Architecture Backlog
+- [ ] **`QST-ROADMAP-001` (Quantum-native intercept-resend simulation):** Transition from classical pre-circuit interception emulation to genuine mid-circuit quantum measurement (`measure_and_reset`) and density-matrix quantum channels (Kraus operators) directly on Qiskit quantum circuit representations (Target Phase 1.5 / 2).
+
 
 ---
 
