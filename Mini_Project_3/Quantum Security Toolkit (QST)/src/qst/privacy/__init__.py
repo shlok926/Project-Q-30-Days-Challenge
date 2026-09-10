@@ -4,20 +4,20 @@ References:
     Docs/10_API_SPECIFICATION.md
 """
 
+from qst.privacy.amplifier import PrivacyAmplifier
 from qst.privacy.exceptions import PrivacyAmplificationError
+from qst.privacy.interfaces import HashAlgorithm
 from qst.privacy.models import (
-    PrivacyAmplificationConfiguration,
     FinalSecretKey,
-    PrivacyStatistics,
+    PrivacyAmplificationConfiguration,
     PrivacyAmplificationResult,
+    PrivacyStatistics,
 )
 from qst.privacy.validators import (
+    validate_dimensions,
     validate_key,
     validate_privacy_config,
-    validate_dimensions,
 )
-from qst.privacy.interfaces import HashAlgorithm
-from qst.privacy.amplifier import PrivacyAmplifier
 
 __all__ = [
     "PrivacyAmplificationError",
