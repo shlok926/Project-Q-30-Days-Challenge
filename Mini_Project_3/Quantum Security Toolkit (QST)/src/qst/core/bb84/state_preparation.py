@@ -5,7 +5,7 @@ References:
     Docs/07_SYSTEM_ARCHITECTURE.md §5
 """
 
-from typing import Any, Optional
+from typing import Any
 
 from qst.core.bb84.constants import SUPPORTED_BASES
 from qst.core.bb84.validators import validate_bb84_inputs
