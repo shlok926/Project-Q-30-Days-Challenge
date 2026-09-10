@@ -7,10 +7,11 @@ References:
 
 import json
 import os
+
 import pytest
 
-from qst.exceptions.validation import ValidationError
 from qst.cli.main import main
+from qst.exceptions.validation import ValidationError
 
 
 @pytest.mark.unit
@@ -414,6 +415,7 @@ def test_cli_visualize_theme_fallback(tmp_path) -> None:
 
     # Direct visualizer invocation to bypass choice check and test fallback branches
     import argparse
+
     from qst.cli.main import handle_visualize
 
     args = argparse.Namespace(
@@ -434,6 +436,7 @@ def test_cli_visualize_type_fallback(tmp_path) -> None:
     main(["sweep", "--qubits", "10", "--probabilities", "0.0", "--export", in_path])
 
     import argparse
+
     from qst.cli.main import handle_visualize
 
     args = argparse.Namespace(
