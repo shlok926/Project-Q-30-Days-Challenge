@@ -6,10 +6,12 @@ References:
 """
 
 import time
+
 import pytest
+
+from qst.models.results import SweepDimensions
 from qst.orchestration.orchestrator import SimulationOrchestrator
 from qst.orchestration.sweep_generator import ParameterSweepGenerator
-from qst.models.results import SweepDimensions
 
 
 @pytest.mark.performance
