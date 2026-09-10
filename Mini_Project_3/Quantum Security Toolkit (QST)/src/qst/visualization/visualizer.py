@@ -5,17 +5,17 @@ References:
     Docs/07_SYSTEM_ARCHITECTURE.md §5, §11
 """
 
-from typing import Any, Optional
+from typing import Optional
 
 from qst.models.results import SimulationResult
 from qst.visualization.backend import VisualizationBackend, VisualizationResult
 from qst.visualization.datasets import (
+    HeatmapMatrix,
+    HistogramSeries,
     LineSeries,
     ScatterSeries,
-    HistogramSeries,
-    HeatmapMatrix,
 )
-from qst.visualization.styles import Theme, LightTheme
+from qst.visualization.styles import LightTheme, Theme
 
 
 class Visualizer:
