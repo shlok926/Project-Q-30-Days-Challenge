@@ -5,13 +5,13 @@ References:
     Docs/07_SYSTEM_ARCHITECTURE.md §5
 """
 
-from typing import Any, Sequence
+from typing import Sequence
 
 from qiskit import QuantumCircuit
 
+from qst.core.bb84.circuit_builder import GateApplier
 from qst.core.bb84.constants import BASIS_X, SUPPORTED_BASES
 from qst.core.bb84.validators import validate_bb84_bases, validate_bb84_circuit
-from qst.core.bb84.circuit_builder import GateApplier
 from qst.core.shared.random.random_provider import RandomProvider
 from qst.core.shared.validation.validators import validate_qubit_count
 
