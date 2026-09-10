@@ -6,14 +6,15 @@ References:
 """
 
 import math
+
 import pytest
 
+from qst.models.results import StatisticsResult
 from qst.orchestration.statistics import (
     ConfidenceIntervalCalculator,
     DescriptiveStatistics,
     ExperimentStatisticsService,
 )
-from qst.models.results import StatisticsResult
 
 
 @pytest.mark.unit
