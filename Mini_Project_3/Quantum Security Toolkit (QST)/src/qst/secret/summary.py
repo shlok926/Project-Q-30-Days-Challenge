@@ -5,6 +5,7 @@ References:
 """
 
 from typing import Optional
+
 from qst.secret.models import ProtocolSummary
 from qst.secret.validators import validate_key_lengths
 
