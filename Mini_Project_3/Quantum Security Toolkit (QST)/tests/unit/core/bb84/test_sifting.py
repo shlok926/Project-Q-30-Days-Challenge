@@ -8,8 +8,8 @@ References:
 import pytest
 
 from qst.core.bb84.sifting import KeySiftingService
-from qst.models.results import ReconciliationResult
 from qst.exceptions.validation import ValidationError
+from qst.models.results import ReconciliationResult
 
 
 @pytest.mark.unit
