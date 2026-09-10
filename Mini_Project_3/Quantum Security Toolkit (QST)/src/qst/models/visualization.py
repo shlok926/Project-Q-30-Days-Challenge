@@ -7,6 +7,13 @@ References:
 from dataclasses import dataclass, field
 from typing import Any
 
+from qst.visualization.datasets import (
+    HeatmapMatrix,
+    HistogramSeries,
+    LineSeries,
+    ScatterSeries,
+)
+
 
 @dataclass(frozen=True)
 class VisualizationResult:
@@ -25,9 +32,13 @@ class VisualizationResult:
     extra: dict[str, Any] = field(default_factory=dict)
 
 
-from qst.visualization.datasets import (
-    LineSeries,
-    ScatterSeries,
-    HistogramSeries,
-    HeatmapMatrix,
-)
+__all__ = [
+    "VisualizationResult",
+    "HeatmapMatrix",
+    "HistogramSeries",
+    "LineSeries",
+    "ScatterSeries",
+]
+
+
+
