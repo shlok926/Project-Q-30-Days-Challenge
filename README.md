@@ -140,18 +140,19 @@ Below is the chronological roadmap of the challenge, tracking skill acquisition 
 ### Mini Project 3 (Flagship) — Quantum Security Toolkit (QST)
 * **Folder Link:** [`./Mini_Project_3/Quantum Security Toolkit (QST)`](./Mini_Project_3/Quantum%20Security%20Toolkit%20(QST))
 * **Status:** `Completed` | **Difficulty:** `Advanced` | **Est. Time:** `45 hours`
-* **Current Version:** `1.0.0`
+* **Release:** [![GitHub Release](https://img.shields.io/badge/release-v1.0.0-blue.svg)](https://github.com/shlok926/Project-Q-30-Days-Challenge/releases/tag/v1.0.0) | **Current Version:** `1.0.0`
 * **Short Description:**  
-  A production-grade, highly optimized security framework implementing end-to-end BB84 Quantum Key Distribution (QKD), eavesdropping interception simulations, post-sifting Cascade parity error correction, and 2-universal Toeplitz privacy amplification.
+  A modular, research-oriented quantum security framework implementing end-to-end BB84 Quantum Key Distribution (QKD), active eavesdropping interception simulations, post-sifting Cascade parity error correction, and 2-universal privacy amplification (Toeplitz and Carter-Wegman affine matrix over $\text{GF}(2)$).
 * **Key Features:**
-  - **BB84 Core Engine:** Models polarization basis reconciliations, sifting, and Quantum Bit Error Rate (QBER) estimates.
-  - **IBM Quantum Runtime Service:** Runs execution queues on remote physical QPUs with local Aer fallbacks and noise calibration mapping.
-  - **Cascade Error Correction:** Corrects key transmission noise recursively without altering intermediate key representations.
-  - **Toeplitz Privacy Amplification:** Hashing engine compressing keys to distill final secrets and evaluate Min-Entropy bounds ($H_{\infty}$).
-  - **Release Quality Assurance:** Fully type annotated, checked by strict linting rules, and verified by **209 automated tests** (95% code coverage).
+  - **BB84 Core Engine:** Models polarization basis reconciliations ($Z$ & $X$), basis sifting, and Quantum Bit Error Rate (QBER) estimates.
+  - **Adaptive Execution:** Clifford stabilizer routing enabling simulation of up to **2,048 qubits** in ~4 seconds, with remote IBM Quantum Runtime execution and automatic Aer fallback.
+  - **Cascade Error Correction:** Multi-pass recursive parity reconciliation using iterative binary search bit-error localization.
+  - **2-Universal Privacy Amplification:** Strongly 2-universal hash family (Toeplitz + Carter-Wegman affine matrix over $\text{GF}(2)$) compressing keys and calculating Min-Entropy ($H_{\infty}$) and trace distance security bounds.
+  - **Enterprise Security Defenses:** Atomic file writes (`mkstemp` + `os.fsync` + `os.replace`), path traversal protection (`QST-VAL-405`), and RAM ceiling estimators.
+  - **Release Quality Assurance:** Fully type annotated, checked by strict linting rules, and verified by **229 automated tests** (97% code coverage, Ruff clean, strict Mypy clean).
 * **Technology Stack:** Qiskit, Qiskit Aer, NumPy, pytest, pytest-cov, Matplotlib, black, ruff, mypy.
 * **Lessons Learned:**  
-  Implemented complex post-processing cryptography algorithms, decoupled calculators using service-oriented patterns, and locked public interfaces under strict SemVer compatibility bounds for production environments.
+  Implemented complex post-processing cryptography algorithms, decoupled calculators using service-oriented patterns, eliminated canvas memory leaks, and locked public interfaces under strict SemVer compatibility bounds for production environments.
 
 ---
 
@@ -161,7 +162,7 @@ Below is the chronological roadmap of the challenge, tracking skill acquisition 
 | :--- | :--- | :---: | :--- | :---: | :---: | :---: | :---: |
 | **Quantum Randomness Lab** | Scientific Core | Python | Qiskit | Beginner | `Complete` | [README](./Mini_Project_1/Quantum-Randomness-Lab/README.md) | None (Manual) |
 | **Platform Enterprise** | Full-Stack Dashboard | JS / Python | Next.js / FastAPI | Intermediate | `Complete` | [Docs Folder](./Mini_Project_2/quantum-platform-enterprise/docs) | Backend checks |
-| **Security Toolkit (QST)** | Flagship Cryptography | Python | Qiskit / Pytest | Advanced | `Complete` | [Docs Folder](./Mini_Project_3/Quantum%20Security%20Toolkit%20(QST)/Docs) | **209 Passed (95% Cov)** |
+| **Security Toolkit (QST)** | Flagship Cryptography | Python | Qiskit / Pytest | Advanced | `Complete` | [Docs Folder](./Mini_Project_3/Quantum%20Security%20Toolkit%20(QST)/Docs) | **229 Passed (97% Cov)** |
 
 ---
 
@@ -189,7 +190,7 @@ Project-Q-30-Days-Challenge/
 * **Post-Processing Protocols:** Coded recursive Cascade parity correction loops and universal Toeplitz compression matrices.
 * **Systems Architecture:** Applied SOLID patterns, dependency inversion backends, and modular calculations services.
 * **Full-Stack Development:** Engineered responsive Next.js dashboards and asynchronous FastAPI SQLite state machines.
-* **QA & Engineering:** Enforced 95%+ pytest coverage, strict static typing (mypy), and automated GitHub Actions workflows (build, lint, CodeQL scans).
+* **QA & Engineering:** Enforced 97% pytest coverage, strict static typing (mypy), and automated GitHub Actions workflows (build, lint, CodeQL scans).
 
 ---
 
@@ -211,7 +212,7 @@ Project-Q-30-Days-Challenge/
 
 * **30 Learning Days:** Completed daily worksheets mapping quantum fundamentals.
 * **3 Major Projects:** Designed, implemented, and delivered three distinct repositories.
-* **209 Automated Tests:** Maintained 95% aggregate coverage on the flagship cryptography framework.
+* **229 Automated Tests:** Maintained 97% aggregate coverage on the flagship cryptography framework.
 * **IBM QPU Integration:** Successful remote circuit executions and noise-aware simulators routing.
 * **Complete Documentation:** Over 40 distinct architectural ADRs and user guides written.
 * **Clean Code:** Zero TODO/FIXME tags or debug logs remaining in production packages.
